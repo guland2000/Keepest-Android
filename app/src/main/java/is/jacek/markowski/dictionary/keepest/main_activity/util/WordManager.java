@@ -1,0 +1,271 @@
+/*
+ * Copyright 2018 Jacek Markowski
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
+ * associated documentation files (the "Software"), to deal in the Software without restriction,
+ * including without limitation the rights to use, copy, modify, merge, publish, distribute,
+ * sublicense,  and/or sell copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or
+ * substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ *
+ */
+
+package is.jacek.markowski.dictionary.keepest.main_activity.util;
+
+import android.content.ContentResolver;
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.widget.EditText;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import is.jacek.markowski.dictionary.keepest.main_activity.database.Contract;
+
+import static android.provider.UserDictionary.Words._ID;
+import static is.jacek.markowski.dictionary.keepest.main_activity.database.Contract.Tag.Entry.COLUMN_TAG;
+import static is.jacek.markowski.dictionary.keepest.main_activity.database.Contract.Tag.Entry.TAG_ID;
+import static is.jacek.markowski.dictionary.keepest.main_activity.database.Contract.Tag.Entry.WORD_ID;
+import static is.jacek.markowski.dictionary.keepest.main_activity.database.Contract.Word.Entry.COLUMN_DICTIONARY_ID;
+import static is.jacek.markowski.dictionary.keepest.main_activity.database.Contract.Word.Entry.COLUMN_FAVOURITE;
+import static is.jacek.markowski.dictionary.keepest.main_activity.database.Contract.Word.Entry.COLUMN_IMAGE;
+import static is.jacek.markowski.dictionary.keepest.main_activity.database.Contract.Word.Entry.COLUMN_NOTES;
+import static is.jacek.markowski.dictionary.keepest.main_activity.database.Contract.Word.Entry.COLUMN_TRANSLATION;
+import static is.jacek.markowski.dictionary.keepest.main_activity.database.Contract.Word.Entry.COLUMN_WORD;
+import static is.jacek.markowski.dictionary.keepest.main_activity.fragment.WordAdvancedFragment.NOTES_KEY;
+
+/**
+ * Created by jacek on 8/5/17.
+ */
+
+public class WordManager {
+    public static Word getWordById(Context context, long wordId) {
+        ContentResolver resolver = context.getContentResolver();
+        String selection = _ID + "=?";
+        String[] selectionArgs = new String[]{Long.toString(wordId)};
+        Cursor c = resolver.query(UriHelper.Word.buildWordWithSelectionUri(), null, selection, selectionArgs, null);
+        Word entry = new Word();
+        if (c != null && c.getCount() > 0) {
+            c.moveToFirst();
+            int favourite = c.getInt(c.getColumnIndex(COLUMN_FAVOURITE));
+            // todo
+            String tags = Tags.prepareStringWithAllTags(context, (int) wordId);
+            String notes = c.getString(c.getColumnIndex(COLUMN_NOTES));
+            String word = c.getString(c.getColumnIndex(COLUMN_WORD));
+            String trans = c.getString(c.getColumnIndex(COLUMN_TRANSLATION));
+            String imageUrl = c.getString(c.getColumnIndex(COLUMN_IMAGE));
+            entry.id = (int) wordId;
+            entry.word = word.trim();
+            entry.translation = trans.trim();
+            entry.favourite = favourite;
+            entry.notes = notes.trim();
+            entry.tags = tags.trim();
+            entry.imageUrl = imageUrl;
+        }
+        if (c != null) {
+            c.close();
+        }
+        return entry;
+    }
+
+    public static class WordEdit {
+
+
+        public static Word getWordObjectForSave(Context context, long wordId, EditText wordEdit, EditText translationEdit, boolean advanced) {
+
+            Word entry;
+            if (wordId >= 0) {
+                entry = WordManager.getWordById(context, wordId);
+            } else {
+                entry = new Word();
+            }
+
+            if (advanced) {
+                entry.notes = WordEdit.getTextItem(context, NOTES_KEY).trim();
+                entry.imageUrl = WordEdit.getTextItem(context, "image").trim();
+            }
+
+            if (wordEdit != null) {
+                entry.word = Text.shrinkText(wordEdit.getText().toString());
+            }
+            if (translationEdit != null) {
+                entry.translation = Text.shrinkText(translationEdit.getText().toString());
+            }
+            return entry;
+        }
+
+        public static String getTextItem(Context context, String key) {
+            Preferences.WordEdit pref = new Preferences.WordEdit();
+            return pref.getTextItem(context, key);
+        }
+
+        public static ContentValues prepareContentValues(Context context, WordManager.Word entry) {
+            ContentValues values = new ContentValues();
+            values.put(COLUMN_WORD, entry.word);
+            values.put(COLUMN_TRANSLATION, entry.translation);
+            values.put(COLUMN_DICTIONARY_ID, DictionaryManager.getDictData(context).dictId);
+            values.put(COLUMN_FAVOURITE, entry.favourite);
+            values.put(COLUMN_NOTES, entry.notes);
+            values.put(COLUMN_IMAGE, entry.imageUrl);
+            return values;
+        }
+
+        public static void saveTextItem(Context context, String key, String text) {
+            Preferences.WordEdit pref = new Preferences.WordEdit();
+            pref.saveTextItem(context, key, text);
+        }
+
+        public static boolean isEdited(Context context) {
+            Preferences.WordEdit pref = new Preferences.WordEdit();
+            return pref.isEdited(context);
+        }
+
+        public static void resetValues(Context context) {
+            Preferences.WordEdit pref = new Preferences.WordEdit();
+            pref.resetValues(context);
+        }
+
+        public static Set<String> getSetOfTagId(Context context) {
+            Preferences.WordEdit pref = new Preferences.WordEdit();
+            return pref.getSetOfId(context);
+        }
+
+        public static boolean isTagIdInSet(Context context, int idInDb) {
+            Preferences.WordEdit pref = new Preferences.WordEdit();
+            return pref.isIdInSet(context, idInDb);
+        }
+
+        public static void addOrRemoveTagIdFromSet(Context context, int idInDb) {
+            Preferences.WordEdit pref = new Preferences.WordEdit();
+            pref.addOrRemoveIdFromSet(context, idInDb);
+        }
+
+        public static long getId(Context context) {
+            Preferences.WordEdit pref = new Preferences.WordEdit();
+            return pref.getId(context);
+        }
+
+        public static void setId(Context context, long id) {
+            Preferences.WordEdit pref = new Preferences.WordEdit();
+            pref.setId(context, id);
+        }
+
+        public static void setMode(Context context, int mode) {
+            Preferences.WordEdit pref = new Preferences.WordEdit();
+            pref.setMode(context, mode);
+        }
+
+        public static int getMode(Context context) {
+            Preferences.WordEdit pref = new Preferences.WordEdit();
+            return pref.getMode(context);
+        }
+    }
+
+    public static class Tags {
+        public static void addTagsToWord(Context context, int wordId) {
+            ContentResolver resolver = context.getContentResolver();
+            ContentValues values = new ContentValues();
+            HashSet<String> tagsToProcess = (HashSet<String>) WordManager.WordEdit.getSetOfTagId(context);
+            for (String t : tagsToProcess) {
+                int tagId = Integer.valueOf(t);
+                values.put(TAG_ID, tagId);
+                values.put(Contract.Tag.Entry.WORD_ID, wordId);
+                if (isWordAndTagConnected(context, tagId, wordId)) {
+                    String selection = TAG_ID + "=? AND " + WORD_ID + "=?";
+                    String[] selectionArgs = new String[]{t, Integer.toString(wordId)};
+                    resolver.delete(UriHelper.TagsWord.buildDeleteTagFromWordUri(), selection, selectionArgs);
+                } else {
+                    resolver.insert(UriHelper.TagsWord.buildAddTagToWordUri(), values);
+                }
+            }
+        }
+
+        private static boolean isWordAndTagConnected(Context context, int tagId, int wordId) {
+            ContentResolver resolver = context.getContentResolver();
+            String selection = TAG_ID + "=? AND " + WORD_ID + "=?";
+            String[] selectionArgs = new String[]{Integer.toString(tagId), Integer.toString(wordId)};
+            Cursor c = resolver.query(UriHelper.TagsWord.buildTagsForWords(), null, selection, selectionArgs, null);
+            return c != null && c.getCount() > 0;
+        }
+
+        public static String prepareStringWithAllTags(Context context, int wordId) {
+            ContentResolver resolver = context.getContentResolver();
+            Cursor c = resolver.query(UriHelper.TagsWord.buildTagsWordUri(wordId), null, null, new String[]{""}, null);
+            StringBuilder tags = new StringBuilder();
+            if (c != null && c.getCount() > 0) {
+                for (int i = 0; i < c.getCount(); i++) {
+                    c.moveToPosition(i);
+                    if (!c.isNull(c.getColumnIndex(WORD_ID))) {
+                        String tagName = c.getString(c.getColumnIndex(COLUMN_TAG));
+                        tags.append(tagName);
+                        tags.append(" ");
+                    }
+                }
+                c.close();
+            }
+            if (c != null) {
+                c.close();
+            }
+            return tags.toString();
+        }
+    }
+
+    public static class Word {
+        public int id = -1;
+        public String word = "";
+        public String translation = "";
+        public int favourite = 0; // 0-1
+        public String tags = "";
+        public String notes = "";
+        public String imageUrl = "";
+
+        public static void saveIdOfLastAddedWord(Context context, int wordId) {
+            Preferences.Word pref = new Preferences.Word();
+            pref.saveIdOfLastAddedWord(context, wordId);
+        }
+
+        public static long getIdOfLastAddedWord(Context context) {
+            Preferences.Word pref = new Preferences.Word();
+            return pref.getIdOfLastAddedWord(context);
+
+        }
+
+        public static void clearIdOfLastAddedWord(Context context) {
+            Preferences.Word pref = new Preferences.Word();
+            pref.clearIdOfLastAddedWord(context);
+        }
+    }
+
+    public static class TagChooser {
+        public static boolean isTagIdInSet(Context context, int idInDb) {
+            Preferences.TagChooser pref = new Preferences.TagChooser();
+            return pref.isIdInSet(context, idInDb);
+        }
+
+        public static void addOrRemoveTagIdFromSet(Context context, int idInDb) {
+            Preferences.TagChooser pref = new Preferences.TagChooser();
+            pref.addOrRemoveIdFromSet(context, idInDb);
+        }
+
+        public static Set<String> getSetOfTagId(Context context) {
+            Preferences.TagChooser pref = new Preferences.TagChooser();
+            return pref.getSetOfId(context);
+        }
+
+        public static void resetSet(Context context) {
+            Preferences.TagChooser pref = new Preferences.TagChooser();
+            pref.resetSet(context);
+        }
+    }
+}

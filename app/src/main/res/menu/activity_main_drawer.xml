@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright 2018 Jacek Markowski
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
+  ~ associated documentation files (the "Software"), to deal in the Software without restriction,
+  ~ including without limitation the rights to use, copy, modify, merge, publish, distribute,
+  ~ sublicense,  and/or sell copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in all copies or
+  ~ substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+  ~ THE SOFTWARE.
+  ~
+  -->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_words"
+            android:icon="@drawable/ic_words"
+            android:title="@string/nav_words"/>
+        <item
+            android:id="@+id/nav_manage_dictionaries"
+            android:icon="@drawable/ic_new_dictionary"
+            android:title="@string/nav_manage_dictionaries"/>
+        <item
+            android:id="@+id/nav_learning_mode"
+            android:icon="@drawable/ic_school"
+            android:title="@string/learning"/>
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_settings"
+            android:title="@string/nav_settings"/>
+        <item
+            android:id="@+id/nav_theme"
+            android:icon="@drawable/ic_night"
+            android:title="@string/nav_night_mode"/>
+        <item
+            android:id="@+id/nav_rate"
+            android:icon="@drawable/star_off"
+            android:title="@string/nav_rate_app"/>
+    </group>
+</menu>

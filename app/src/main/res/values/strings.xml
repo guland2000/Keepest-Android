@@ -1,0 +1,424 @@
+<!--
+  ~ Copyright 2018 Jacek Markowski
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
+  ~ associated documentation files (the "Software"), to deal in the Software without restriction,
+  ~ including without limitation the rights to use, copy, modify, merge, publish, distribute,
+  ~ sublicense,  and/or sell copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in all copies or
+  ~ substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+  ~ THE SOFTWARE.
+  ~
+  -->
+
+<resources>
+    <string name="app_name" translatable="false">Keepest</string>
+
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="nav_add_dictionary">Add word list</string>
+    <string name="nav_load_dictionary">Load list</string>
+    <string name="nav_quiz_mode">Quiz mode</string>
+    <string name="nav_settings">Settings</string>
+    <string name="nav_send_feedback">Contact</string>
+    <string name="nav_default_dictionary">default list</string>
+
+    <string name="action_find">Sort</string>
+    <string name="nav_manage_dictionaries">Lists</string>
+    <string name="nav_sign_in">Sign in</string>
+    <string name="nav_words">Words</string>
+    <string name="sign_up">Sign up</string>
+    <string name="passwords_dont_match">Passwords don\'t match</string>
+    <string name="save">Save</string>
+    <string name="dictionaries_title">Word lists</string>
+    <string name="backup_file_created">Backup file created:</string>
+    <string name="from">from</string>
+    <string name="export_dictionary">Export word list</string>
+    <string name="there_are_no_email_clients">There are no email clients installed.</string>
+    <string name="permission_denied">Permission denied.</string>
+    <string name="close">Close</string>
+    <string name="login">Sign in</string>
+    <string name="empty_email_or_password">Empty email or password.</string>
+    <string name="settings_title">Settings</string>
+    <string name="words_title">Words</string>
+    <string name="feedback_from_user">Feedback from user</string>
+    <string name="choose_email_client">Choose email client</string>
+    <string name="export_all">Export All</string>
+    <string name="import_file">Import File</string>
+    <string name="verify_your_email">Check your inbox and verify your email before signing in.</string>
+    <string name="backup_upload_failure">Backup upload failure</string>
+    <string name="backup_upload_complete">Backup upload complete</string>
+    <string name="backup_file_downloaded">Backup file imported</string>
+    <string name="backup_download_failure">Backup download failure</string>
+    <string name="password">password</string>
+    <string name="login_failed">Signing in failed</string>
+    <string name="logged_as">"Signed in as "</string>
+    <string name="sign_in_summary">Get access to cloud backup storage.</string>
+    <string name="sign_in">Sign in</string>
+    <string name="create_account">Create Account</string>
+    <string name="you_are_not_logged_in">You are not signed in</string>
+    <string name="send_backup_confirmation">Do you want to send your data to cloud?</string>
+    <string name="send">Send</string>
+    <string name="cancel">Cancel</string>
+    <string name="download">Download</string>
+    <string name="download_backup_confirmation">Do you want to download your data from Google Drive?</string>
+    <string name="wait_before_next_download">Wait %d seconds before next download</string>
+    <string name="wait_before_next_upload">Wait %d seconds before next upload.</string>
+    <string name="uploading_to_cloud_progress">Uploading data to cloud</string>
+    <string name="downloading_from_cloud_progress">Downloading from Google Drive</string>
+    <string name="singning_in_progress">Signing in</string>
+    <string name="singning_up_progress">Signing up</string>
+    <string name="dictionaries_imported">Words imported.</string>
+    <string name="error_importing_dictionary">Error importing dictionary</string>
+    <string name="importing_dictionaries_progress">Importing words</string>
+    <string name="exporting_dictionaries_progress">Exporting words</string>
+    <string name="no_write_permission">Export failed. No write permission.</string>
+    <string name="create_first_dictionary">Create Word List</string>
+    <string name="dictionary_name_hint">List name</string>
+    <string name="bt_dict_open">Open</string>
+    <string name="dict_delete_dialog">Delete</string>
+    <string name="error_importing_dictionary_timeout">Sql insert timeout. Import failed</string>
+    <string name="no_internet_connection">No internet connection</string>
+    <string name="cache_size">"Cache size: %.2f megabytes"</string>
+    <string name="cache_cleared">Cache cleared</string>
+    <string name="confirm_deletion_of">"Confirm deletion of "</string>
+    <string name="learning_mode">Learning mode</string>
+    <string name="advanced">Extra</string>
+    <string name="translate">Translate</string>
+    <string name="yes">yes</string>
+    <string name="remove_tag_question">Do you want to remove tag:</string>
+    <string name="you_have_0_dictionaries">Create word list. Enter name and choose languages.</string>
+    <string name="next">Next</string>
+    <string name="nav_night_mode">Night mode ON/OFF</string>
+    <string name="tutorial_edit_export_or_delete_dictionary">Edit, export or delete word list.</string>
+    <string name="tutorial_type_dictionary_name_and_choose_languages">Type word list name  and choose languages</string>
+    <string name="tutorial_translate_word">Translate word.</string>
+    <string name="tutorial_swipe_left_card">Swipe left or touch card to open menu. Touch speaker to listen.</string>
+    <string name="turorial_restart_session">Restart session.</string>
+    <string name="tutorial_end_session">End session.</string>
+    <string name="tutorial_add_tags_notes">Add #tags and notes to the word.</string>
+    <string name="tutorial_add_new_word">Add new word.</string>
+    <string name="tutorial_star_edit_delete_word">Highlight, edit or delete word.</string>
+    <string name="tag_name">Tag name</string>
+    <string name="your_email_com">your@email.com</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="filename">File</string>
+    <string name="choose_export_method">Choose export method</string>
+    <string name="flashcard">Card</string>
+    <string name="correct">Correct:</string>
+    <string name="wrong">Wrong:</string>
+    <string name="score">Score:</string>
+    <string name="_0_percent" translatable="false">0 %</string>
+    <string name="number_of_questions">Number of questions</string>
+    <string name="start_session">Start session</string>
+    <string name="word">Word</string>
+    <string name="translation">Translation</string>
+    <string name="notes">Notes</string>
+    <string name="tags">TAGS</string>
+    <string name="enter_word">enter word</string>
+    <string name="enter_translation">enter translation</string>
+    <string name="already_exists">Already Exists</string>
+    <string name="dictionary_name">list_name</string>
+    <string name="import_dictionary_from_file">Import words from file</string>
+    <string name="new_">New</string>
+    <string name="to">To</string>
+    <string name="tag">Tag</string>
+    <string name="select_all">Select All</string>
+    <string name="search">Search</string>
+    <string name="backup_keep">backup</string>
+    <string name="unknown">unknown</string>
+    <string name="choose_tags">Choose tags.</string>
+    <string name="choose_dictionaries">Choose lists</string>
+    <string name="zero_words_found">0 words found</string>
+    <string name="choose_number_of_questions">Choose number of questions.</string>
+    <string name="not_signed">Not signed</string>
+    <string name="permissions">Permissions</string>
+    <string name="grant_acces_dialog">Grant access to read/write SD storage to enable Import/Export functionality.</string>
+    <string name="dictionaries_tab">Word lists</string>
+    <string name="notes_tab">Notes</string>
+    <string name="tags_tab">#Tags</string>
+    <string name="edit_tag">Edit #TAG</string>
+    <string name="tag_laready_exists">Tag already exist.</string>
+    <string name="empty_fields_not_allowed">Empty fields not allowed</string>
+    <string name="sing_out">Sign out</string>
+    <string name="cloud_backup">Google Drive backup</string>
+    <string name="send_to_cloud">Send to Google Drive</string>
+    <string name="send_to_cloud_summary">Keep copy of your word lists safe in Google Drive.</string>
+    <string name="download_from_cloud_summary">Retrieve your word lists from Google Drive. Supported files: *.keep, *.csv (word, word, tags, notes)</string>
+    <string name="cache_summary">Keepest caches sounds to reduce internet usage. Cached sounds can be played offline.</string>
+    <string name="show_cache">Show Cache</string>
+    <string name="clear_cache">Clear Cache</string>
+    <string name="download_from_cloud">Download from Google Drive</string>
+    <string name="accounts">Accounts</string>
+    <string name="learning">Learning</string>
+    <string name="nav_rate_app">Rate this app</string>
+    <string name="unable_to_find_playstore">Unable to open PlayStore.</string>
+    <string name="grant_acces_dialog_gdrive">Grant access to enable Google Drive backup functionality.</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="gdrive_error_create_file">Error while trying to create new file contents</string>
+    <string name="gdrive_upload_success">File uploaded:</string>
+    <string name="about">About</string>
+    <string name="edit">Edit</string>
+    <string name="search_in_english">Search in english</string>
+    <string name="show_gif">Show GIF</string>
+    <string name="connecting_to_gdrive">Connecting to Google Drive...</string>
+    <string name="cache_title">Cache</string>
+    <string name="cache_settings">Cache Settings</string>
+    <string name="enter_word_tut">Enter word for translation</string>
+    <string name="tut_translate_word">Touch this button to translate the word you entered.</string>
+    <string name="dictionary">"List "</string>
+    <string name="loaded">" loaded!"</string>
+    <string name="edit_word">Edit word</string>
+    <string name="add_word">Add word</string>
+    <string name="read_answers">Read Answer</string>
+    <string name="app_version">Version</string>
+    <string name="swipe_left_to_open_menu">Swipe left to open menu</string>
+
+
+    <!-- TODO: add more languages -->
+    <string-array name="select" translatable="true">
+        <!-- most used -->
+        <item>English</item>
+        <item>Polish</item>
+        <item>Icelandic</item>
+        <item>Spanish</item>
+        <!-- google translate languages -->
+        <item>Afrikaans</item>
+        <item>Albanian</item>
+        <item>Amharic</item>
+        <item>Arabic</item>
+        <item>Armenian</item>
+        <item>Azeerbaijani</item>
+        <item>Basque</item>
+        <item>Belarusian</item>
+        <item>Bengali</item>
+        <item>Bosnian</item>
+        <item>Bulgarian</item>
+        <item>Catalan</item>
+        <item>Cebuano</item>
+        <item>Chinese (Simplified)</item>
+        <item>Chinese (Traditional)</item>
+        <item>Corsican</item>
+        <item>Croatian</item>
+        <item>Czech</item>
+        <item>Danish</item>
+        <item>Dutch</item>
+        <item>English</item>
+        <item>Esperanto</item>
+        <item>Estonian</item>
+        <item>Finnish</item>
+        <item>French</item>
+        <item>Frisian</item>
+        <item>Galician</item>
+        <item>Georgian</item>
+        <item>German</item>
+        <item>Greek</item>
+        <item>Gujarati</item>
+        <item>Haitian Creole</item>
+        <item>Hausa</item>
+        <item>Hawaiian</item>
+        <item>Hebrew</item>
+        <item>Hindi</item>
+        <item>Hmong</item>
+        <item>Hungarian</item>
+        <item>Icelandic</item>
+        <item>Igbo</item>
+        <item>Indonesian</item>
+        <item>Irish</item>
+        <item>Italian</item>
+        <item>Japanese</item>
+        <item>Javanese</item>
+        <item>Kannada</item>
+        <item>Kazakh</item>
+        <item>Khmer</item>
+        <item>Korean</item>
+        <item>Kurdish</item>
+        <item>Kyrgyz</item>
+        <item>Lao</item>
+        <item>Latin</item>
+        <item>Latvian</item>
+        <item>Lithuanian</item>
+        <item>Luxembourgish</item>
+        <item>Macedonian</item>
+        <item>Malagasy</item>
+        <item>Malay</item>
+        <item>Malayalam</item>
+        <item>Maltese</item>
+        <item>Maori</item>
+        <item>Marathi</item>
+        <item>Mongolian</item>
+        <item>Myanmar (Burmese)</item>
+        <item>Nepali</item>
+        <item>Norwegian</item>
+        <item>Nyanja (Chichewa)</item>
+        <item>Pashto</item>
+        <item>Persian</item>
+        <item>Polish</item>
+        <item>Portuguese (Portugal, Brazil)</item>
+        <item>Punjabi</item>
+        <item>Romanian</item>
+        <item>Russian</item>
+        <item>Samoan</item>
+        <item>Scots Gaelic</item>
+        <item>Serbian</item>
+        <item>Sesotho</item>
+        <item>Shona</item>
+        <item>Sindhi</item>
+        <item>Sinhala (Sinhalese)</item>
+        <item>Slovak</item>
+        <item>Slovenian</item>
+        <item>Somali</item>
+        <item>Spanish</item>
+        <item>Sundanese</item>
+        <item>Swahili</item>
+        <item>Swedish</item>
+        <item>Tagalog (Filipino)</item>
+        <item>Tajik</item>
+        <item>Tamil</item>
+        <item>Telugu</item>
+        <item>Thai</item>
+        <item>Turkish</item>
+        <item>Ukrainian</item>
+        <item>Urdu</item>
+        <item>Uzbek</item>
+        <item>Vietnamese</item>
+        <item>Welsh</item>
+        <item>Xhosa</item>
+        <item>Yiddish</item>
+        <item>Yoruba</item>
+        <item>Zulu</item>
+    </string-array>
+
+    <string-array name="selectValues" translatable="true">
+        <!-- most used -->
+        <item>en</item>
+        <item>pl</item>
+        <item>is</item>
+        <item>es</item>
+
+        <!-- google translate all code -->
+        <item>af</item>
+        <item>sq</item>
+        <item>am</item>
+        <item>ar</item>
+        <item>hy</item>
+        <item>az</item>
+        <item>eu</item>
+        <item>be</item>
+        <item>bn</item>
+        <item>bs</item>
+        <item>bg</item>
+        <item>ca</item>
+        <item>ceb</item>
+        <item>zh-CN</item>
+        <item>zh-TW</item>
+        <item>co</item>
+        <item>hr</item>
+        <item>cs</item>
+        <item>da</item>
+        <item>nl</item>
+        <item>en</item>
+        <item>eo</item>
+        <item>et</item>
+        <item>fi</item>
+        <item>fr</item>
+        <item>fy</item>
+        <item>gl</item>
+        <item>ka</item>
+        <item>de</item>
+        <item>el</item>
+        <item>gu</item>
+        <item>ht</item>
+        <item>ha</item>
+        <item>haw</item>
+        <item>iw</item>
+        <item>hi</item>
+        <item>hmn</item>
+        <item>hu</item>
+        <item>is</item>
+        <item>ig</item>
+        <item>id</item>
+        <item>ga</item>
+        <item>it</item>
+        <item>ja</item>
+        <item>jw</item>
+        <item>kn</item>
+        <item>kk</item>
+        <item>km</item>
+        <item>ko</item>
+        <item>ku</item>
+        <item>ky</item>
+        <item>lo</item>
+        <item>la</item>
+        <item>lv</item>
+        <item>lt</item>
+        <item>lb</item>
+        <item>mk</item>
+        <item>mg</item>
+        <item>ms</item>
+        <item>ml</item>
+        <item>mt</item>
+        <item>mi</item>
+        <item>mr</item>
+        <item>mn</item>
+        <item>my</item>
+        <item>ne</item>
+        <item>no</item>
+        <item>ny</item>
+        <item>ps</item>
+        <item>fa</item>
+        <item>pl</item>
+        <item>pt</item>
+        <item>pa</item>
+        <item>ro</item>
+        <item>ru</item>
+        <item>sm</item>
+        <item>gd</item>
+        <item>sr</item>
+        <item>st</item>
+        <item>sn</item>
+        <item>sd</item>
+        <item>si</item>
+        <item>sk</item>
+        <item>sl</item>
+        <item>so</item>
+        <item>es</item>
+        <item>su</item>
+        <item>sw</item>
+        <item>sv</item>
+        <item>tl</item>
+        <item>tg</item>
+        <item>ta</item>
+        <item>te</item>
+        <item>th</item>
+        <item>tr</item>
+        <item>uk</item>
+        <item>ur</item>
+        <item>uz</item>
+        <item>vi</item>
+        <item>cy</item>
+        <item>xh</item>
+        <item>yi</item>
+        <item>yo</item>
+        <item>zu</item>
+    </string-array>
+    <string name="email">Send</string>
+    <string name="writing_mode">writing</string>
+    <string name="test_mode">test</string>
+    <string name="enter_answer">Enter answer</string>
+    <string name="check">Check</string>
+    <string name="hint" translatable="false">❓</string>
+
+
+</resources>

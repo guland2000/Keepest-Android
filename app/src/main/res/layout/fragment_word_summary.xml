@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright 2018 Jacek Markowski
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
+  ~ associated documentation files (the "Software"), to deal in the Software without restriction,
+  ~ including without limitation the rights to use, copy, modify, merge, publish, distribute,
+  ~ sublicense,  and/or sell copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in all copies or
+  ~ substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+  ~ THE SOFTWARE.
+  ~
+  -->
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                             xmlns:app="http://schemas.android.com/apk/res-auto"
+                                             xmlns:tools="http://schemas.android.com/tools"
+                                             android:id="@+id/layout_word_summary"
+                                             android:layout_width="300dp"
+                                             android:layout_height="wrap_content"
+                                             android:layout_gravity="top"
+                                             android:padding="4dp"
+                                             tools:layout_editor_absoluteX="0dp"
+                                             tools:layout_editor_absoluteY="81dp">
+
+    <ImageView
+        android:id="@+id/img_summary_gif_view"
+        android:layout_width="200dp"
+        android:layout_height="150dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="7dp"
+        android:background="@drawable/border_image"
+        app:layout_constraintHorizontal_bias="0.7"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_summary_translation"
+        app:srcCompat="@color/buttonDefaultColor"/>
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="250dp"
+        android:layout_height="70dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:maxHeight="100dp"
+        android:minHeight="40dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_summary_gif_view">
+
+        <TextView
+            android:id="@+id/tv_summary_tags_notes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="5dp"
+            android:padding="4dp"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            android:textStyle="italic"
+            tools:text="TextView"/>
+    </ScrollView>
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tv_summary_word"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:layout_margin="0dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:text="@string/word"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:autoSizeMaxTextSize="24sp"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintLeft_toRightOf="@+id/img_summary_star"
+        app:layout_constraintRight_toLeftOf="@+id/bt_summary_play_word"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tv_summary_translation"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:layout_margin="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="0dp"
+        android:text="@string/translation"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        app:autoSizeMaxTextSize="24sp"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintLeft_toRightOf="@+id/img_summary_star"
+        app:layout_constraintRight_toLeftOf="@+id/bt_summary_play_translation"
+        app:layout_constraintTop_toBottomOf="@+id/tv_summary_word"/>
+
+
+    <Button
+        android:id="@+id/bt_summary_close"
+        android:layout_width="88dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="1dp"
+        android:background="@android:color/transparent"
+        android:backgroundTint="@android:color/transparent"
+        android:text="@string/close"
+        android:textColor="@color/buttonWrongAnswerColor"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2"/>
+
+    <ImageButton
+        android:id="@+id/bt_summary_play_word"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="0dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="0dp"
+        android:background="@android:color/transparent"
+        android:backgroundTint="@android:color/transparent"
+        android:tint="@color/editButton"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_summary_word"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_summary_word"
+        app:srcCompat="@drawable/volume"/>
+
+    <ImageButton
+        android:id="@+id/bt_summary_play_translation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="0dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="0dp"
+        android:background="@android:color/transparent"
+        android:backgroundTint="@android:color/transparent"
+        android:tint="@color/editButton"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_summary_translation"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_summary_word"
+        app:srcCompat="@drawable/volume"/>
+
+    <Button
+        android:id="@+id/bt_summary_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="0dp"
+        android:background="@android:color/transparent"
+        android:backgroundTint="@android:color/transparent"
+        android:text="@string/edit"
+        android:textColor="@color/editButton"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2"/>
+
+    <ImageButton
+        android:id="@+id/img_summary_star"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/transparent"
+        android:backgroundTint="@android:color/transparent"
+        android:tint="@color/starColor"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/star_off"/>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="21dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="0dp"
+        android:background="@android:color/black"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="@+id/img_summary_gif_view"
+        app:layout_constraintRight_toLeftOf="@+id/img_summary_gif_view"
+        app:layout_constraintTop_toTopOf="@+id/img_summary_gif_view"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/static_logo_2"/>
+
+    <ImageButton
+        android:id="@+id/img_word_next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/transparent"
+        android:backgroundTint="@android:color/transparent"
+        android:tint="@color/editButton"
+        app:layout_constraintBottom_toBottomOf="@+id/img_summary_gif_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/img_summary_gif_view"
+        app:layout_constraintTop_toTopOf="@+id/img_summary_gif_view"
+        app:srcCompat="@drawable/ic_right"/>
+
+    <ImageButton
+        android:id="@+id/img_word_prev"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/transparent"
+        android:backgroundTint="@android:color/transparent"
+        android:tint="@color/editButton"
+        app:layout_constraintBottom_toBottomOf="@+id/img_summary_gif_view"
+        app:layout_constraintEnd_toStartOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/img_summary_gif_view"
+        app:srcCompat="@drawable/ic_left"/>
+
+</android.support.constraint.ConstraintLayout>

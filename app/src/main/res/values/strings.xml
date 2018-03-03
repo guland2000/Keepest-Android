@@ -137,7 +137,6 @@
     <string name="hint" translatable="false">❓</string>
 
 
-    <!-- TODO: add more languages -->
     <string-array name="select" translatable="true">
         <!-- most used -->
         <item>English</item>

@@ -22,7 +22,6 @@
 
 <!--?xml version="1.0" encoding="UTF-8"?-->
 <resources>
-    <color name="textColor">#bdbdbd</color>
     <color name="cardDefaultColor">#ff424242</color>
     <color name="cardHighlightColor">#19541b</color>
     <color name="buttonDefaultColor">#ff5a595b</color>

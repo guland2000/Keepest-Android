@@ -80,7 +80,6 @@
     </FrameLayout>
 
     <Space
-        android:id="@+id/space"
         android:layout_width="wrap_content"
         android:layout_height="8dp"
         android:layout_marginBottom="8dp"
@@ -139,7 +138,6 @@
     </FrameLayout>
 
     <TextView
-        android:id="@+id/textView15"
         android:layout_width="82dp"
         android:layout_height="33dp"
         android:layout_marginBottom="4dp"

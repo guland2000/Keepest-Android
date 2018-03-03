@@ -29,7 +29,6 @@
 
 
     <TextView
-        android:id="@+id/textView7"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:text="@string/filename"

@@ -22,13 +22,11 @@
 
 <!--?xml version="1.0" encoding="UTF-8"?-->
 <resources>
-    <color name="textColor">#000000</color>
     <color name="cardDefaultColor">#ffd6d7d7</color>
     <color name="cardHighlightColor">#FFA000</color>
     <color name="buttonDefaultColor">#ffd6d7d7</color>
     <color name="buttonWrongAnswerColor">#D32F2F</color>
     <color name="buttonRightAnswerColor">#4caf50</color>
-    <color name="foreground_material_dark_1">#893737</color>
     <color name="editButton">#0099cc</color>
     <color name="starColor">#ffa000</color>
 </resources>

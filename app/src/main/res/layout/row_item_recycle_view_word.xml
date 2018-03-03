@@ -39,14 +39,12 @@
         app:cardUseCompatPadding="true">
 
         <LinearLayout
-            android:id="@+id/llay_word"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:animateLayoutChanges="false"
             android:orientation="horizontal">
 
             <android.support.constraint.ConstraintLayout
-                android:id="@+id/clay_word"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="8dp"

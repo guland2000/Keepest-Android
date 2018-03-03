@@ -80,7 +80,6 @@
             app:layout_constraintTop_toBottomOf="@+id/spinner_from"/>
 
         <Space
-            android:id="@+id/space2"
             android:layout_width="368dp"
             android:layout_height="20dp"
             android:layout_marginTop="8dp"

@@ -61,14 +61,12 @@
         </FrameLayout>
 
         <LinearLayout
-            android:id="@+id/llay_dictionary"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="left|end"
             android:animateLayoutChanges="false">
 
             <android.support.constraint.ConstraintLayout
-                android:id="@+id/clay_dictionary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"

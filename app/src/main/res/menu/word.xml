@@ -24,14 +24,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_search"
         android:icon="@drawable/ic_search"
         android:onClick="showWordsSearchToolbar"
         android:orderInCategory="100"
         android:title=""
         app:showAsAction="always"/>
     <item
-        android:id="@+id/action_sort"
         android:icon="@drawable/star_off"
         android:onClick="sortWordList"
         android:orderInCategory="100"

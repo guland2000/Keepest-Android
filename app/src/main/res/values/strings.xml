@@ -48,7 +48,7 @@
     <string name="exporting_dictionaries_progress">Exporting words</string>
     <string name="no_write_permission">Export failed. No write permission.</string>
     <string name="create_first_dictionary">Create Word List</string>
-    <string name="dictionary_name_hint">List name</string>
+    <string name="dictionary_name_hint">List\'s name</string>
     <string name="dict_delete_dialog">Delete</string>
     <string name="error_importing_dictionary_timeout">Sql insert timeout. Import failed</string>
     <string name="no_internet_connection">No internet connection</string>
@@ -65,7 +65,7 @@
     <string name="turorial_restart_session">Restart session.</string>
     <string name="tutorial_end_session">End session.</string>
     <string name="tutorial_add_new_word">Add new word.</string>
-    <string name="tag_name">Tag name</string>
+    <string name="tag_name">Tag\'s name</string>
     <string name="filename">File</string>
     <string name="choose_export_method">Choose export method</string>
     <string name="flashcard">Card</string>
@@ -81,7 +81,7 @@
     <string name="enter_word">enter word</string>
     <string name="enter_translation">enter translation</string>
     <string name="already_exists">Already Exists</string>
-    <string name="dictionary_name">list_name</string>
+    <string name="dictionary_name">lists_name</string>
     <string name="import_dictionary_from_file">Import words from file</string>
     <string name="new_">New</string>
     <string name="to">To</string>
@@ -129,6 +129,12 @@
     <string name="read_answers">Read Answer</string>
     <string name="app_version">Version</string>
     <string name="swipe_left_to_open_menu">Swipe left to open menu</string>
+    <string name="email">Send</string>
+    <string name="writing_mode">writing</string>
+    <string name="test_mode">test</string>
+    <string name="enter_answer">Enter answer</string>
+    <string name="check">Check</string>
+    <string name="hint" translatable="false">❓</string>
 
 
     <!-- TODO: add more languages -->
@@ -358,12 +364,6 @@
         <item>yo</item>
         <item>zu</item>
     </string-array>
-    <string name="email">Send</string>
-    <string name="writing_mode">writing</string>
-    <string name="test_mode">test</string>
-    <string name="enter_answer">Enter answer</string>
-    <string name="check">Check</string>
-    <string name="hint" translatable="false">❓</string>
 
 
 </resources>

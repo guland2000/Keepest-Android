@@ -33,6 +33,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.speech.tts.TextToSpeech;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -58,6 +59,8 @@ import android.widget.Toast;
 
 import com.google.android.gms.drive.DriveId;
 import com.google.android.gms.drive.OpenFileActivityBuilder;
+
+import java.util.Locale;
 
 import is.jacek.markowski.dictionary.keepest.BuildConfig;
 import is.jacek.markowski.dictionary.keepest.R;
@@ -87,7 +90,7 @@ import static is.jacek.markowski.dictionary.keepest.main_activity.util.Loaders.W
 import static is.jacek.markowski.dictionary.keepest.main_activity.util.Preferences.PREFERENCES_FILE;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, TextToSpeech.OnInitListener {
 
     public static final String LAST_FRAGMENT = "last_fragment";
     // fragments
@@ -98,6 +101,7 @@ public class MainActivity extends AppCompatActivity
     public boolean mIsWordFragmentOpened = true;
     public GDrive mGdrive;
     private NavigationView mNavigationView;
+    public TextToSpeech mTts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,6 +133,8 @@ public class MainActivity extends AppCompatActivity
             mWordAdvancedFragment = WordAdvancedFragment.newInstance(this, id, ADD_MODE);
         }
         mSettingsFragment = new SettingsFragment();
+        // ivona tts icelandic
+        mTts = new TextToSpeech(this, this, "com.ivona.tts");
     }
 
     private void setApplicationTheme() {
@@ -291,6 +297,9 @@ public class MainActivity extends AppCompatActivity
             mGdrive.disconnect();
         }
         setAsLastFragment(WordFragment.TAG);
+        if (mTts != null) {
+            mTts.shutdown();
+        }
     }
 
     @Override
@@ -354,7 +363,10 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onStop() {
         super.onStop();
+        if (mTts != null)
+            mTts.stop();
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -538,5 +550,13 @@ public class MainActivity extends AppCompatActivity
 
     public void commitWordsFragment(MenuItem item) {
         commitWordsFragment();
+    }
+
+    // text to speech initializer
+    @Override
+    public void onInit(int status) {
+        /* todo - add all ivona voices, menu entry for tts setting for languages*/
+        // set voice to icelandic
+        mTts.setLanguage(new Locale("is"));
     }
 }

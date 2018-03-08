@@ -25,6 +25,7 @@ package is.jacek.markowski.dictionary.keepest.main_activity.util;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.net.Uri;
+import android.os.Build;
 import android.widget.Toast;
 
 import java.io.DataInputStream;
@@ -39,6 +40,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 
 import is.jacek.markowski.dictionary.keepest.R;
+import is.jacek.markowski.dictionary.keepest.main_activity.MainActivity;
 
 /**
  * Created by jacek on 13.07.17.
@@ -54,7 +56,7 @@ public class Cache {
         String hash = hashCode(toHash);
         file = new File(new ContextWrapper(context).getFilesDir().getAbsolutePath() + "/" + hash + ".mp3");
         if (!isSoundCached(hash)) {
-            saveSoundFile(uri, file);
+            saveSoundFile(context, word, langCode, uri, file);
         }
         return file;
     }
@@ -75,19 +77,29 @@ public class Cache {
 
     }
 
-    private static void saveSoundFile(Uri uri, File file) {
-        try {
-            System.setProperty("http.agent", "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.4; en-US; rv:1.9.2.2) Gecko/20100316 Firefox/3.6.2");
-            URL u = new URL(uri.toString());
-            DataInputStream inputStream = new DataInputStream(u.openStream());
-            OutputStream outputStream = new FileOutputStream(file.getAbsolutePath());
-            Files.copy(inputStream, outputStream);
-            outputStream.flush();
-            outputStream.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+    private static void saveSoundFile(Context context, String word, String langCode, Uri uri, File file) {
+        MainActivity activity = (MainActivity) context;
+        if (langCode.equals("is")) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                activity.mTts.synthesizeToFile(word, null, file, file.getName());
+            } else {
+                activity.mTts.synthesizeToFile(word, null, file.getName());
+            }
+
+        } else {
+            try {
+                System.setProperty("http.agent", "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.4; en-US; rv:1.9.2.2) Gecko/20100316 Firefox/3.6.2");
+                URL u = new URL(uri.toString());
+                DataInputStream inputStream = new DataInputStream(u.openStream());
+                OutputStream outputStream = new FileOutputStream(file.getAbsolutePath());
+                Files.copy(inputStream, outputStream);
+                outputStream.flush();
+                outputStream.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 

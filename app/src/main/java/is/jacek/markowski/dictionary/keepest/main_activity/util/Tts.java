@@ -26,6 +26,7 @@ import android.content.Context;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.support.v4.app.FragmentActivity;
 
 import java.io.File;
 import java.io.IOException;
@@ -45,7 +46,7 @@ public class Tts {
     private Context mContext;
     private boolean mIsConnected;
 
-    public Tts(Context context) {
+    public Tts(FragmentActivity context) {
         mContext = context;
         if (mMediaPlayer == null) {
             mMediaPlayer = new MediaPlayer();

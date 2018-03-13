@@ -58,9 +58,25 @@
         android:layout="@layout/preference_category"
         android:title="@string/about">
         <PreferenceScreen
+            android:key="pref_contributors"
+            android:persistent="true"
+            android:title="@string/contributors">
+            <PreferenceCategory android:title="@string/translations">
+                <Preference
+                    android:key="pref_icelandic"
+                    android:title="@string/portuguese_2018"
+                    android:summary="@string/contributor_portuguese_2018"/>
+            </PreferenceCategory>
+        </PreferenceScreen>
+        <PreferenceScreen
             android:key="pref_privacy_policy"
             android:persistent="false"
             android:title="@string/privacy_policy">
+        </PreferenceScreen>
+        <PreferenceScreen
+            android:key="pref_source_code"
+            android:persistent="false"
+            android:title="@string/source_code">
         </PreferenceScreen>
         <PreferenceScreen
             android:key="pref_version"

@@ -135,6 +135,11 @@
     <string name="enter_answer">Enter answer</string>
     <string name="check">Check</string>
     <string name="hint" translatable="false">❓</string>
+    <string name="portuguese_2018">Portuguese, 2018</string>
+    <string name="contributor_portuguese_2018" translatable="false">Nádia Dias</string>
+    <string name="source_code">Source code</string>
+    <string name="contributors">Contributors</string>
+    <string name="translations">Translations</string>
 
 
     <string-array name="select" translatable="true">
@@ -215,7 +220,7 @@
         <item>Pashto</item>
         <item>Persian</item>
         <item>Polish</item>
-        <item>Portuguese (Portugal, Brazil)</item>
+        <item>Portuguese</item>
         <item>Punjabi</item>
         <item>Romanian</item>
         <item>Russian</item>

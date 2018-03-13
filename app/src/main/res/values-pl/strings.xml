@@ -355,4 +355,8 @@
     <string name="test_mode">test</string>
     <string name="enter_answer">Wpisz odpowiedź</string>
     <string name="check">Sprawdź</string>
+    <string name="portuguese_2018">Portugalski, 2018</string>
+    <string name="source_code">Kod źródłowy</string>
+    <string name="contributors">Współtwórcy</string>
+    <string name="translations">Tłumaczenia</string>
 </resources>

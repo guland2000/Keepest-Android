@@ -78,6 +78,18 @@ public class SettingsFragment extends PreferenceFragment {
                 return false;
             }
         });
+        // source code
+        Preference pre_source_code = getPreferenceScreen().findPreference("pref_source_code");
+        pre_source_code.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                String url = "https://github.com/jacekm-git/Keepest-Android";
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                startActivity(i);
+                return false;
+            }
+        });
 
         Preference pre_version = getPreferenceScreen().findPreference("pref_version");
         String appVersion = BuildConfig.VERSION_NAME;

@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright 2018 Jacek Markowski
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
+  ~ associated documentation files (the "Software"), to deal in the Software without restriction,
+  ~ including without limitation the rights to use, copy, modify, merge, publish, distribute,
+  ~ sublicense,  and/or sell copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in all copies or
+  ~ substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+  ~ THE SOFTWARE.
+  ~
+  -->
+
+<resources>
+    <string name="nav_settings">Stillingar</string>
+    <string name="nav_default_dictionary">Sjálfgefinn listi</string>
+    <string name="action_find">Raða</string>
+    <string name="nav_manage_dictionaries">Listar</string>
+    <string name="nav_words">Orð</string>
+    <string name="save">Vista</string>
+    <string name="dictionaries_title">Orðalistar</string>
+    <string name="from">frá</string>
+    <string name="export_dictionary">Flytja út orðalista</string>
+    <string name="there_are_no_email_clients">Það eru engir tölvupóstþjónar uppsettir</string>
+    <string name="close">Loka</string>
+    <string name="settings_title">Stillingar</string>
+    <string name="words_title">Orð</string>
+    <string name="export_all">Flytja allt út</string>
+    <string name="import_file">Flytja inn skrá</string>
+    <string name="backup_file_downloaded">Öryggisafrit innflutt</string>
+    <string name="cancel">Hætta við</string>
+    <string name="importing_dictionaries_progress">Flytur inn orð</string>
+    <string name="exporting_dictionaries_progress">Flytur út orð</string>
+    <string name="no_write_permission">Útflutningur fór úrskeiðis. Þú hefur ekki leyfi til að breyta</string>
+    <string name="create_first_dictionary">Búa til orðalista</string>
+    <string name="dictionary_name_hint">Nafn á lista</string>
+    <string name="dict_delete_dialog">Eyða</string>
+    <string name="error_importing_dictionary_timeout">Sql rann út á tíma. Innflutningur fór úrskeiðis</string>
+    <string name="no_internet_connection">Engin nettenging</string>
+    <string name="cache_size">Stærð skyndiminnis:  %.2f megabytes</string>
+    <string name="cache_cleared">Skyndiminni hreinsað</string>
+    <string name="confirm_deletion_of">Staðfestu að þú viljir eyða</string>
+    <string name="learning_mode">Námshamur</string>
+    <string name="advanced">Auka</string>
+    <string name="translate">Þýða</string>
+    <string name="yes">já</string>
+    <string name="you_have_0_dictionaries">Búa til orðalista. Settu inn nafn og veldu tungumál.</string>
+    <string name="next">Áfram</string>
+    <string name="nav_night_mode">Næturstilling Á/AF</string>
+    <string name="turorial_restart_session">Byrja upp á nýtt.</string>
+    <string name="tutorial_end_session">Ljúka lotu.</string>
+    <string name="tutorial_add_new_word">Bæta við orðum.</string>
+    <string name="tag_name">Nafn merkis</string>
+    <string name="filename">Skrá</string>
+    <string name="choose_export_method">Veldu útflutningsaðferð</string>
+    <string name="flashcard">Minnisspjald</string>
+    <string name="correct">Rétt:</string>
+    <string name="wrong">Rangt:</string>
+    <string name="score">Stig:</string>
+    <string name="number_of_questions">Fjöldi spurninga</string>
+    <string name="start_session">Hefja lotu</string>
+    <string name="word">Orð</string>
+    <string name="translation">Þýðing</string>
+    <string name="notes">Athugasemdir</string>
+    <string name="enter_word">settu inn orð</string>
+    <string name="enter_translation">sláðu inn þýðingu</string>
+    <string name="already_exists">Nú þegar til</string>
+    <string name="dictionary_name">listar_nafn</string>
+    <string name="import_dictionary_from_file">Flytja inn orð úr skrá</string>
+    <string name="new_">Nýtt</string>
+    <string name="to">Til</string>
+    <string name="tag">Merki</string>
+    <string name="select_all">Velja allt</string>
+    <string name="search">Leita</string>
+    <string name="backup_keep">afrit</string>
+    <string name="unknown">óþekkt</string>
+    <string name="choose_tags">Veldu merki.</string>
+    <string name="choose_dictionaries">Velja lista</string>
+    <string name="zero_words_found">0 orð fundust</string>
+    <string name="choose_number_of_questions">Veldu fjölda spurninga.</string>
+    <string name="permissions">Leyfi</string>
+    <string name="grant_acces_dialog">Veita aðgang að lesa/skrifa SD geymslu til að virkja innflutnings/útflutnings virkni.</string>
+    <string name="dictionaries_tab">Orðalistar</string>
+    <string name="notes_tab">Athugasemdir</string>
+    <string name="tags_tab">#Merki</string>
+    <string name="edit_tag">Breyta #MERKI</string>
+    <string name="tag_laready_exists">Merki nú þegar til.</string>
+    <string name="empty_fields_not_allowed">Auðir reitir ekki leyfilegir</string>
+    <string name="cloud_backup">Google Drive öryggisafrit</string>
+    <string name="send_to_cloud">Senda á Google Drive</string>
+    <string name="send_to_cloud_summary">Geymdu öryggisafrit af orðalistunum þínum á Google Drive.</string>
+    <string name="download_from_cloud_summary">Sækja orðalista frá Google Drive. Studdar skrár: *.keep, *.csv (orð, orð, merki, athugasemdir)</string>
+    <string name="cache_summary">Keepest geymir hljóð til að minnka netnotkun. Geymd hljóð geta verið spiluð án nettengingar.</string>
+    <string name="show_cache">Sýna skyndiminni</string>
+    <string name="clear_cache">Hreinsa skyndiminni</string>
+    <string name="download_from_cloud">Sækja frá Google Drive</string>
+    <string name="learning">Að læra</string>
+    <string name="nav_rate_app">Gefðu appinu einkun</string>
+    <string name="unable_to_find_playstore">Get ekki opnað PlayStore</string>
+    <string name="privacy_policy">Friðhelgisstefna</string>
+    <string name="gdrive_error_create_file">Villa kom upp við að búa til nýja skrá</string>
+    <string name="gdrive_upload_success">Skrá hlaðið upp:</string>
+    <string name="about">Um</string>
+    <string name="edit">Breyta</string>
+    <string name="search_in_english">Leita á ensku</string>
+    <string name="show_gif">Sýna GIF</string>
+    <string name="connecting_to_gdrive">Tengist Google Drive...</string>
+    <string name="cache_title">Skyndiminni</string>
+    <string name="cache_settings">Stillingar Skyndiminnis</string>
+    <string name="tut_translate_word">Ýttu á þennan takka til að þýða orðið sem þú settir inn.</string>
+    <string name="edit_word">Breyta orði</string>
+    <string name="add_word">Bæta við orði</string>
+    <string name="read_answers">Lesa svar</string>
+    <string name="app_version">Útgáfa</string>
+    <string name="swipe_left_to_open_menu">Renndu fingrinum til vinstri til að opna valmynd</string>
+    <string name="email">Senda</string>
+    <string name="writing_mode">skrifa</string>
+    <string name="test_mode">tilraun</string>
+    <string name="enter_answer">Settu inn svar</string>
+    <string name="check">Athuga</string>
+    <string name="portuguese_2018">Portúgalska, 2018</string>
+    <string name="source_code">Frumkóði</string>
+    <string name="contributors">Þátttakendur</string>
+    <string name="translations">Þýðingar</string>
+    <string name="icleandic_2018">Íslenska, 2018</string>
+
+    <string-array name="select" translatable="true">
+        <item>Afríkanska</item>
+        <item>Albanska</item>
+        <item>Amharíska</item>
+        <item>Arabíska</item>
+        <item>Armenska</item>
+        <item>Aserbaídsjan</item>
+        <item>Baskneska</item>
+        <item>Bengali</item>
+        <item>Bosníska</item>
+        <item>Búlgarska</item>
+        <item>Danska</item>
+        <item>Eistneska</item>
+        <item>Enska</item>
+        <item>Esperanto</item>
+        <item>Finnska</item>
+        <item>Franska</item>
+        <item>Frísneska</item>
+        <item>Gallíska</item>
+        <item>Georgíska</item>
+        <item>Gríska</item>
+        <item>Gújaratí</item>
+        <item>Haitian Creole</item>
+        <item>Haúsa</item>
+        <item>Hawaiíska</item>
+        <item>Hebreska</item>
+        <item>Hindí</item>
+        <item>Hmong</item>
+        <item>Hollenska</item>
+        <item>Hvítrússneska</item>
+        <item>Igbo</item>
+        <item>Indónesíska</item>
+        <item>Írska</item>
+        <item>Íslenska</item>
+        <item>Ítalska</item>
+        <item>Japanska</item>
+        <item>Javanese</item>
+        <item>Jiddíska</item>
+        <item>Kambódíska</item>
+        <item>Kannada</item>
+        <item>Kasakska</item>
+        <item>Katalónska</item>
+        <item>Kínverska (einfölduð)</item>
+        <item>Kínverska (hefðbundin)</item>
+        <item>Kirgisíska</item>
+        <item>Kóreska</item>
+        <item>Korsíska</item>
+        <item>Króatíska</item>
+        <item>Kúrdíska</item>
+        <item>Laó</item>
+        <item>Latína</item>
+        <item>Lettneska</item>
+        <item>Litháínska</item>
+        <item>Lúxemborgíska</item>
+        <item>Makedónska</item>
+        <item>Malagasíska</item>
+        <item>Malay</item>
+        <item>Malayalam</item>
+        <item>Maltneska</item>
+        <item>Maori</item>
+        <item>Maratí</item>
+        <item>Mjanmar (Burmese)</item>
+        <item>Mongólska</item>
+        <item>Nepalska</item>
+        <item>Norska</item>
+        <item>Nyanja (Chichewa)</item>
+        <item>Pastú</item>
+        <item>Persneska</item>
+        <item>Pólska</item>
+        <item>Portúgalska</item>
+        <item>Púndjabí</item>
+        <item>Rúmenska</item>
+        <item>Rússneska</item>
+        <item>Sænska</item>
+        <item>Samóa</item>
+        <item>Sebúanó</item>
+        <item>Serbneska</item>
+        <item>Shona</item>
+        <item>Sindí</item>
+        <item>Singalíska (Sinhalese)</item>
+        <item>Skosk gelíska</item>
+        <item>Slóvakíska</item>
+        <item>Slóvenska</item>
+        <item>Sómalsk</item>
+        <item>Sótó</item>
+        <item>Spænska</item>
+        <item>Súndíska</item>
+        <item>Svahílí</item>
+        <item>Tadsjíkinska</item>
+        <item>Tælenska</item>
+        <item>Tagalog (Filipino)</item>
+        <item>Tamílska</item>
+        <item>Tékkneska</item>
+        <item>Telúgú</item>
+        <item>Tyrknesk</item>
+        <item>Úkraínska</item>
+        <item>Ungverska</item>
+        <item>Úrdú</item>
+        <item>Úsbekíska</item>
+        <item>Velska</item>
+        <item>Víetnamsk</item>
+        <item>Xhosa</item>
+        <item>Yoruba</item>
+        <item>Zulu</item>
+        <item>Þýska</item>
+    </string-array>
+    <string-array name="selectValues" translatable="true">
+        <item>af</item>
+        <item>sq</item>
+        <item>am</item>
+        <item>ar</item>
+        <item>hy</item>
+        <item>az</item>
+        <item>eu</item>
+        <item>bn</item>
+        <item>bs</item>
+        <item>bg</item>
+        <item>da</item>
+        <item>et</item>
+        <item>en</item>
+        <item>eo</item>
+        <item>fi</item>
+        <item>fr</item>
+        <item>fy</item>
+        <item>gl</item>
+        <item>ka</item>
+        <item>el</item>
+        <item>gu</item>
+        <item>ht</item>
+        <item>ha</item>
+        <item>haw</item>
+        <item>iw</item>
+        <item>hi</item>
+        <item>hmn</item>
+        <item>nl</item>
+        <item>be</item>
+        <item>ig</item>
+        <item>id</item>
+        <item>ga</item>
+        <item>is</item>
+        <item>it</item>
+        <item>ja</item>
+        <item>jw</item>
+        <item>yi</item>
+        <item>km</item>
+        <item>kn</item>
+        <item>kk</item>
+        <item>ca</item>
+        <item>zh-CN</item>
+        <item>zh-TW</item>
+        <item>ky</item>
+        <item>ko</item>
+        <item>co</item>
+        <item>hr</item>
+        <item>ku</item>
+        <item>lo</item>
+        <item>la</item>
+        <item>lv</item>
+        <item>lt</item>
+        <item>lb</item>
+        <item>mk</item>
+        <item>mg</item>
+        <item>ms</item>
+        <item>ml</item>
+        <item>mt</item>
+        <item>mi</item>
+        <item>mr</item>
+        <item>my</item>
+        <item>mn</item>
+        <item>ne</item>
+        <item>no</item>
+        <item>ny</item>
+        <item>ps</item>
+        <item>fa</item>
+        <item>pl</item>
+        <item>pt</item>
+        <item>pa</item>
+        <item>ro</item>
+        <item>ru</item>
+        <item>sv</item>
+        <item>sm</item>
+        <item>ceb</item>
+        <item>sr</item>
+        <item>sn</item>
+        <item>sd</item>
+        <item>si</item>
+        <item>gd</item>
+        <item>sk</item>
+        <item>sl</item>
+        <item>so</item>
+        <item>st</item>
+        <item>es</item>
+        <item>su</item>
+        <item>sw</item>
+        <item>tg</item>
+        <item>th</item>
+        <item>tl</item>
+        <item>ta</item>
+        <item>cs</item>
+        <item>te</item>
+        <item>tr</item>
+        <item>uk</item>
+        <item>hu</item>
+        <item>ur</item>
+        <item>uz</item>
+        <item>cy</item>
+        <item>vi</item>
+        <item>xh</item>
+        <item>yo</item>
+        <item>zu</item>
+        <item>de</item>
+    </string-array>
+</resources>

@@ -24,7 +24,7 @@
 <resources>
     <string name="translations">Traduções</string>
     <string name="contributors">Colaboradores</string>
-    <string name="source_code">Código fonte</string>
+    <string name="source_code">Código da fonte</string>
     <string name="nav_settings">Definições</string>
     <string name="nav_default_dictionary">Lista pré definida</string>
     <string name="action_find">Ordenar</string>
@@ -102,7 +102,7 @@
     <string name="cloud_backup">"Cópia de segurança na Google Drive "</string>
     <string name="send_to_cloud">"Enviar para Google Drive "</string>
     <string name="send_to_cloud_summary">Guardar cópia de segurança da lista de palavras na Google Drive.</string>
-    <string name="download_from_cloud_summary">"Importar lista de palavras da Google Drive. Ficheiros supportados: *.keep, *.csv (Palavra, Palavra, Etiquetas, notas) "</string>
+    <string name="download_from_cloud_summary">"Importar lista de palavras da Google Drive. Ficheiros suportados: *.keep, *.csv (Palavra, Palavra, Etiquetas, notas) "</string>
     <string name="cache_summary">"Mantenha os sons em cache para reduzir o uso da internet. Os sons em cache podem ser reproduzidos offline. "</string>
     <string name="show_cache">Mostrar cache</string>
     <string name="clear_cache">Limpar cache</string>
@@ -352,4 +352,5 @@
         <item>xh</item>
         <item>zu</item>
     </string-array>
+    <string name="icleandic_2018">Islandês, 2018</string>
 </resources>

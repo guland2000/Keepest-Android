@@ -142,7 +142,7 @@
         <item>holenderski</item>
         <item>Igbo</item>
         <item>indonezyjski</item>
-        <item>Irlandczyk</item>
+        <item>irlandzki</item>
         <item>islandzki</item>
         <item>japoński</item>
         <item>jawajski</item>
@@ -359,4 +359,5 @@
     <string name="source_code">Kod źródłowy</string>
     <string name="contributors">Współtwórcy</string>
     <string name="translations">Tłumaczenia</string>
+    <string name="icleandic_2018">Islandzki, 2018</string>
 </resources>

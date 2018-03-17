@@ -56,6 +56,87 @@
     </PreferenceCategory>
     <PreferenceCategory
         android:layout="@layout/preference_category"
+        android:title="@string/tts_settings">
+        <PreferenceScreen
+            android:icon="@drawable/volume"
+            android:key="pref_tts_settings"
+            android:persistent="false"
+            android:summary="Supported TTS engines: IVONA (offline, better quality), Google Translate (online)"
+            android:title="@string/tts_settings_edit">
+            <Preference
+                android:icon="@drawable/ic_import"
+                android:key="pref_tts_ivona_download"
+                android:title="Download IVONA voices"/>
+            <PreferenceCategory
+                android:title="@string/tts_settings">
+                <ListPreference
+                    android:summary="%s"
+                    android:entries="@array/tts_entries"
+                    android:entryValues="@array/tts_icelandic_values"
+                    android:defaultValue="google_translate"
+                    android:key="pref_tts_icelandic"
+                    android:title="@string/tts_icelandic"/>
+                <ListPreference
+                    android:summary="%s"
+                    android:entries="@array/tts_entries"
+                    android:entryValues="@array/tts_polish_values"
+                    android:defaultValue="google_translate"
+                    android:key="pref_tts_polish"
+                    android:title="@string/tts_polish"/>
+                <ListPreference
+                    android:summary="%s"
+                    android:entries="@array/tts_english_entries"
+                    android:entryValues="@array/tts_english_values"
+                    android:defaultValue="google_translate"
+                    android:key="pref_tts_english"
+                    android:title="@string/tts_english"/>
+                <ListPreference
+                    android:summary="%s"
+                    android:entries="@array/tts_spanish_entries"
+                    android:entryValues="@array/tts_spanish_values"
+                    android:defaultValue="google_translate"
+                    android:key="pref_tts_spanish"
+                    android:title="@string/tts_spanish"/>
+                <ListPreference
+                    android:summary="%s"
+                    android:entries="@array/tts_entries"
+                    android:entryValues="@array/tts_romanian_values"
+                    android:defaultValue="google_translate"
+                    android:key="pref_tts_romanian"
+                    android:title="@string/tts_romanian"/>
+                <ListPreference
+                    android:summary="%s"
+                    android:entries="@array/tts_entries"
+                    android:entryValues="@array/tts_german_values"
+                    android:defaultValue="google_translate"
+                    android:key="pref_tts_german"
+                    android:title="@string/tts_german"/>
+                <ListPreference
+                    android:summary="%s"
+                    android:entries="@array/tts_entries"
+                    android:entryValues="@array/tts_french_values"
+                    android:defaultValue="google_translate"
+                    android:key="pref_tts_french"
+                    android:title="@string/tts_french"/>
+                <ListPreference
+                    android:summary="%s"
+                    android:entries="@array/tts_entries"
+                    android:entryValues="@array/tts_italian_values"
+                    android:defaultValue="google_translate"
+                    android:key="pref_tts_italian"
+                    android:title="@string/tts_italian"/>
+                <ListPreference
+                    android:summary="%s"
+                    android:entries="@array/tts_entries"
+                    android:entryValues="@array/tts_welsh_values"
+                    android:defaultValue="google_translate"
+                    android:key="pref_tts_welsh"
+                    android:title="@string/tts_welsh"/>
+            </PreferenceCategory>
+        </PreferenceScreen>
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:layout="@layout/preference_category"
         android:title="@string/about">
         <PreferenceScreen
             android:key="pref_contributors"
@@ -63,9 +144,13 @@
             android:title="@string/contributors">
             <PreferenceCategory android:title="@string/translations">
                 <Preference
+                    android:key="pref_portuguese"
+                    android:summary="@string/contributor_portuguese_2018"
+                    android:title="@string/portuguese_2018"/>
+                <Preference
                     android:key="pref_icelandic"
-                    android:title="@string/portuguese_2018"
-                    android:summary="@string/contributor_portuguese_2018"/>
+                    android:summary="@string/contributor_icelandic_2018"
+                    android:title="@string/icleandic_2018"/>
             </PreferenceCategory>
         </PreferenceScreen>
         <PreferenceScreen

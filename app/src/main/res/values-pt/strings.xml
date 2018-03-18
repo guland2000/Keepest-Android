@@ -353,4 +353,14 @@
         <item>zu</item>
     </string-array>
     <string name="icleandic_2018">Islandês, 2018</string>
+    <string name="tts_icelandic">Islandês</string>
+    <string name="tts_settings_edit">Personalizar tts</string>
+    <string name="tts_polish">Polaco</string>
+    <string name="tts_english">Inglês</string>
+    <string name="tts_spanish">Espanhol</string>
+    <string name="tts_romanian">Romeno</string>
+    <string name="tts_german">Alemão</string>
+    <string name="tts_french">Francês</string>
+    <string name="tts_italian">Italiano</string>
+    <string name="tts_welsh">Galês</string>
 </resources>

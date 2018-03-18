@@ -346,4 +346,14 @@
         <item>zu</item>
         <item>de</item>
     </string-array>
+    <string name="tts_icelandic">Íslenska</string>
+    <string name="tts_settings_edit">Aðlaga tts</string>
+    <string name="tts_polish">Pólska</string>
+    <string name="tts_english">Enska</string>
+    <string name="tts_spanish">Spænska</string>
+    <string name="tts_romanian">Rúmenska</string>
+    <string name="tts_german">Þýska</string>
+    <string name="tts_french">Franska</string>
+    <string name="tts_italian">Ítalska</string>
+    <string name="tts_welsh">Velska</string>
 </resources>

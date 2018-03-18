@@ -360,4 +360,14 @@
     <string name="contributors">Współtwórcy</string>
     <string name="translations">Tłumaczenia</string>
     <string name="icleandic_2018">Islandzki, 2018</string>
+    <string name="tts_icelandic">Islandzki</string>
+    <string name="tts_settings_edit">Dostosuj TTS</string>
+    <string name="tts_welsh">Waliski</string>
+    <string name="tts_italian">Włoski</string>
+    <string name="tts_french">Francuski</string>
+    <string name="tts_german">Niemiecki</string>
+    <string name="tts_romanian">Rumuński</string>
+    <string name="tts_spanish">Hiszpański</string>
+    <string name="tts_english">Angielski</string>
+    <string name="tts_polish">Polski</string>
 </resources>

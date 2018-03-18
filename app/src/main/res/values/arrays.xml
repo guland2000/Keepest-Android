@@ -22,57 +22,57 @@
   -->
 
 <resources>
-    <string-array name="tts_entries">
+    <string-array name="tts_entries" translatable="false">
         <item>Google Translate</item>
         <item>IVONA</item>
     </string-array>
-    <string-array name="tts_english_entries">
+    <string-array name="tts_english_entries" translatable="false">
         <item>Google Translate</item>
         <item>IVONA GB</item>
         <item>IVONA US</item>
         <item>IVONA AU</item>
     </string-array>
-    <string-array name="tts_spanish_entries">
+    <string-array name="tts_spanish_entries" translatable="false">
         <item>Google Translate</item>
         <item>IVONA ES</item>
         <item>IVONA US</item>
     </string-array>
-    <string-array name="tts_icelandic_values">
+    <string-array name="tts_icelandic_values" translatable="false">
         <item>google_translate</item>
         <item>is</item>
     </string-array>
-    <string-array name="tts_polish_values">
+    <string-array name="tts_polish_values" translatable="false">
         <item>google_translate</item>
         <item>pl</item>
     </string-array>
-    <string-array name="tts_english_values">
+    <string-array name="tts_english_values" translatable="false">
         <item>google_translate</item>
         <item>en_GB</item>
         <item>en_US</item>
         <item>en_AU</item>
     </string-array>
-    <string-array name="tts_spanish_values">
+    <string-array name="tts_spanish_values" translatable="false">
         <item>google_translate</item>
         <item>es_ES</item>
         <item>es_US</item>
     </string-array>
-    <string-array name="tts_romanian_values">
+    <string-array name="tts_romanian_values" translatable="false">
         <item>google_translate</item>
         <item>ro</item>
     </string-array>
-    <string-array name="tts_german_values">
+    <string-array name="tts_german_values" translatable="false">
         <item>google_translate</item>
         <item>de</item>
     </string-array>
-    <string-array name="tts_french_values">
+    <string-array name="tts_french_values" translatable="false">
         <item>google_translate</item>
         <item>fr</item>
     </string-array>
-    <string-array name="tts_italian_values">
+    <string-array name="tts_italian_values" translatable="false">
         <item>google_translate</item>
         <item>it</item>
     </string-array>
-    <string-array name="tts_welsh_values">
+    <string-array name="tts_welsh_values" translatable="false">
         <item>google_translate</item>
         <item>cy</item>
     </string-array>

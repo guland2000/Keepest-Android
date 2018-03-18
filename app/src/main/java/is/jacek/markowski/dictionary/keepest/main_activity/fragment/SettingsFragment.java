@@ -98,7 +98,7 @@ public class SettingsFragment extends PreferenceFragment {
         pre_download_ivona.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                String url = "https://raw.githubusercontent.com/jacekm-git/Keepest-Android/master/IVONA_installation.txt";
+                String url = "https://github.com/jacekm-git/Keepest-Android/blob/master/IVONA_installation.md";
                 Intent i = new Intent(Intent.ACTION_VIEW);
                 i.setData(Uri.parse(url));
                 startActivity(i);

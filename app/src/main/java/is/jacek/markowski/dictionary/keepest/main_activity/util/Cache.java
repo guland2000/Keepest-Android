@@ -146,7 +146,7 @@ public class Cache {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 activity.mTts.synthesizeToFile(word, null, file, file.getName());
             } else {
-                activity.mTts.synthesizeToFile(word, null, file.getName());
+                activity.mTts.synthesizeToFile(word, null, file.getAbsolutePath());
             }
             int timeCounter = 0;
             int sleep = 100;

@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright 2018 Jacek Markowski
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
+  ~ associated documentation files (the "Software"), to deal in the Software without restriction,
+  ~ including without limitation the rights to use, copy, modify, merge, publish, distribute,
+  ~ sublicense,  and/or sell copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in all copies or
+  ~ substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+  ~ THE SOFTWARE.
+  ~
+  -->
+
+<resources>
+    <string name="translations">Traduções</string>
+    <string name="contributors">Colaboradores</string>
+    <string name="source_code">Código da fonte</string>
+    <string name="nav_settings">Definições</string>
+    <string name="nav_default_dictionary">Lista pré definida</string>
+    <string name="action_find">Ordenar</string>
+    <string name="nav_manage_dictionaries">Listas</string>
+    <string name="nav_words">"Palavras "</string>
+    <string name="save">Guardar</string>
+    <string name="dictionaries_title">Listas de Palavras</string>
+    <string name="from">De</string>
+    <string name="export_dictionary">Exportar lista de palavras</string>
+    <string name="there_are_no_email_clients">"Não existem clientes de e-mail instalados "</string>
+    <string name="close">Fechar</string>
+    <string name="settings_title">"Definições "</string>
+    <string name="words_title">Palavras</string>
+    <string name="export_all">"Exportar Tudo "</string>
+    <string name="import_file">Importar Ficheiro</string>
+    <string name="backup_file_downloaded">"Cópia de Segurança Importada  "</string>
+    <string name="cancel">"Cancelar "</string>
+    <string name="importing_dictionaries_progress">Importar Palavras</string>
+    <string name="exporting_dictionaries_progress">Exportar Palavras</string>
+    <string name="no_write_permission">"Falha na exportação. Sem permissões de escrita. "</string>
+    <string name="create_first_dictionary">Criar Lista de Palavras</string>
+    <string name="dictionary_name_hint">Nome da Lista</string>
+    <string name="dict_delete_dialog">"Apagar "</string>
+    <string name="error_importing_dictionary_timeout">Sql insert timeout. Import failed</string>
+    <string name="no_internet_connection">"Sem Ligação à Internet "</string>
+    <string name="cache_size">"Tamanho de Cache: %.2f megabytes "</string>
+    <string name="cache_cleared">Cache limpo</string>
+    <string name="confirm_deletion_of">Confirmar eliminação de:</string>
+    <string name="learning_mode">"Modo de Aprendizagem "</string>
+    <string name="advanced">Extra</string>
+    <string name="translate">Traduzir</string>
+    <string name="yes">Sim</string>
+    <string name="you_have_0_dictionaries">"Criar Lista de Palavras. Introduzir Nome e Escolher Línguas. "</string>
+    <string name="next">Seguinte</string>
+    <string name="nav_night_mode">Modo noturno Sim/Não</string>
+    <string name="turorial_restart_session">Reiniciar sessão</string>
+    <string name="tutorial_end_session">Fim de sessão</string>
+    <string name="tutorial_add_new_word">"Adicionar nova palavra "</string>
+    <string name="tag_name">Nome da etiqueta</string>
+    <string name="filename">Ficheiro</string>
+    <string name="choose_export_method">"Escolha método de exportação "</string>
+    <string name="flashcard">Cartão</string>
+    <string name="correct">Correcto:</string>
+    <string name="wrong">Incorrecto:</string>
+    <string name="score">Pontuação:</string>
+    <string name="number_of_questions">"Número de questões "</string>
+    <string name="start_session">Inicio de sessão</string>
+    <string name="word">Palavra</string>
+    <string name="translation">Tradução</string>
+    <string name="notes">"Notas "</string>
+    <string name="notes_tab">"Notas "</string>
+    <string name="enter_word">Inserir palavra</string>
+    <string name="enter_translation">Inserir tradução</string>
+    <string name="already_exists">Já existente</string>
+    <string name="dictionary_name">listas_nome</string>
+    <string name="import_dictionary_from_file">"Importar palavras do ficheiro "</string>
+    <string name="new_">Novo</string>
+    <string name="to">Para</string>
+    <string name="tag">Etiqueta</string>
+    <string name="select_all">"Selecionar tudo "</string>
+    <string name="search">Procurar</string>
+    <string name="backup_keep">Cópia de segurança</string>
+    <string name="unknown">Desconhecido</string>
+    <string name="choose_tags">Escolher etiquetas.</string>
+    <string name="choose_dictionaries">"Escolher listas "</string>
+    <string name="zero_words_found">0 Palavras encontradas</string>
+    <string name="choose_number_of_questions">"Escolher o número de questões "</string>
+    <string name="permissions">Permissões</string>
+    <string name="grant_acces_dialog">"Permitir acesso escrita/leitura no cartão de memória SD para activar a funcionalidade de importação/exportação. "</string>
+    <string name="dictionaries_tab">"Listas de palavras "</string>
+    <string name="tags_tab">#Etiquetas</string>
+    <string name="edit_tag">Editar #Etiqueta</string>
+    <string name="tag_laready_exists">Etiqueta já existe.</string>
+    <string name="empty_fields_not_allowed">"Campos em branco não permitidos. "</string>
+    <string name="cloud_backup">"Cópia de segurança na Google Drive "</string>
+    <string name="send_to_cloud">"Enviar para Google Drive "</string>
+    <string name="send_to_cloud_summary">Guardar cópia de segurança da lista de palavras na Google Drive.</string>
+    <string name="download_from_cloud_summary">"Importar lista de palavras da Google Drive. Ficheiros suportados: *.keep, *.csv (Palavra, Palavra, Etiquetas, notas) "</string>
+    <string name="cache_summary">"Mantenha os sons em cache para reduzir o uso da internet. Os sons em cache podem ser reproduzidos offline. "</string>
+    <string name="show_cache">Mostrar cache</string>
+    <string name="clear_cache">Limpar cache</string>
+    <string name="download_from_cloud">"Descarregar a partir da Google Drive "</string>
+    <string name="learning">Aprender</string>
+    <string name="nav_rate_app">Dê pontuação a esta app</string>
+    <string name="unable_to_find_playstore">"Não foi possível abrir a PlayStore. "</string>
+    <string name="privacy_policy">Politica de privacidade</string>
+    <string name="gdrive_error_create_file">Erro ao criar novo ficheiro</string>
+    <string name="gdrive_upload_success">"Ficheiro carregado: "</string>
+    <string name="about">Sobre</string>
+    <string name="edit">Editar</string>
+    <string name="search_in_english">"Procurar em inglês "</string>
+    <string name="show_gif">Mostrar GIF</string>
+    <string name="connecting_to_gdrive">"Ligando à Google Drive... "</string>
+    <string name="cache_title">Cache</string>
+    <string name="cache_settings">"Definições de Cache "</string>
+    <string name="tut_translate_word">"Toque neste botão para traduzir a palavra inserida. "</string>
+    <string name="edit_word">Editar palavra</string>
+    <string name="add_word">Adicionar palavra</string>
+    <string name="read_answers">"Ler resposta "</string>
+    <string name="app_version">Versão</string>
+    <string name="swipe_left_to_open_menu">"Arraste para a esquerda para abrir o menu "</string>
+    <string name="email">Enviar</string>
+    <string name="writing_mode">"Escrevendo "</string>
+    <string name="test_mode">"teste "</string>
+    <string name="enter_answer">"Inserir resposta "</string>
+    <string name="check">Verificar</string>
+    <string name="portuguese_2018">Português, 2018</string>
+
+    <string-array name="select" translatable="true">
+        <item>Português</item>
+        <item>Inglês</item>
+
+        <item>Africanse</item>
+        <item>Albanês</item>
+        <item>Alemão</item>
+        <item>Amárico</item>
+        <item>Árabe</item>
+        <item>Armênio</item>
+        <item>Azeri</item>
+        <item>Basco</item>
+        <item>Bengali</item>
+        <item>Bielorrusso</item>
+        <item>Birmanês</item>
+        <item>Bósnio</item>
+        <item>Búlgaro</item>
+        <item>Canarim</item>
+        <item>Catalão</item>
+        <item>Cazaque</item>
+        <item>Cebuano</item>
+        <item>Checo</item>
+        <item>Chinês (Simplificado)</item>
+        <item>Chinês (Tradicional)</item>
+        <item>Cingalês</item>
+        <item>Coreano</item>
+        <item>Corso</item>
+        <item>Crioulo Haitiano</item>
+        <item>Croata</item>
+        <item>Curdo</item>
+        <item>Dinarmarquês</item>
+        <item>Eslovaco</item>
+        <item>Esloveno</item>
+        <item>Espanhol</item>
+        <item>Esperanto</item>
+        <item>Estoniano</item>
+        <item>Filandês</item>
+        <item>Francês</item>
+        <item>Frisão</item>
+        <item>Gaélico escocês</item>
+        <item>Galego</item>
+        <item>Galês</item>
+        <item>Georgiano</item>
+        <item>Grego</item>
+        <item>Guzerate</item>
+        <item>Hauçá</item>
+        <item>Havaiano</item>
+        <item>Hebraico</item>
+        <item>Hindi</item>
+        <item>Hmong</item>
+        <item>Holandês</item>
+        <item>Húngaro</item>
+        <item>Igbo</item>
+        <item>iídiche</item>
+        <item>Indonésio</item>
+        <item>Inglês</item>
+        <item>Iorubá</item>
+        <item>Irlandês</item>
+        <item>Islandês</item>
+        <item>Italiano</item>
+        <item>Japonês</item>
+        <item>Javanês</item>
+        <item>Khmer</item>
+        <item>Laociano</item>
+        <item>Latim</item>
+        <item>Letão</item>
+        <item>Lituano</item>
+        <item>Luxemburguês</item>
+        <item>Macêdonio</item>
+        <item>Malaiala</item>
+        <item>Malaio</item>
+        <item>Malgaxe</item>
+        <item>Maltesa</item>
+        <item>Maori</item>
+        <item>Marata</item>
+        <item>Marata</item>
+        <item>Nepalês</item>
+        <item>Nianja</item>
+        <item>Norueguês</item>
+        <item>Pachto</item>
+        <item>Panjabi</item>
+        <item>Persa</item>
+        <item>Polaco</item>
+        <item>Português</item>
+        <item>Quirguiz</item>
+        <item>Romeno</item>
+        <item>Russo</item>
+        <item>Samoano</item>
+        <item>Sérvio</item>
+        <item>Sesoto</item>
+        <item>Sindi</item>
+        <item>Somali</item>
+        <item>Suaíli</item>
+        <item>Sueco</item>
+        <item>Sundanês</item>
+        <item>Tagalo</item>
+        <item>Tailandês</item>
+        <item>Tajique</item>
+        <item>Tâmil</item>
+        <item>Telugo</item>
+        <item>Turco</item>
+        <item>Ucraniano</item>
+        <item>Urdu</item>
+        <item>Uzbequistão</item>
+        <item>Vietnamita</item>
+        <item>Xona</item>
+        <item>Xossa</item>
+        <item>Zulu</item>
+    </string-array>
+
+    <string-array name="selectValues" translatable="true">
+        <item>pt</item>
+        <item>en</item>
+
+        <item>af</item>
+        <item>sq</item>
+        <item>de</item>
+        <item>am</item>
+        <item>ar</item>
+        <item>hy</item>
+        <item>az</item>
+        <item>eu</item>
+        <item>bn</item>
+        <item>be</item>
+        <item>my</item>
+        <item>bs</item>
+        <item>bg</item>
+        <item>kn</item>
+        <item>ca</item>
+        <item>kk</item>
+        <item>ceb</item>
+        <item>cs</item>
+        <item>zh-CN</item>
+        <item>zh-TW</item>
+        <item>si</item>
+        <item>ko</item>
+        <item>co</item>
+        <item>ht</item>
+        <item>hr</item>
+        <item>ku</item>
+        <item>da</item>
+        <item>sk</item>
+        <item>sl</item>
+        <item>es</item>
+        <item>eo</item>
+        <item>et</item>
+        <item>fi</item>
+        <item>fr</item>
+        <item>fy</item>
+        <item>gd</item>
+        <item>gl</item>
+        <item>cy</item>
+        <item>ka</item>
+        <item>el</item>
+        <item>gu</item>
+        <item>ha</item>
+        <item>haw</item>
+        <item>iw</item>
+        <item>hi</item>
+        <item>hmn</item>
+        <item>nl</item>
+        <item>hu</item>
+        <item>ig</item>
+        <item>yi</item>
+        <item>id</item>
+        <item>en</item>
+        <item>yo</item>
+        <item>ga</item>
+        <item>is</item>
+        <item>it</item>
+        <item>ja</item>
+        <item>jw</item>
+        <item>km</item>
+        <item>lo</item>
+        <item>la</item>
+        <item>lv</item>
+        <item>lt</item>
+        <item>lb</item>
+        <item>mk</item>
+        <item>ml</item>
+        <item>ms</item>
+        <item>mg</item>
+        <item>mt</item>
+        <item>mi</item>
+        <item>mr</item>
+        <item>mn</item>
+        <item>ne</item>
+        <item>ny</item>
+        <item>no</item>
+        <item>ps</item>
+        <item>pa</item>
+        <item>fa</item>
+        <item>pl</item>
+        <item>pt</item>
+        <item>ky</item>
+        <item>ro</item>
+        <item>ru</item>
+        <item>sm</item>
+        <item>sr</item>
+        <item>st</item>
+        <item>sd</item>
+        <item>so</item>
+        <item>sw</item>
+        <item>sv</item>
+        <item>su</item>
+        <item>tl</item>
+        <item>th</item>
+        <item>tg</item>
+        <item>ta</item>
+        <item>te</item>
+        <item>tr</item>
+        <item>uk</item>
+        <item>ur</item>
+        <item>uz</item>
+        <item>vi</item>
+        <item>sn</item>
+        <item>xh</item>
+        <item>zu</item>
+    </string-array>
+    <string name="icleandic_2018">Islandês, 2018</string>
+    <string name="tts_icelandic">Islandês</string>
+    <string name="tts_settings_edit">Personalizar tts</string>
+    <string name="tts_polish">Polaco</string>
+    <string name="tts_english">Inglês</string>
+    <string name="tts_spanish">Espanhol</string>
+    <string name="tts_romanian">Romeno</string>
+    <string name="tts_german">Alemão</string>
+    <string name="tts_french">Francês</string>
+    <string name="tts_italian">Italiano</string>
+    <string name="tts_welsh">Galês</string>
+</resources>

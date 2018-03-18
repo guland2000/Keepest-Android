@@ -24,44 +24,50 @@ package is.jacek.markowski.dictionary.keepest.main_activity.util;
 
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.content.SharedPreferences;
 import android.net.Uri;
+import android.os.Build;
+import android.preference.PreferenceManager;
+import android.speech.tts.TextToSpeech;
+import android.support.annotation.NonNull;
 import android.widget.Toast;
+
+import org.jetbrains.annotations.Contract;
 
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileFilter;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URL;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+import java.util.Locale;
 
 import is.jacek.markowski.dictionary.keepest.R;
+import is.jacek.markowski.dictionary.keepest.main_activity.MainActivity;
 
-/**
- * Created by jacek on 13.07.17.
- */
 
 public class Cache {
 
     private static File file;
 
-    public static File cacheOrReadSound(Context context, Uri uri, String word, String langCode) throws InvalidKeySpecException, NoSuchAlgorithmException {
+    static File cacheOrReadSound(Context context, Uri uri, String word, String langCode) throws InvalidKeySpecException, NoSuchAlgorithmException {
 
         String toHash = word.toLowerCase() + langCode;
         String hash = hashCode(toHash);
         file = new File(new ContextWrapper(context).getFilesDir().getAbsolutePath() + "/" + hash + ".mp3");
         if (!isSoundCached(hash)) {
-            saveSoundFile(uri, file);
+            saveSoundFile(context, word, langCode, uri, file);
         }
         return file;
     }
 
-    public static String hashCode(String text) {
+    @NonNull
+    private static String hashCode(String text) {
         long h = 0L;
-        if (h == 0 && text.length() > 0) {
+        if (text.length() > 0) {
             for (int i = 0; i < text.length(); i++) {
                 h = 31 * h + text.charAt(i);
             }
@@ -75,22 +81,105 @@ public class Cache {
 
     }
 
-    private static void saveSoundFile(Uri uri, File file) {
-        try {
-            System.setProperty("http.agent", "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.4; en-US; rv:1.9.2.2) Gecko/20100316 Firefox/3.6.2");
-            URL u = new URL(uri.toString());
-            DataInputStream inputStream = new DataInputStream(u.openStream());
-            OutputStream outputStream = new FileOutputStream(file.getAbsolutePath());
-            Files.copy(inputStream, outputStream);
-            outputStream.flush();
-            outputStream.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+    private static void saveSoundFile(Context context, String word, String langCode, Uri uri, File file) {
+        MainActivity activity = (MainActivity) context;
+        TextToSpeech tts = activity.mTts;
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(activity);
+        Locale locale = null;
+        switch (langCode) {
+            case "is": {
+                String engine = prefs.getString("pref_tts_icelandic", "google_translate");
+                locale = new Locale(engine);
+                break;
+            }
+            case "pl": {
+                String engine = prefs.getString("pref_tts_polish", "google_translate");
+                locale = new Locale(engine);
+                break;
+            }
+            case "en": {
+                String engine = prefs.getString("pref_tts_english", "google_translate");
+                if (engine.length() > 2) {
+                    String lang = engine.substring(0, 2);
+                    String region = engine.substring(3);
+                    locale = new Locale(lang, region);
+                }
+                break;
+            }
+            case "es": {
+                String engine = prefs.getString("pref_tts_spanish", "google_translate");
+                if (engine.length() > 2) {
+                    String lang = engine.substring(0, 2);
+                    String region = engine.substring(3);
+                    locale = new Locale(lang, region);
+                }
+                break;
+            }
+            case "ro": {
+                String engine = prefs.getString("pref_tts_romanian", "google_translate");
+                locale = new Locale(engine);
+                break;
+            }
+            case "de": {
+                String engine = prefs.getString("pref_tts_german", "google_translate");
+                locale = new Locale(engine);
+                break;
+            }
+            case "fr": {
+                String engine = prefs.getString("pref_tts_french", "google_translate");
+                locale = new Locale(engine);
+                break;
+            }
+            case "it": {
+                String engine = prefs.getString("pref_tts_italian", "google_translate");
+                locale = new Locale(engine);
+                break;
+            }
+            case "cy": {
+                String engine = prefs.getString("pref_tts_welsh", "google_translate");
+                locale = new Locale(engine);
+                break;
+            }
+        }
+
+        if (locale != null && tts.setLanguage(locale) >= 0) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                activity.mTts.synthesizeToFile(word, null, file, file.getName());
+            } else {
+                activity.mTts.synthesizeToFile(word, null, file.getAbsolutePath());
+            }
+            int timeCounter = 0;
+            int sleep = 100;
+            while (tts.isSpeaking()) {
+                try {
+                    Thread.sleep(sleep);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                timeCounter += sleep;
+                // exit loop if longer than 2 seconds
+                if (timeCounter > 2000) {
+                    break;
+                }
+            }
+
+        } else {
+            try {
+                System.setProperty("http.agent", "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.4; en-US; rv:1.9.2.2) Gecko/20100316 Firefox/3.6.2");
+                URL u = new URL(uri.toString());
+                DataInputStream inputStream = new DataInputStream(u.openStream());
+                OutputStream outputStream = new FileOutputStream(file.getAbsolutePath());
+                Files.copy(inputStream, outputStream);
+                outputStream.flush();
+                outputStream.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
+    @NonNull
+    @Contract(pure = true)
     private static FileFilter mp3FileFilter() {
         return new FileFilter() {
             @Override
@@ -124,7 +213,7 @@ public class Cache {
 
     }
 
-    public static void toastCacheCleared(Context context) {
+    private static void toastCacheCleared(Context context) {
         Toast.makeText(context, R.string.cache_cleared, Toast.LENGTH_SHORT).show();
     }
 }

@@ -32,6 +32,7 @@ import java.util.ArrayList;
 
 import is.jacek.markowski.dictionary.keepest.R;
 import is.jacek.markowski.dictionary.keepest.main_activity.fragment.TabGifsWordFragment;
+import is.jacek.markowski.dictionary.keepest.main_activity.util.ApiKeys;
 import is.jacek.markowski.dictionary.keepest.main_activity.util.Connection;
 import is.jacek.markowski.dictionary.keepest.main_activity.util.Giphy;
 import is.jacek.markowski.dictionary.keepest.main_activity.util.WordManager;
@@ -67,7 +68,7 @@ public class GifChooserAdapter extends RecyclerView.Adapter<GifChooserAdapter.Gi
         if (getItemCount() - 2 <= position) {
             mOffset += 10;
             if (mOffset < 50 && Connection.isConnected(fragment.getContext())) {
-                Giphy.queryGifs(fragment.getString(R.string.giphy_api), this, mSearch, mLimit, mOffset);
+                Giphy.queryGifs(ApiKeys.getGiphyApiKey(fragment.getContext()), this, mSearch, mLimit, mOffset);
             }
         }
         final String gifUrl = data.get(position);

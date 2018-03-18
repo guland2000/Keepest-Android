@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright 2018 Jacek Markowski
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
+  ~ associated documentation files (the "Software"), to deal in the Software without restriction,
+  ~ including without limitation the rights to use, copy, modify, merge, publish, distribute,
+  ~ sublicense,  and/or sell copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in all copies or
+  ~ substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+  ~ THE SOFTWARE.
+  ~
+  -->
+
+<resources>
+    <string-array name="tts_entries" translatable="false">
+        <item>Google Translate</item>
+        <item>IVONA</item>
+    </string-array>
+    <string-array name="tts_english_entries" translatable="false">
+        <item>Google Translate</item>
+        <item>IVONA GB</item>
+        <item>IVONA US</item>
+        <item>IVONA AU</item>
+    </string-array>
+    <string-array name="tts_spanish_entries" translatable="false">
+        <item>Google Translate</item>
+        <item>IVONA ES</item>
+        <item>IVONA US</item>
+    </string-array>
+    <string-array name="tts_icelandic_values" translatable="false">
+        <item>google_translate</item>
+        <item>is</item>
+    </string-array>
+    <string-array name="tts_polish_values" translatable="false">
+        <item>google_translate</item>
+        <item>pl</item>
+    </string-array>
+    <string-array name="tts_english_values" translatable="false">
+        <item>google_translate</item>
+        <item>en_GB</item>
+        <item>en_US</item>
+        <item>en_AU</item>
+    </string-array>
+    <string-array name="tts_spanish_values" translatable="false">
+        <item>google_translate</item>
+        <item>es_ES</item>
+        <item>es_US</item>
+    </string-array>
+    <string-array name="tts_romanian_values" translatable="false">
+        <item>google_translate</item>
+        <item>ro</item>
+    </string-array>
+    <string-array name="tts_german_values" translatable="false">
+        <item>google_translate</item>
+        <item>de</item>
+    </string-array>
+    <string-array name="tts_french_values" translatable="false">
+        <item>google_translate</item>
+        <item>fr</item>
+    </string-array>
+    <string-array name="tts_italian_values" translatable="false">
+        <item>google_translate</item>
+        <item>it</item>
+    </string-array>
+    <string-array name="tts_welsh_values" translatable="false">
+        <item>google_translate</item>
+        <item>cy</item>
+    </string-array>
+</resources>

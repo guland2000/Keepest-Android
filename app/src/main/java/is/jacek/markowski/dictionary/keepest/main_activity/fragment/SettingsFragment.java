@@ -26,6 +26,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.Preference;
+import android.preference.PreferenceManager;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -60,6 +61,8 @@ public class SettingsFragment extends PreferenceFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+        // load default values
+        PreferenceManager.setDefaultValues(getContext(), R.xml.preferences, false);
 
         final MainActivity activity = (MainActivity) getActivity();
 
@@ -78,6 +81,53 @@ public class SettingsFragment extends PreferenceFragment {
                 return false;
             }
         });
+        // source code
+        Preference pre_source_code = getPreferenceScreen().findPreference("pref_source_code");
+        pre_source_code.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                String url = "https://github.com/jacekm-git/Keepest-Android";
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                startActivity(i);
+                return false;
+            }
+        });
+        // download ivona
+        Preference pre_download_ivona = getPreferenceScreen().findPreference("pref_tts_ivona_download");
+        pre_download_ivona.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                String url = "https://github.com/jacekm-git/Keepest-Android/blob/master/IVONA_installation.md";
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                startActivity(i);
+                return false;
+            }
+        });
+        // clear cache on voice change
+        String[] voices = {
+                "pref_tts_polish",
+                "pref_tts_icelandic",
+                "pref_tts_english",
+                "pref_tts_spanish",
+                "pref_tts_romanian",
+                "pref_tts_german",
+                "pref_tts_french",
+                "pref_tts_italian",
+                "pref_tts_welsh"
+        };
+        for (String voice : voices) {
+            Preference pre_tts_lang = getPreferenceScreen().findPreference(voice);
+            pre_tts_lang.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    Cache.clearCache(activity);
+                    return true;
+                }
+            });
+        }
+
 
         Preference pre_version = getPreferenceScreen().findPreference("pref_version");
         String appVersion = BuildConfig.VERSION_NAME;

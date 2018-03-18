@@ -38,6 +38,7 @@ import is.jacek.markowski.dictionary.keepest.R;
 import is.jacek.markowski.dictionary.keepest.main_activity.MainActivity;
 import is.jacek.markowski.dictionary.keepest.main_activity.adapter.GifChooserAdapter;
 import is.jacek.markowski.dictionary.keepest.main_activity.adapter.WordAdvancedTabsAdapter;
+import is.jacek.markowski.dictionary.keepest.main_activity.util.ApiKeys;
 import is.jacek.markowski.dictionary.keepest.main_activity.util.Connection;
 import is.jacek.markowski.dictionary.keepest.main_activity.util.DictionaryManager;
 import is.jacek.markowski.dictionary.keepest.main_activity.util.Giphy;
@@ -106,7 +107,7 @@ public class TabGifsWordFragment extends Fragment implements WordAdvancedTabsAda
                     MainActivity activity = (MainActivity) getActivity();
                     activity.hideKeyboard();
                     if (Connection.isConnected(context)) {
-                        Giphy.queryGifs(getString(R.string.giphy_api), adapter, searchTerm, limit, offset);
+                        Giphy.queryGifs(ApiKeys.getGiphyApiKey(getContext()), adapter, searchTerm, limit, offset);
                     }
                 }
             }

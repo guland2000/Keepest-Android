@@ -142,7 +142,7 @@
         <item>holenderski</item>
         <item>Igbo</item>
         <item>indonezyjski</item>
-        <item>Irlandczyk</item>
+        <item>irlandzki</item>
         <item>islandzki</item>
         <item>japoński</item>
         <item>jawajski</item>
@@ -355,4 +355,19 @@
     <string name="test_mode">test</string>
     <string name="enter_answer">Wpisz odpowiedź</string>
     <string name="check">Sprawdź</string>
+    <string name="portuguese_2018">Portugalski, 2018</string>
+    <string name="source_code">Kod źródłowy</string>
+    <string name="contributors">Współtwórcy</string>
+    <string name="translations">Tłumaczenia</string>
+    <string name="icleandic_2018">Islandzki, 2018</string>
+    <string name="tts_icelandic">Islandzki</string>
+    <string name="tts_settings_edit">Dostosuj TTS</string>
+    <string name="tts_welsh">Waliski</string>
+    <string name="tts_italian">Włoski</string>
+    <string name="tts_french">Francuski</string>
+    <string name="tts_german">Niemiecki</string>
+    <string name="tts_romanian">Rumuński</string>
+    <string name="tts_spanish">Hiszpański</string>
+    <string name="tts_english">Angielski</string>
+    <string name="tts_polish">Polski</string>
 </resources>

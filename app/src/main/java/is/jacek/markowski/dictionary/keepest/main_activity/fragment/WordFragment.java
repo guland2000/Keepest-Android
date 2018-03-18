@@ -69,7 +69,7 @@ public class WordFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        ttsManager = new Tts(getContext()); // initialize text to speech service
+        ttsManager = new Tts(getActivity()); // initialize text to speech service
         setHasOptionsMenu(true);
 
         final View root = inflater.inflate(R.layout.fragment_words, container, false);

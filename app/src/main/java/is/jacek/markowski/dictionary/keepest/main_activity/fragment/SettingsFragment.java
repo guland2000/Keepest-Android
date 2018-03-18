@@ -98,7 +98,7 @@ public class SettingsFragment extends PreferenceFragment {
         pre_download_ivona.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                String url = "https://apkpure.com/developer/IVONA%20Text-to-Speech";
+                String url = "https://raw.githubusercontent.com/jacekm-git/Keepest-Android/master/IVONA_installation.txt";
                 Intent i = new Intent(Intent.ACTION_VIEW);
                 i.setData(Uri.parse(url));
                 startActivity(i);

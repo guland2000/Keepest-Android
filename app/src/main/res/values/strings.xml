@@ -115,7 +115,7 @@
     <string name="unable_to_find_playstore">Unable to open PlayStore.</string>
     <string name="privacy_policy">Privacy Policy</string>
     <string name="gdrive_error_create_file">Error while trying to create new file contents</string>
-    <string name="gdrive_upload_success">File uploaded:</string>
+    <string name="gdrive_upload_success">File uploaded!</string>
     <string name="about">About</string>
     <string name="edit">Edit</string>
     <string name="search_in_english">Search in english</string>

@@ -95,10 +95,10 @@ public class ImportExport {
     static final String NOTES_KEY = "notes";
     static final String IMAGE_KEY = "image";
     public static int STORAGE_REQUEST_CODE = 0;
-    private static File root = android.os.Environment.getExternalStoragePublicDirectory(DIRECTORY_DOWNLOADS);
     private static File dir;
 
-    static {
+    public static void createDirectories() {
+        File root = android.os.Environment.getExternalStoragePublicDirectory(DIRECTORY_DOWNLOADS);
         root.mkdirs();
         dir = new File(root.getAbsolutePath() + "/Keepest");
         dir.mkdirs();
@@ -106,7 +106,7 @@ public class ImportExport {
 
     public static File getNewDownloadFile(Context context, String fileName) {
         if (fileName == null) {
-            fileName = "google_drive.keep";
+            fileName = Files.TARGET_GDRIVE_FILENAME;
         }
         return new File(context.getApplicationInfo().dataDir, fileName);
     }
@@ -123,6 +123,7 @@ public class ImportExport {
     }
 
     public static File getImportDirectory() {
+        createDirectories();
         return dir;
     }
 
@@ -138,7 +139,7 @@ public class ImportExport {
         int mType;
         ProgressDialog mProgressDialog;
 
-        public ExportJsonTask(FragmentActivity activity, Cursor words, Cursor dicts, String filename, int type, String format) {
+        ExportJsonTask(FragmentActivity activity, Cursor words, Cursor dicts, String filename, int type, String format) {
             mCursorDicts = dicts;
             mCursorWords = words;
             mActivity = (MainActivity) activity;
@@ -171,10 +172,10 @@ public class ImportExport {
                     Toast.makeText(mActivity, R.string.there_are_no_email_clients, Toast.LENGTH_SHORT).show();
                 }
             } else if (mType == TYPE_CLOUD) {
-                GDrive gDrive = mActivity.mGdrive;
-                DateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd HH:mm:ss");
+                GDriveV3 gDrive = mActivity.mGdriveV3;
+                DateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd");
                 Date date = new Date();
-                gDrive.uploadFile("Keepest_" + dateFormat.format(date).toString() + FILE_KEEP);
+                gDrive.uploadFile(mActivity.getString(R.string.backup_keep) + dateFormat.format(date).toString() + FILE_KEEP);
 
             } else if (mType == TYPE_FILE) {
 

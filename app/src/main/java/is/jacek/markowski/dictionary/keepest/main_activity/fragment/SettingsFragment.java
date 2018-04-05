@@ -35,18 +35,17 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.github.machinarius.preferencefragment.PreferenceFragment;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 
 import is.jacek.markowski.dictionary.keepest.BuildConfig;
 import is.jacek.markowski.dictionary.keepest.R;
 import is.jacek.markowski.dictionary.keepest.main_activity.MainActivity;
 import is.jacek.markowski.dictionary.keepest.main_activity.util.Cache;
 import is.jacek.markowski.dictionary.keepest.main_activity.util.Files;
-import is.jacek.markowski.dictionary.keepest.main_activity.util.GDrive;
+import is.jacek.markowski.dictionary.keepest.main_activity.util.GDriveV3;
 import is.jacek.markowski.dictionary.keepest.main_activity.util.ImportExport;
-import is.jacek.markowski.dictionary.keepest.main_activity.util.Message;
 
-import static is.jacek.markowski.dictionary.keepest.main_activity.util.GDrive.MODE_DOWNLOAD;
-import static is.jacek.markowski.dictionary.keepest.main_activity.util.GDrive.MODE_UPLOAD;
 import static is.jacek.markowski.dictionary.keepest.main_activity.util.ImportExport.ExportJsonTask.TYPE_CLOUD;
 
 /**
@@ -98,7 +97,7 @@ public class SettingsFragment extends PreferenceFragment {
         pre_download_ivona.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                String url = "https://github.com/jacekm-git/Keepest-Android/blob/master/IVONA_installation.md";
+                String url = "http://lmgtfy.com/?q=IVONA+Text-to-Speech+apkpure";
                 Intent i = new Intent(Intent.ACTION_VIEW);
                 i.setData(Uri.parse(url));
                 startActivity(i);
@@ -139,15 +138,13 @@ public class SettingsFragment extends PreferenceFragment {
         pre_send_to_cloud.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                if (activity.mGdrive == null) {
-                    activity.mGdrive = new GDrive(activity, MODE_UPLOAD);
-                }
-                if (activity.mGdrive != null && activity.mGdrive.isConnected()) {
-                    Files.prepareJsonAll(activity, ImportExport.getNewDownloadFile(getContext(), null).getName(), TYPE_CLOUD);
-                } else
-
-                {
-                    Message.showToast(activity, getString(R.string.connecting_to_gdrive));
+                if (checkPlayServices()) {
+                    GDriveV3 drive = new GDriveV3(activity);
+                    drive.signIn(GDriveV3.REQUEST_CODE_UPLOAD);
+                    activity.mGdriveV3 = drive;
+                    if (drive.isSignedIn()) {
+                        Files.prepareJsonAll(activity, ImportExport.getNewDownloadFile(getContext(), null).getName(), TYPE_CLOUD);
+                    }
                 }
                 return true;
             }
@@ -160,19 +157,16 @@ public class SettingsFragment extends PreferenceFragment {
         {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                if (activity.mGdrive == null) {
-                    activity.mGdrive = new GDrive(activity, MODE_DOWNLOAD);
-                    activity.mGdrive.showFileDialog();
-                }
-
-                if (activity.mGdrive != null && activity.mGdrive.isConnected()) {
-                    activity.mGdrive.showFileDialog();
-                } else {
-                    Message.showToast(activity, getString(R.string.connecting_to_gdrive));
+                if (checkPlayServices()) {
+                    GDriveV3 drive = new GDriveV3(activity);
+                    drive.signIn(GDriveV3.REQUEST_CODE_SIGN_IN_DOWNLOAD);
+                    activity.mGdriveV3 = drive;
+                    drive.showFileDialog();
                 }
                 return true;
             }
         });
+
         activity.setAsLastFragment(TAG);
 
 // show cache
@@ -197,6 +191,21 @@ public class SettingsFragment extends PreferenceFragment {
             }
         });
 
+    }
+
+    private boolean checkPlayServices() {
+        GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
+        int resultCode = apiAvailability.isGooglePlayServicesAvailable(getActivity());
+        if (resultCode != ConnectionResult.SUCCESS) {
+            if (apiAvailability.isUserResolvableError(resultCode)) {
+                apiAvailability.getErrorDialog(getActivity(), resultCode, 0)
+                        .show();
+            } else {
+                return false;
+            }
+            return false;
+        }
+        return true;
     }
 
     @Override

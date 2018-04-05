@@ -112,7 +112,7 @@
     <string name="unable_to_find_playstore">"Não foi possível abrir a PlayStore. "</string>
     <string name="privacy_policy">Politica de privacidade</string>
     <string name="gdrive_error_create_file">Erro ao criar novo ficheiro</string>
-    <string name="gdrive_upload_success">"Ficheiro carregado: "</string>
+    <string name="gdrive_upload_success">Ficheiro carregado!</string>
     <string name="about">Sobre</string>
     <string name="edit">Editar</string>
     <string name="search_in_english">"Procurar em inglês "</string>

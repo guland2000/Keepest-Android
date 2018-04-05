@@ -337,7 +337,7 @@
     <string name="unable_to_find_playstore">Nie można otworzyć PlayStore.</string>
     <string name="privacy_policy">Polityka Prywatności</string>
     <string name="gdrive_error_create_file">Bląd podczas tworzenia pliku.</string>
-    <string name="gdrive_upload_success">"Wysłano plik: "</string>
+    <string name="gdrive_upload_success">Wysłano plik!</string>
     <string name="about">O programie</string>
     <string name="edit">Edytuj</string>
     <string name="search_in_english">Szukaj po angielsku</string>

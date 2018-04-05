@@ -21,33 +21,31 @@
   -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="350dp"
-              android:layout_height="600dp"
-              android:orientation="vertical"
-              tools:context=".main_activity.fragment.WordFragment">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="600dp"
+    android:orientation="vertical"
+    tools:context=".main_activity.fragment.WordFragment">
 
 
     <TextView
-        android:layout_width="350dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/import_dictionary_from_file"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:textSize="14sp"
-        />
+        android:textSize="14sp" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_import_list"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:clipToPadding="false"
-        android:paddingBottom="80dp"
-        />
+        android:paddingBottom="80dp" />
 
     <include
         layout="@layout/directory_browser"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

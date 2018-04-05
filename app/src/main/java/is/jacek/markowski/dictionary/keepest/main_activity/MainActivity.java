@@ -58,7 +58,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.drive.DriveId;
-import com.google.android.gms.drive.OpenFileActivityBuilder;
+import com.google.android.gms.drive.OpenFileActivityOptions;
 
 import java.util.Locale;
 
@@ -73,17 +73,24 @@ import is.jacek.markowski.dictionary.keepest.main_activity.fragment.SettingsFrag
 import is.jacek.markowski.dictionary.keepest.main_activity.fragment.WordAdvancedFragment;
 import is.jacek.markowski.dictionary.keepest.main_activity.fragment.WordFragment;
 import is.jacek.markowski.dictionary.keepest.main_activity.util.DictionaryManager;
-import is.jacek.markowski.dictionary.keepest.main_activity.util.GDrive;
+import is.jacek.markowski.dictionary.keepest.main_activity.util.Files;
+import is.jacek.markowski.dictionary.keepest.main_activity.util.GDriveV3;
+import is.jacek.markowski.dictionary.keepest.main_activity.util.ImportExport;
 import is.jacek.markowski.dictionary.keepest.main_activity.util.Language;
 import is.jacek.markowski.dictionary.keepest.main_activity.util.LearningManager;
 import is.jacek.markowski.dictionary.keepest.main_activity.util.Loaders;
+import is.jacek.markowski.dictionary.keepest.main_activity.util.Message;
 import is.jacek.markowski.dictionary.keepest.main_activity.util.Preferences;
 import is.jacek.markowski.dictionary.keepest.main_activity.util.UriHelper;
 import is.jacek.markowski.dictionary.keepest.main_activity.util.WordManager;
 
 import static is.jacek.markowski.dictionary.keepest.main_activity.fragment.WordDialogFragment.ADD_MODE;
 import static is.jacek.markowski.dictionary.keepest.main_activity.fragment.WordDialogFragment.EDIT_MODE;
-import static is.jacek.markowski.dictionary.keepest.main_activity.util.GDrive.REQUEST_CODE_OPENER;
+import static is.jacek.markowski.dictionary.keepest.main_activity.util.GDriveV3.REQUEST_CODE_OPENER;
+import static is.jacek.markowski.dictionary.keepest.main_activity.util.GDriveV3.REQUEST_CODE_SIGN_IN_DOWNLOAD;
+import static is.jacek.markowski.dictionary.keepest.main_activity.util.GDriveV3.REQUEST_CODE_SIGN_IN_UPLOAD;
+import static is.jacek.markowski.dictionary.keepest.main_activity.util.GDriveV3.REQUEST_CODE_UPLOAD;
+import static is.jacek.markowski.dictionary.keepest.main_activity.util.ImportExport.ExportJsonTask.TYPE_CLOUD;
 import static is.jacek.markowski.dictionary.keepest.main_activity.util.Loaders.Words.LOADER_ID;
 import static is.jacek.markowski.dictionary.keepest.main_activity.util.Loaders.Words.SORT_BY_NAMES;
 import static is.jacek.markowski.dictionary.keepest.main_activity.util.Loaders.Words.SORT_BY_STARS;
@@ -99,7 +106,7 @@ public class MainActivity extends AppCompatActivity
     public WordAdvancedFragment mWordAdvancedFragment;
     public DictionaryFragment mDictionaryFragment;
     public boolean mIsWordFragmentOpened = true;
-    public GDrive mGdrive;
+    public GDriveV3 mGdriveV3;
     private NavigationView mNavigationView;
     public TextToSpeech mTts;
 
@@ -277,9 +284,6 @@ public class MainActivity extends AppCompatActivity
         super.onResume();
         getContentResolver().notifyChange(UriHelper.Word.buildWordsAllUri(), null);
         restoreLastFragment();
-        if (mGdrive != null) {
-            mGdrive.connect();
-        }
     }
 
     public void hideKeyboard() {
@@ -293,9 +297,6 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (mGdrive != null) {
-            mGdrive.disconnect();
-        }
         setAsLastFragment(WordFragment.TAG);
         if (mTts != null) {
             mTts.shutdown();
@@ -476,7 +477,7 @@ public class MainActivity extends AppCompatActivity
         WordFragment fragment = (WordFragment) getSupportFragmentManager().findFragmentByTag(WordFragment.TAG);
         RecyclerView recyclerView = fragment.mRecyclerView;
         Uri uri = UriHelper.Word.buildWordsAllUri();
-        if (fragment.sortMode == SORT_BY_NAMES) {
+        if (fragment.sortMode.equals(SORT_BY_NAMES)) {
             fragment.sortMode = SORT_BY_STARS;
         } else {
             fragment.sortMode = SORT_BY_NAMES;
@@ -539,9 +540,26 @@ public class MainActivity extends AppCompatActivity
             case REQUEST_CODE_OPENER:
                 if (resultCode == RESULT_OK) {
                     DriveId driveId = data.getParcelableExtra(
-                            OpenFileActivityBuilder.EXTRA_RESPONSE_DRIVE_ID);
-                    mGdrive.importFile(driveId);
+                            OpenFileActivityOptions.EXTRA_RESPONSE_DRIVE_ID);
+                    mGdriveV3.importFile(driveId);
                 }
+                break;
+            case REQUEST_CODE_UPLOAD:
+                if (resultCode == RESULT_OK) {
+                    Message.showToast(this, getString(R.string.gdrive_upload_success));
+                }
+                break;
+            case REQUEST_CODE_SIGN_IN_UPLOAD:
+                GDriveV3 drive_up = new GDriveV3(this);
+                mGdriveV3 = drive_up;
+                if (drive_up.isSignedIn()) {
+                    Files.prepareJsonAll(this, ImportExport.getNewDownloadFile(this, null).getName(), TYPE_CLOUD);
+                }
+                break;
+            case REQUEST_CODE_SIGN_IN_DOWNLOAD:
+                GDriveV3 drive_dwn = new GDriveV3(this);
+                mGdriveV3 = drive_dwn;
+                drive_dwn.showFileDialog();
                 break;
             default:
                 super.onActivityResult(requestCode, resultCode, data);

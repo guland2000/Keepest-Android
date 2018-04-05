@@ -52,6 +52,7 @@ import static is.jacek.markowski.dictionary.keepest.main_activity.util.UriHelper
 
 public class Files {
     private static final String IMPORT_PATH = "import path";
+    public static String TARGET_GDRIVE_FILENAME = "google_drive.keep";
 
     public static File[] listFiles(File dir) {
         return dir.listFiles(new FileFilter() {

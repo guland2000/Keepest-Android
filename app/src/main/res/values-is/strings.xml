@@ -109,7 +109,7 @@
     <string name="unable_to_find_playstore">Get ekki opnað PlayStore</string>
     <string name="privacy_policy">Friðhelgisstefna</string>
     <string name="gdrive_error_create_file">Villa kom upp við að búa til nýja skrá</string>
-    <string name="gdrive_upload_success">Skrá hlaðið upp:</string>
+    <string name="gdrive_upload_success">Skrá hlaðið upp!</string>
     <string name="about">Um</string>
     <string name="edit">Breyta</string>
     <string name="search_in_english">Leita á ensku</string>

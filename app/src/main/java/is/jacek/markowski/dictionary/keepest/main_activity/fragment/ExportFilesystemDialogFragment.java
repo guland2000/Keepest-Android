@@ -45,6 +45,7 @@ import java.io.File;
 import is.jacek.markowski.dictionary.keepest.R;
 import is.jacek.markowski.dictionary.keepest.main_activity.adapter.DirAdapter;
 import is.jacek.markowski.dictionary.keepest.main_activity.util.Files;
+import is.jacek.markowski.dictionary.keepest.main_activity.util.ImportExport;
 import is.jacek.markowski.dictionary.keepest.main_activity.util.Permissions;
 import is.jacek.markowski.dictionary.keepest.main_activity.util.Text;
 
@@ -161,6 +162,7 @@ public class ExportFilesystemDialogFragment extends DialogFragment {
                         // check and grant permission
                         if (Text.validate(getContext(), mFilename.getText().toString())) {
                             if (Permissions.getPermissionWriteStatus(activity) == PackageManager.PERMISSION_GRANTED) {
+                                ImportExport.createDirectories();
                                 // create export file
                                 String exportFileName = Text.shrinkText(mFilename.getText().toString());
                                 if (dictId == -1) {

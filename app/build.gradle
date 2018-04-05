@@ -32,7 +32,7 @@ android {
                 storePassword STORE_PASSWORD
             }
             catch (ignored) {
-                throw new InvalidUserDataException("You should define STORE_PASSWORD and KEY_PASSWORD in gradle.properties.")
+                throw new InvalidUserDataException("You should define STORE_PASSWORD, KEY_PASSWORD and STORE_FILE in gradle.properties.")
             }
         }
     }
@@ -43,15 +43,17 @@ android {
         minSdkVersion 19
         targetSdkVersion 27
         vectorDrawables.useSupportLibrary = true
-        versionCode 70
-        versionName "1.18"
+        versionCode 72
+        versionName "1.19"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         signingConfig signingConfigs.config
     }
     buildTypes {
         release {
             minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
         }
         debug {
             signingConfig signingConfigs.config
@@ -62,24 +64,24 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:27.0.2'
-    compile 'com.android.support:design:27.0.2'
-    compile 'com.android.support:cardview-v7:27.0.2'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.github.machinarius:preferencefragment:0.1.2'
-    compile 'com.github.madrapps:asyncquery:1.0.0'
-    compile 'com.tubb.smrv:swipemenu-recyclerview:5.4.0'
-    compile 'com.github.bmarrdev:android-DecoView-charting:v1.2'
-    compile 'com.appolica:flubber:1.0.1'
-    compile 'net.lingala.zip4j:zip4j:1.3.2'
-    compile 'com.github.deano2390:MaterialShowcaseView:1.1.0'
-    compile 'com.google.android.gms:play-services-drive:10.0.1'
-    compile 'com.github.bumptech.glide:glide:4.2.0'
-    compile 'com.google.firebase:firebase-crash:10.0.1'
-    testCompile 'junit:junit:4.12'
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support:appcompat-v7:27.1.0'
+    implementation 'com.android.support:design:27.1.0'
+    implementation 'com.android.support:cardview-v7:27.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation 'com.github.machinarius:preferencefragment:0.1.2'
+    implementation 'com.github.madrapps:asyncquery:1.0.0'
+    implementation 'com.tubb.smrv:swipemenu-recyclerview:5.4.0'
+    implementation 'com.github.bmarrdev:android-DecoView-charting:v1.2'
+    implementation 'com.appolica:flubber:1.0.1'
+    implementation 'net.lingala.zip4j:zip4j:1.3.2'
+    implementation 'com.github.deano2390:MaterialShowcaseView:1.1.0'
+    implementation 'com.google.android.gms:play-services-drive:12.0.1'
+    implementation 'com.google.android.gms:play-services-auth:12.0.1'
+    implementation 'com.github.bumptech.glide:glide:4.2.0'
+    testImplementation 'junit:junit:4.12'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.2.0'
-    compile 'com.opencsv:opencsv:4.0'
+    implementation 'com.opencsv:opencsv:4.0'
     configurations.all {
         exclude group: "commons-logging", module: "commons-logging"
     }
@@ -91,5 +93,3 @@ repositories {
         url "https://maven.google.com"
     }
 }
-
-apply plugin: 'com.google.gms.google-services'

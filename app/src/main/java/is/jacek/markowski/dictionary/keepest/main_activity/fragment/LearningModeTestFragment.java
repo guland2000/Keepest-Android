@@ -136,7 +136,7 @@ public class LearningModeTestFragment extends Fragment {
     }
 
     private void setupQuestion() {
-        TextView question = getView().findViewById(R.id.tv_test_question);
+        final TextView question = getView().findViewById(R.id.tv_test_question);
         mBtAnswerOne = getView().findViewById(R.id.tv_test_answer_1);
         mBtAnswerTwo = getView().findViewById(R.id.tv_test_answer_2);
         mBtAnswerThree = getView().findViewById(R.id.tv_test_answer_3);
@@ -155,8 +155,6 @@ public class LearningModeTestFragment extends Fragment {
             mGifView.setVisibility(View.INVISIBLE);
             mGiphyLogo.setVisibility(View.INVISIBLE);
         }
-
-        final ImageButton playQuestion = getView().findViewById(R.id.ibt_test_play_question);
 
 
         mBtRestart = getView().findViewById(R.id.bt_test_restart);
@@ -182,6 +180,7 @@ public class LearningModeTestFragment extends Fragment {
         if (mSession == null) {
             MainActivity activity = (MainActivity) getActivity();
             activity.commitWordsFragment();
+            return;
         }
 
         mProgressBar.setMax(mSession.mNumberOfQuestions);
@@ -229,13 +228,13 @@ public class LearningModeTestFragment extends Fragment {
                     .replace(R.id.fragment_container, new LearningSummaryFragment(), DictionaryFragment.TAG)
                     .commit();
         }
-        playQuestion.setOnClickListener(new View.OnClickListener() {
+        question.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Flubber.with()
                         .animation(Flubber.AnimationPreset.ZOOM_IN)
                         .duration(500)
-                        .createFor(playQuestion)
+                        .createFor(question)
                         .start();
                 Tts ttsManager = new Tts(getActivity());
                 if (!ttsManager.isPlaying()) {
@@ -253,6 +252,20 @@ public class LearningModeTestFragment extends Fragment {
             Giphy.displayGif(getActivity(), entry.imageUrl, mGifView);
         }
 
+        // play question on start
+        if (q != null) {
+            if (Preferences.isReadLangOne(getContext())
+                    && (mSession.mLearningMode == LearningManager.MODE_WORD_TRANSLATION
+                    || mSession.mLearningMode == LearningManager.MODE_WORD_TAG)
+                    ) {
+                question.callOnClick();
+            } else if (Preferences.isReadLangTwo(getContext())
+                    && (mSession.mLearningMode == LearningManager.MODE_TRANSLATION_WORD
+                    || mSession.mLearningMode == LearningManager.MODE_TRANSLATION_TAG)
+                    ) {
+                question.callOnClick();
+            }
+        }
     }
 
 
@@ -317,26 +330,18 @@ public class LearningModeTestFragment extends Fragment {
             boolean isConnected = Connection.isConnected(getContext());
             DictionaryManager.Dictionary dict = DictionaryManager.getDictData(getContext());
             String answersLang = mSession.getCurrentQuestion().getAnswersLanguage(getContext());
-            WordManager.Word entry = WordManager.getWordById(
-                    getContext(),
-                    mSession.getCurrentQuestion().getIdInDatabase());
-            if (answersLang != null && Preferences.isReadAnswers(getContext())) {
-                // read answers
-                if ((mSession.mLearningMode == LearningManager.MODE_WORD_TRANSLATION)
-                        || (mSession.mLearningMode == LearningManager.MODE_WORD_TAG)) {
-                    ttsManager.onlineTts(
-                            mSession.getCurrentQuestion().getQuestion(),
-                            dict.speak_from,
-                            entry.translation,
-                            dict.speak_to,
-                            isConnected);
-                } else {
-                    ttsManager.onlineTts(
-                            mSession.getCurrentQuestion().getQuestion(),
-                            dict.speak_to,
-                            entry.word,
-                            dict.speak_from,
-                            isConnected);
+            if (answersLang != null) {
+                Question q = mSession.getCurrentQuestion();
+                if (Preferences.isReadLangTwo(getContext())
+                        && (mSession.mLearningMode == LearningManager.MODE_WORD_TRANSLATION
+                        || mSession.mLearningMode == LearningManager.MODE_WORD_TAG)
+                        ) {
+                    ttsManager.onlineTts(q.getCorrectAnswer(), answersLang, "", dict.speak_to, isConnected);
+                } else if (Preferences.isReadLangOne(getContext())
+                        && (mSession.mLearningMode == LearningManager.MODE_TRANSLATION_WORD
+                        || mSession.mLearningMode == LearningManager.MODE_TRANSLATION_TAG)
+                        ) {
+                    ttsManager.onlineTts(q.getCorrectAnswer(), answersLang, "", dict.speak_to, isConnected);
                 }
             }
         }

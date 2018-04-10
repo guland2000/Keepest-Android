@@ -116,14 +116,12 @@
     <string name="about">Sobre</string>
     <string name="edit">Editar</string>
     <string name="search_in_english">"Procurar em inglês "</string>
-    <string name="show_gif">Mostrar GIF</string>
     <string name="connecting_to_gdrive">"Ligando à Google Drive... "</string>
     <string name="cache_title">Cache</string>
     <string name="cache_settings">"Definições de Cache "</string>
     <string name="tut_translate_word">"Toque neste botão para traduzir a palavra inserida. "</string>
     <string name="edit_word">Editar palavra</string>
     <string name="add_word">Adicionar palavra</string>
-    <string name="read_answers">"Ler resposta "</string>
     <string name="app_version">Versão</string>
     <string name="swipe_left_to_open_menu">"Arraste para a esquerda para abrir o menu "</string>
     <string name="email">Enviar</string>
@@ -363,4 +361,5 @@
     <string name="tts_french">Francês</string>
     <string name="tts_italian">Italiano</string>
     <string name="tts_welsh">Galês</string>
+    <string name="flashcards_mode">flashcards</string>
 </resources>

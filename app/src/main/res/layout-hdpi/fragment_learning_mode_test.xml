@@ -260,20 +260,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@color/buttonDefaultColor"/>
 
-        <ImageButton
-            android:id="@+id/ibt_test_play_question"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginStart="8dp"
-            android:background="@color/cardDefaultColor"
-            android:backgroundTint="@color/cardDefaultColor"
-            android:tint="@color/editButton"
-            app:layout_constraintBottom_toBottomOf="@+id/img_learning_gif"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/volume"/>
-
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/tv_test_question"
             android:layout_width="0dp"

@@ -28,6 +28,7 @@ import android.content.IntentSender;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
+import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -96,6 +97,7 @@ public class GDriveV3 {
 
     public void showFileDialog() {
         if (isSignedIn()) {
+            Toast.makeText(mActivity, mActivity.getString(R.string.connecting_to_gdrive), Toast.LENGTH_SHORT).show();
             OpenFileActivityOptions options = new OpenFileActivityOptions.Builder()
                     .setActivityTitle("*.keep or *.csv")
                     .build();

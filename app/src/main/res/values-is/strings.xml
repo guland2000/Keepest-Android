@@ -113,14 +113,12 @@
     <string name="about">Um</string>
     <string name="edit">Breyta</string>
     <string name="search_in_english">Leita á ensku</string>
-    <string name="show_gif">Sýna GIF</string>
     <string name="connecting_to_gdrive">Tengist Google Drive...</string>
     <string name="cache_title">Skyndiminni</string>
     <string name="cache_settings">Stillingar Skyndiminnis</string>
     <string name="tut_translate_word">Ýttu á þennan takka til að þýða orðið sem þú settir inn.</string>
     <string name="edit_word">Breyta orði</string>
     <string name="add_word">Bæta við orði</string>
-    <string name="read_answers">Lesa svar</string>
     <string name="app_version">Útgáfa</string>
     <string name="swipe_left_to_open_menu">Renndu fingrinum til vinstri til að opna valmynd</string>
     <string name="email">Senda</string>
@@ -356,4 +354,5 @@
     <string name="tts_french">Franska</string>
     <string name="tts_italian">Ítalska</string>
     <string name="tts_welsh">Velska</string>
+    <string name="flashcards_mode">flashcards</string>
 </resources>

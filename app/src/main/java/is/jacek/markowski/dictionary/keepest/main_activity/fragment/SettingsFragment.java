@@ -140,7 +140,7 @@ public class SettingsFragment extends PreferenceFragment {
             public boolean onPreferenceClick(Preference preference) {
                 if (checkPlayServices()) {
                     GDriveV3 drive = new GDriveV3(activity);
-                    drive.signIn(GDriveV3.REQUEST_CODE_UPLOAD);
+                    drive.signIn(GDriveV3.REQUEST_CODE_SIGN_IN_UPLOAD);
                     activity.mGdriveV3 = drive;
                     if (drive.isSignedIn()) {
                         Files.prepareJsonAll(activity, ImportExport.getNewDownloadFile(getContext(), null).getName(), TYPE_CLOUD);

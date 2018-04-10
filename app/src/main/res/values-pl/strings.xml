@@ -341,14 +341,12 @@
     <string name="about">O programie</string>
     <string name="edit">Edytuj</string>
     <string name="search_in_english">Szukaj po angielsku</string>
-    <string name="show_gif">Pokaż GIF</string>
     <string name="connecting_to_gdrive">Łączenie z Dyskiem Google...</string>
     <string name="cache_title">Pamięć podręczna</string>
     <string name="cache_settings">Ustawienia pamięci podręcznej</string>
     <string name="tut_translate_word">Dotknij tego przycisku aby automatycznie przetłumaczyć wpisane słowo.</string>
     <string name="add_word">Dodaj słowo</string>
     <string name="edit_word">Edytuj słowo</string>
-    <string name="read_answers">Czytaj odpowiedzi</string>
     <string name="app_version">Wersja</string>
     <string name="swipe_left_to_open_menu">Przesuń w lewo, aby wyświetlić menu</string>
     <string name="writing_mode">pisanie</string>
@@ -370,4 +368,5 @@
     <string name="tts_spanish">Hiszpański</string>
     <string name="tts_english">Angielski</string>
     <string name="tts_polish">Polski</string>
+    <string name="flashcards_mode">fiszki</string>
 </resources>

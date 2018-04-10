@@ -20,13 +20,12 @@
   ~
   -->
 
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".main_activity.fragment.DictionaryFragment">
+    tools:context=".main_activity.fragment.LearningModeFlashcardsFragment">
 
 
     <ImageButton
@@ -39,7 +38,7 @@
         android:tint="@color/editButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/progress_test_questions"
-        app:srcCompat="@drawable/ic_restart"/>
+        app:srcCompat="@drawable/ic_restart" />
 
     <ImageButton
         android:id="@+id/bt_test_stop"
@@ -51,28 +50,7 @@
         android:tint="@color/buttonWrongAnswerColor"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/progress_test_questions"
-        app:srcCompat="@drawable/ic_stop"/>
-
-    <Button
-        android:id="@+id/bt_test_flashcard"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="8dp"
-        android:text="@string/flashcard"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/bt_test_next"/>
-
-    <Button
-        android:id="@+id/bt_test_next"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/next"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/bt_test_flashcard"
-        app:layout_constraintTop_toBottomOf="@+id/ed_test_writing_answer"/>
+        app:srcCompat="@drawable/ic_stop" />
 
     <ProgressBar
         android:id="@+id/progress_test_questions"
@@ -84,17 +62,17 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintLayout"
-        android:layout_width="wrap_content"
+        android:layout_width="168dp"
         android:layout_height="wrap_content"
-        android:layout_marginRight="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:paddingRight="8dp"
-        app:layout_constraintRight_toLeftOf="@+id/bt_test_stop"
+        app:layout_constraintEnd_toStartOf="@+id/bt_test_stop"
         app:layout_constraintStart_toEndOf="@+id/bt_test_restart"
         app:layout_constraintTop_toBottomOf="@+id/progress_test_questions">
 
@@ -103,11 +81,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="@string/correct"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tv_test_correct_counter"
@@ -119,19 +96,18 @@
             android:textColor="@color/buttonRightAnswerColor"
             app:layout_constraintLeft_toRightOf="@+id/textView12"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="0"/>
+            tools:text="0" />
 
         <TextView
             android:id="@+id/tv_test_wrong_counter"
             android:layout_width="wrap_content"
             android:layout_height="16dp"
             android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:textColor="@color/buttonWrongAnswerColor"
             app:layout_constraintLeft_toRightOf="@+id/textView13"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="0"/>
+            tools:text="0" />
 
         <TextView
             android:id="@+id/textView13"
@@ -142,7 +118,7 @@
             android:layout_marginTop="8dp"
             android:text="@string/wrong"
             app:layout_constraintLeft_toLeftOf="@+id/tv_test_correct_counter"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
     </android.support.constraint.ConstraintLayout>
 
 
@@ -151,10 +127,10 @@
         android:layout_width="21dp"
         android:layout_height="150dp"
         android:background="@android:color/black"
-        android:scaleType="centerCrop"
+        android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="@+id/img_learning_gif"
         app:layout_constraintRight_toLeftOf="@+id/img_learning_gif"
-        app:srcCompat="@drawable/static_logo_2"/>
+        app:srcCompat="@drawable/static_logo_2" />
 
     <ImageView
         android:id="@+id/img_learning_gif"
@@ -167,12 +143,12 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bt_test_stop"
-        app:srcCompat="@color/buttonDefaultColor"/>
+        app:srcCompat="@color/buttonDefaultColor" />
 
     <android.support.v7.widget.AppCompatTextView
-        android:id="@+id/tv_test_question"
+        android:id="@+id/tv_flashcards_question"
         android:layout_width="0dp"
-        android:layout_height="70dp"
+        android:layout_height="50dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:maxLines="2"
@@ -183,56 +159,63 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/img_learning_gif"
-        tools:text="Question"/>
+        tools:text="Question" />
 
-    <EditText
-        android:id="@+id/ed_test_writing_answer"
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tv_flashcards_answer"
         android:layout_width="0dp"
-        android:layout_height="62dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:gravity="center_vertical|center_horizontal"
-        android:hint="@string/enter_answer"
-        android:inputType="text"
-        app:layout_constraintEnd_toStartOf="@+id/bt_test_writing_hint"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_answer"/>
-
-    <Button
-        android:id="@+id/bt_test_writing_check"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="@string/check"
+        android:gravity="center_vertical|center_horizontal"
+        android:maxLines="2"
+        app:autoSizeMaxTextSize="24sp"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toTopOf="@+id/btn_flashcards_check"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ed_test_writing_answer"/>
+        app:layout_constraintTop_toBottomOf="@+id/tv_flashcards_question"
+        tools:text="answer " />
 
     <Button
-        android:id="@+id/bt_test_writing_hint"
+        android:id="@+id/btn_flashcards_check"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:text="@string/hint"
-        app:layout_constraintBottom_toBottomOf="@+id/ed_test_writing_answer"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/ed_test_writing_answer"/>
-
-    <TextView
-        android:id="@+id/tv_answer"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:gravity="center_vertical|center_horizontal"
+        android:text="@string/check"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_test_question"
-        tools:text="answer "/>
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/ibtn_flashcards_wrong"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:src="@drawable/ic_close"
+        android:tint="@color/buttonWrongAnswerColor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_flashcards_check"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/ibtn_flashcards_correct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:src="@drawable/ic_correct"
+        android:tint="@color/buttonRightAnswerColor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_flashcards_check" />
 
 </android.support.constraint.ConstraintLayout>
 

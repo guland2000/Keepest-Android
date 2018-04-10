@@ -24,23 +24,16 @@ package is.jacek.markowski.dictionary.keepest.main_activity.fragment;
 
 
 import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.VibrationEffect;
-import android.os.Vibrator;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -56,19 +49,13 @@ import is.jacek.markowski.dictionary.keepest.main_activity.util.Giphy;
 import is.jacek.markowski.dictionary.keepest.main_activity.util.LearningManager;
 import is.jacek.markowski.dictionary.keepest.main_activity.util.LearningManager.Question;
 import is.jacek.markowski.dictionary.keepest.main_activity.util.Preferences;
-import is.jacek.markowski.dictionary.keepest.main_activity.util.Text;
 import is.jacek.markowski.dictionary.keepest.main_activity.util.Tts;
 import is.jacek.markowski.dictionary.keepest.main_activity.util.WordManager;
 
-import static is.jacek.markowski.dictionary.keepest.main_activity.util.LearningManager.LearningSession.HINTS_ALLOWED;
 
-
-public class LearningModeWritingFragment extends Fragment {
-    public static final String TAG = LearningModeWritingFragment.class.getName();
-    static final String TYPED_ANSWER = "typed_answer";
+public class LearningModeFlashcardsFragment extends Fragment {
+    public static final String TAG = LearningModeFlashcardsFragment.class.getName();
     private LearningManager.LearningSession mSession;
-    private Button mBtNext;
-    private Button mBtFlashcard;
     private ProgressBar mProgressBar;
     private TextView mWrongTvCounter;
     private TextView mCorrectTvCounter;
@@ -77,11 +64,12 @@ public class LearningModeWritingFragment extends Fragment {
     private ImageView mGifView;
     private ImageView mGiphyLogo;
     private Button mBtCheck;
-    private Button mBtHint;
-    private EditText mEdAnswer;
     private TextView mAnswer;
+    private Context mContext;
+    private ImageButton mIbtCorrect;
+    private ImageButton mIbtWrong;
 
-    public LearningModeWritingFragment() {
+    public LearningModeFlashcardsFragment() {
         // Required empty public constructor
     }
 
@@ -89,7 +77,7 @@ public class LearningModeWritingFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        final View root = inflater.inflate(R.layout.fragment_learning_mode_writing, container, false);
+        final View root = inflater.inflate(R.layout.fragment_learning_mode_flashcards, container, false);
         return root;
     }
 
@@ -116,62 +104,37 @@ public class LearningModeWritingFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        mContext = getContext();
         final MainActivity activity = (MainActivity) getActivity();
         activity.hideKeyboard();
         activity.setAsLastFragment(LearningSessionFragment.TAG);
         setupQuestion();
-        mEdAnswer = getView().findViewById(R.id.ed_test_writing_answer);
-        String typedAnswer = WordManager.WordEdit.getTextItem(getContext(), TYPED_ANSWER);
-        if (typedAnswer.length() > 0) {
-            mEdAnswer.setText(typedAnswer);
-        }
         if (LearningManager.LearningSession.mAnswerChecked) {
             nextQuestion();
         }
     }
 
     private void setupQuestion() {
-        final TextView question = getView().findViewById(R.id.tv_test_question);
-        mBtHint = getView().findViewById(R.id.bt_test_writing_hint);
-        mBtCheck = getView().findViewById(R.id.bt_test_writing_check);
-        mAnswer = getView().findViewById(R.id.tv_answer);
-        mEdAnswer = getView().findViewById(R.id.ed_test_writing_answer);
-        mEdAnswer.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                WordManager.WordEdit.saveTextItem(getContext(), TYPED_ANSWER, s.toString());
-                Question q = LearningManager.getCurrentSession().getCurrentQuestion();
-                if (mSession != null && q != null && q.checkAnswer(s.toString()) && !LearningManager.LearningSession.mAnswerChecked) {
-                    checkAnswer();
-                    // hide keyboard
-                    mEdAnswer.clearFocus();
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-        mEdAnswer.setTextColor(ContextCompat.getColor(getContext(), R.color.editButton));
+        final TextView question = getView().findViewById(R.id.tv_flashcards_question);
+        mBtCheck = getView().findViewById(R.id.btn_flashcards_check);
+        mIbtCorrect = getView().findViewById(R.id.ibtn_flashcards_correct);
+        mIbtWrong = getView().findViewById(R.id.ibtn_flashcards_wrong);
+        mAnswer = getView().findViewById(R.id.tv_flashcards_answer);
         mProgressBar = getView().findViewById(R.id.progress_test_questions);
-        mBtNext = getView().findViewById(R.id.bt_test_next);
-        mBtFlashcard = getView().findViewById(R.id.bt_test_flashcard);
         mCorrectTvCounter = getView().findViewById(R.id.tv_test_correct_counter);
         mWrongTvCounter = getView().findViewById(R.id.tv_test_wrong_counter);
         mGifView = getView().findViewById(R.id.img_learning_gif);
         mGiphyLogo = getView().findViewById(R.id.img_giphy_logo);
+        // visibility of buttons
+        mBtCheck.setVisibility(View.VISIBLE);
+        mIbtWrong.setVisibility(View.INVISIBLE);
+        mIbtCorrect.setVisibility(View.INVISIBLE);
+        mAnswer.setText("");
 
         if (!Preferences.isShowGif(getContext())) {
             mGifView.setVisibility(View.INVISIBLE);
             mGiphyLogo.setVisibility(View.INVISIBLE);
         }
-
 
         mBtRestart = getView().findViewById(R.id.bt_test_restart);
         mBtStop = getView().findViewById(R.id.bt_test_stop);
@@ -187,7 +150,7 @@ public class LearningModeWritingFragment extends Fragment {
             public void onClick(View v) {
                 LearningManager.stopSession();
                 getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_container, new LearningSettingsFragment(), LearningModeWritingFragment.TAG)
+                        .replace(R.id.fragment_container, new LearningSettingsFragment(), LearningModeFlashcardsFragment.TAG)
                         .commit();
             }
         });
@@ -209,46 +172,22 @@ public class LearningModeWritingFragment extends Fragment {
         final Question q = mSession.getCurrentQuestion();
         if (q != null) {
             question.setText(q.getQuestion());
-            showAfterQuestionButtons(View.INVISIBLE);
             mBtCheck.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    mBtCheck.setVisibility(View.INVISIBLE);
+                    mIbtWrong.setVisibility(View.VISIBLE);
+                    mIbtCorrect.setVisibility(View.VISIBLE);
                     checkAnswer();
                 }
             });
-            mBtHint.setOnClickListener(new View.OnClickListener() {
+            mAnswer.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
-                public void onClick(View v) {
-                    if (LearningManager.LearningSession.hintsRemaining > 0) {
-                        String answer = mSession.getCurrentQuestion().getCorrectAnswer().toLowerCase();
-                        String typedAnswer = mEdAnswer.getText().toString().toLowerCase();
-                        StringBuilder hint = new StringBuilder(10);
-                        for (int i = 0; i < answer.length(); i++) {
-                            hint.append(answer.charAt(i));
-                            if (i > typedAnswer.length() - 1) {
-                                break;
-                            }
-                            if (answer.charAt(i) != typedAnswer.charAt(i)) {
-                                break;
-                            }
-                        }
-                        mEdAnswer.setText(hint.toString());
-                        mEdAnswer.setSelection(hint.length());
-                        LearningManager.LearningSession.hintsRemaining--;
-                    } else {
-                        mBtHint.setEnabled(false);
-                    }
-                }
-            });
-
-            mBtFlashcard.setOnClickListener(new View.OnClickListener()
-
-            {
-                @Override
-                public void onClick(View v) {
+                public boolean onLongClick(View v) {
                     WordSummaryFragment dialog = WordSummaryFragment.newInstance(getActivity(), q.getIdInDatabase());
                     FragmentManager fm = getActivity().getSupportFragmentManager();
                     dialog.show(fm, WordSummaryFragment.TAG);
+                    return true;
                 }
             });
             mAnswer.setOnClickListener(new View.OnClickListener() {
@@ -269,25 +208,14 @@ public class LearningModeWritingFragment extends Fragment {
                 }
             });
 
-            mBtNext.setOnClickListener(new View.OnClickListener()
 
-            {
-                @Override
-                public void onClick(View v) {
-                    nextQuestion();
-                }
-            });
-        } else
-
-        {
-            //showFinalScore();
+        } else {
+            //showFinalScore;
             getActivity().getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fragment_container, new LearningSummaryFragment(), DictionaryFragment.TAG)
                     .commit();
         }
-        question.setOnClickListener(new View.OnClickListener()
-
-        {
+        question.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Flubber.with()
@@ -306,89 +234,62 @@ public class LearningModeWritingFragment extends Fragment {
         });
 
         // show gif
-        if (q != null && Preferences.isShowGif( getContext())) {
-            WordManager.Word entry = WordManager.getWordById(getContext(), q.getIdInDatabase());
+        if (q != null && Preferences.isShowGif(mContext)) {
+            WordManager.Word entry = WordManager.getWordById(mContext, q.getIdInDatabase());
             Giphy.displayGif(getActivity(), entry.imageUrl, mGifView);
         }
-
         // play question on start
         if (q != null) {
-            if(Preferences.isReadLangOne(getContext()) && mSession.mLearningMode == LearningManager.MODE_WRITING_WORD) {
+            if (Preferences.isReadLangOne(mContext)
+                    && mSession.mLearningMode == LearningManager.MODE_FLASHCARDS_WORD) {
                 question.callOnClick();
-            }
-            else if(Preferences.isReadLangTwo(getContext()) && mSession.mLearningMode == LearningManager.MODE_WRITING_TRANSLATION) {
+            } else if (Preferences.isReadLangTwo(mContext)
+                    && mSession.mLearningMode == LearningManager.MODE_FLASHCARDS_TRANSLATION) {
                 question.callOnClick();
             }
         }
 
+        mIbtCorrect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mSession.increaseCorrectCounter();
+                nextQuestion();
+            }
+        });
+        mIbtWrong.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mSession.increaseWrongCounter();
+                nextQuestion();
+            }
+        });
     }
 
     private void nextQuestion() {
-        WordManager.WordEdit.saveTextItem(getContext(), TYPED_ANSWER, "");
         mSession.moveToNextQuestion();
         setupQuestion();
-        mBtHint.setEnabled(true);
-        mEdAnswer.setEnabled(true);
-        mEdAnswer.setText("");
-        mAnswer.setText("");
-        mEdAnswer.requestFocus();
         LearningManager.LearningSession.mAnswerChecked = false;
-        LearningManager.LearningSession.hintsRemaining = HINTS_ALLOWED;
     }
 
     private void checkAnswer() {
-        if (Text.validate(getContext(), mEdAnswer.getText().toString())) {
-            mEdAnswer.setEnabled(false);
-            if (LearningManager.getCurrentSession().getCurrentQuestion().checkAnswer(mEdAnswer.getText().toString())) {
-                mEdAnswer.setTextColor(ContextCompat.getColor(getContext(), R.color.buttonRightAnswerColor));
-                if (!LearningManager.LearningSession.mAnswerChecked)
-                    mSession.increaseCorrectCounter();
-                mCorrectTvCounter.setText(Integer.toString(mSession.getCorrectCount()));
-            } else {
-                mEdAnswer.setTextColor(ContextCompat.getColor(getContext(), R.color.buttonWrongAnswerColor));
-                if (!LearningManager.LearningSession.mAnswerChecked)
-                    mSession.increaseWrongCounter();
-                mWrongTvCounter.setText(Integer.toString(mSession.getWrongCount()));
-                Vibrator vib = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
-                if (Build.VERSION.SDK_INT >= 26) {
-                    vib.vibrate(VibrationEffect.createOneShot(150, 10));
-                } else {
-                    vib.vibrate(150);
+        mAnswer.setText(mSession.getCurrentQuestion().getCorrectAnswer());
+        // play text to speech
+        Tts ttsManager = new Tts(getActivity());
+        if (!ttsManager.isPlaying()) {
+            String answersLang = mSession.getCurrentQuestion().getAnswersLanguage(getContext());
+            if (answersLang != null) {
+                if (Preferences.isReadLangOne(mContext)
+                        && mSession.mLearningMode == LearningManager.MODE_FLASHCARDS_TRANSLATION) {
+                    mAnswer.callOnClick();
+                } else if (Preferences.isReadLangTwo(mContext)
+                        && mSession.mLearningMode == LearningManager.MODE_FLASHCARDS_WORD) {
+                    mAnswer.callOnClick();
                 }
             }
-            showAfterQuestionButtons(View.VISIBLE);
-            mAnswer.setText(mSession.getCurrentQuestion().getCorrectAnswer());
-            // play text to speech
-            Tts ttsManager = new Tts(getActivity());
-            if (!ttsManager.isPlaying()) {
-                String answersLang = mSession.getCurrentQuestion().getAnswersLanguage(getContext());
-                if(answersLang != null) {
-                    if (Preferences.isReadLangTwo(getContext()) && mSession.mLearningMode == LearningManager.MODE_WRITING_WORD) {
-                        mAnswer.callOnClick();
-                    } else if (Preferences.isReadLangOne(getContext()) && mSession.mLearningMode == LearningManager.MODE_WRITING_TRANSLATION) {
-                        mAnswer.callOnClick();
-                    }
-                }
-            }
-        }
-        LearningManager.LearningSession.mAnswerChecked = true;
-    }
-
-
-    private void showAfterQuestionButtons(int visibility) {
-        mBtNext.setVisibility(visibility);
-        mBtFlashcard.setVisibility(visibility);
-        if (visibility == View.INVISIBLE) {
-            mBtHint.setEnabled(true);
-            mBtCheck.setVisibility(View.VISIBLE);
-        } else {
-            mBtHint.setEnabled(false);
-            mBtCheck.setVisibility(View.INVISIBLE);
         }
     }
 
     private void restartSession() {
-        showAfterQuestionButtons(View.INVISIBLE);
         mSession.restartSession();
         mProgressBar.setProgress(0);
         mCorrectTvCounter.setText("0");

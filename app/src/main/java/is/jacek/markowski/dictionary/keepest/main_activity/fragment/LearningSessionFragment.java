@@ -50,6 +50,11 @@ public class LearningSessionFragment extends Fragment {
                     .replace(R.id.fragment_container, new LearningModeWritingFragment(), LearningSessionFragment.TAG)
                     .commit();
 
+        } else if (mode >= 6 && mode <= 7) {
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, new LearningModeFlashcardsFragment(), LearningSessionFragment.TAG)
+                    .commit();
+
         }
     }
 }

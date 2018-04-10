@@ -61,6 +61,8 @@ import is.jacek.markowski.dictionary.keepest.main_activity.util.WordManager;
 
 import static is.jacek.markowski.dictionary.keepest.main_activity.fragment.LearningModeWritingFragment.TYPED_ANSWER;
 import static is.jacek.markowski.dictionary.keepest.main_activity.util.DictionaryManager.getDictData;
+import static is.jacek.markowski.dictionary.keepest.main_activity.util.LearningManager.MODE_FLASHCARDS_TRANSLATION;
+import static is.jacek.markowski.dictionary.keepest.main_activity.util.LearningManager.MODE_FLASHCARDS_WORD;
 import static is.jacek.markowski.dictionary.keepest.main_activity.util.LearningManager.MODE_TRANSLATION_TAG;
 import static is.jacek.markowski.dictionary.keepest.main_activity.util.LearningManager.MODE_TRANSLATION_WORD;
 import static is.jacek.markowski.dictionary.keepest.main_activity.util.LearningManager.MODE_WORD_TAG;
@@ -76,7 +78,8 @@ public class LearningSettingsFragment extends Fragment {
     public TabLayout mTabLayout;
     private Spinner mSpinnerModes;
     private CheckBox mShowGif;
-    private CheckBox mReadAnswers;
+    private CheckBox mReadLang1;
+    private CheckBox mReadLang2;
 
     public LearningSettingsFragment() {
         // Required empty public constructor
@@ -95,13 +98,21 @@ public class LearningSettingsFragment extends Fragment {
                 Preferences.setShowGif(getContext(), isChecked);
             }
         });
-        mReadAnswers = root.findViewById(R.id.checkBox_read_answers);
-        mReadAnswers.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        mReadLang1 = root.findViewById(R.id.checkBox_read_lang_one);
+        mReadLang1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Preferences.setReadAnswers(getContext(), isChecked);
+                Preferences.setReadLangOne(getContext(), isChecked);
             }
         });
+        mReadLang2 = root.findViewById(R.id.checkBox_read_lang_two);
+        mReadLang2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                Preferences.setReadLangTwo(getContext(), isChecked);
+            }
+        });
+
         activity.setAsLastFragment(TAG);
         Button btStartSession = root.findViewById(R.id.bt_start_test);
         final EditText edQuestionsNumber = root.findViewById(R.id.ed_number_of_questions);
@@ -171,6 +182,9 @@ public class LearningSettingsFragment extends Fragment {
         List<String> spinnerArray = new ArrayList<>();
         String from = Language.getCountryName(getContext(), getDictData(getActivity()).speak_from);
         String to = Language.getCountryName(getContext(), getDictData(getActivity()).speak_to);
+        // set language codes on checkboxes
+        mReadLang1.setText(from);
+        mReadLang2.setText(to);
 
         String modeWordTranslation = getString(R.string.test_mode) + ": " + from + " -> " + to;
         String modeTranslationWord = getString(R.string.test_mode) + ": " + to + " -> " + from;
@@ -178,6 +192,8 @@ public class LearningSettingsFragment extends Fragment {
         String modeTranslationTag = getString(R.string.test_mode) + ": " + to + " -> #TAG";
         String modeWritingWord = getString(R.string.writing_mode) + ": " + to;
         String modeWritingTranslation = getString(R.string.writing_mode) + ": " + from;
+        String modeFlashcardsWord = getString(R.string.flashcards_mode) + ": " + from + " -> " + to;
+        String modeFlashcardsTranslation = getString(R.string.flashcards_mode) + ": " + to + " -> " + from;
 
         spinnerArray.add(modeWordTranslation);
         spinnerArray.add(modeTranslationWord);
@@ -185,6 +201,8 @@ public class LearningSettingsFragment extends Fragment {
         spinnerArray.add(modeTranslationTag);
         spinnerArray.add(modeWritingWord);
         spinnerArray.add(modeWritingTranslation);
+        spinnerArray.add(modeFlashcardsWord);
+        spinnerArray.add(modeFlashcardsTranslation);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(
                 getContext(), android.R.layout.simple_spinner_item, spinnerArray);
@@ -275,7 +293,8 @@ public class LearningSettingsFragment extends Fragment {
     public void onStart() {
         super.onStart();
         mShowGif.setChecked(Preferences.isShowGif(getContext()));
-        mReadAnswers.setChecked(Preferences.isReadAnswers(getContext()));
+        mReadLang1.setChecked(Preferences.isReadLangOne(getContext()));
+        mReadLang2.setChecked(Preferences.isReadLangTwo(getContext()));
 
     }
 
@@ -299,6 +318,12 @@ public class LearningSettingsFragment extends Fragment {
             }
             case 5: {
                 return MODE_WRITING_TRANSLATION;
+            }
+            case 6: {
+                return MODE_FLASHCARDS_WORD;
+            }
+            case 7: {
+                return MODE_FLASHCARDS_TRANSLATION;
             }
             default: {
                 return MODE_WORD_TRANSLATION;

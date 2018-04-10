@@ -45,7 +45,8 @@ import static is.jacek.markowski.dictionary.keepest.main_activity.fragment.WordD
 public class Preferences {
     public static final String PREFERENCES_FILE = "is.jacek.markowski.dictionary.keepest";
     public static final String GIF_SHOW = "gifShow";
-    private static final String READ_ANSWERS = "readAnswers";
+    private static final String READ_LANG_ONE = "readLangOne";
+    private static final String READ_LANG_TWO = "readLangTwo";
 
     public static void setShowGif(Context context, boolean isShow) {
         SharedPreferences.Editor editor = context.getSharedPreferences(PREFERENCES_FILE, Context.MODE_PRIVATE).edit();
@@ -58,17 +59,27 @@ public class Preferences {
         return pref.getBoolean(GIF_SHOW, true);
     }
 
-    public static void setReadAnswers(Context context, boolean isReadAnswers) {
+    public static void setReadLangOne(Context context, boolean isReadAnswers) {
         SharedPreferences.Editor editor = context.getSharedPreferences(PREFERENCES_FILE, Context.MODE_PRIVATE).edit();
-        editor.putBoolean(READ_ANSWERS, isReadAnswers);
+        editor.putBoolean(READ_LANG_ONE, isReadAnswers);
         editor.apply();
     }
 
-    public static boolean isReadAnswers(Context context) {
-        SharedPreferences pref = context.getSharedPreferences(PREFERENCES_FILE, Context.MODE_PRIVATE);
-        return pref.getBoolean(READ_ANSWERS, true);
+    public static void setReadLangTwo(Context context, boolean isReadAnswers) {
+        SharedPreferences.Editor editor = context.getSharedPreferences(PREFERENCES_FILE, Context.MODE_PRIVATE).edit();
+        editor.putBoolean(READ_LANG_TWO, isReadAnswers);
+        editor.apply();
     }
 
+    public static boolean isReadLangOne(Context context) {
+        SharedPreferences pref = context.getSharedPreferences(PREFERENCES_FILE, Context.MODE_PRIVATE);
+        return pref.getBoolean(READ_LANG_ONE, true);
+    }
+
+    public static boolean isReadLangTwo(Context context) {
+        SharedPreferences pref = context.getSharedPreferences(PREFERENCES_FILE, Context.MODE_PRIVATE);
+        return pref.getBoolean(READ_LANG_TWO, true);
+    }
 
     public static class Dictionary {
 

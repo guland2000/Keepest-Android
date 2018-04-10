@@ -172,6 +172,7 @@ public class ImportExport {
                     Toast.makeText(mActivity, R.string.there_are_no_email_clients, Toast.LENGTH_SHORT).show();
                 }
             } else if (mType == TYPE_CLOUD) {
+                Toast.makeText(mActivity, mActivity.getString(R.string.connecting_to_gdrive), Toast.LENGTH_SHORT).show();
                 GDriveV3 gDrive = mActivity.mGdriveV3;
                 DateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd");
                 Date date = new Date();

@@ -55,6 +55,8 @@ public class LearningManager {
     public static final int MODE_TRANSLATION_TAG = 3;
     public static final int MODE_WRITING_WORD = 4;
     public static final int MODE_WRITING_TRANSLATION = 5;
+    public static final int MODE_FLASHCARDS_WORD = 6;
+    public static final int MODE_FLASHCARDS_TRANSLATION = 7;
     public static final String MODE_KEY = "mode";
     public static final String QUESTION_COUNT_KEY = "questions";
     private static final String TAG = LearningManager.class.getPackage().getName() + "Learning";
@@ -171,6 +173,12 @@ public class LearningManager {
                         return new QuestionWordTranslation();
                     }
                     case MODE_WRITING_TRANSLATION: {
+                        return new QuestionTranslationWord();
+                    }
+                    case MODE_FLASHCARDS_WORD: {
+                        return new QuestionWordTranslation();
+                    }
+                    case MODE_FLASHCARDS_TRANSLATION: {
                         return new QuestionTranslationWord();
                     }
                     default: {

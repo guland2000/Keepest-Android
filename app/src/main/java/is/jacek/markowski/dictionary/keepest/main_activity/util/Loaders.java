@@ -72,7 +72,11 @@ public class Loaders {
             }
 
             public static String getSortOrder() {
-                return mSortOrder;
+                if (mSortOrder != null) {
+                    return mSortOrder;
+                } else {
+                    return SORT_BY_NAMES;
+                }
             }
 
             @Override

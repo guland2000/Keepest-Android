@@ -26,6 +26,8 @@ package is.jacek.markowski.dictionary.keepest.main_activity.fragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -43,11 +45,15 @@ import java.text.DecimalFormat;
 
 import is.jacek.markowski.dictionary.keepest.R;
 import is.jacek.markowski.dictionary.keepest.main_activity.MainActivity;
+import is.jacek.markowski.dictionary.keepest.main_activity.adapter.WordAdapterLearningSummary;
 import is.jacek.markowski.dictionary.keepest.main_activity.util.LearningManager;
+import is.jacek.markowski.dictionary.keepest.main_activity.util.Preferences;
 
 
 public class LearningSummaryFragment extends Fragment {
     public static final String TAG = LearningSummaryFragment.class.getName();
+    public RecyclerView mRecyclerView;
+
 
     public LearningSummaryFragment() {
         // Required empty public constructor
@@ -63,11 +69,11 @@ public class LearningSummaryFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 LearningManager.getCurrentSession().restartSession();
+                // reset set of mistakes
+                Preferences.LearningSummary.resetSet(getContext());
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .replace(R.id.fragment_container, new LearningSessionFragment(), LearningSessionFragment.TAG)
                         .commit();
-
-
             }
         });
         stop.setOnClickListener(new View.OnClickListener() {
@@ -80,6 +86,12 @@ public class LearningSummaryFragment extends Fragment {
 
             }
         });
+
+        // recycler view: show mistakes
+        mRecyclerView = root.findViewById(R.id.rv_learning_summary);
+        WordAdapterLearningSummary adapter = new WordAdapterLearningSummary(LearningManager.getCurrentSession().mWords, getContext());
+        mRecyclerView.setAdapter(adapter);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         return root;
     }
 

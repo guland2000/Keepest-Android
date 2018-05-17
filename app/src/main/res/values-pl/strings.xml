@@ -369,4 +369,5 @@
     <string name="tts_english">Angielski</string>
     <string name="tts_polish">Polski</string>
     <string name="flashcards_mode">fiszki</string>
+    <string name="learning_mistakes">Błędy:</string>
 </resources>

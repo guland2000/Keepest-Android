@@ -134,7 +134,7 @@ public class LearningManager {
         public int mLearningMode;
         private int questionIndex = 0;
         private String[] mSetOfTagIds;
-        private Cursor mWords;
+        public Cursor mWords;
         private int mCorrectCounter;
         private int mWrongCounter;
         private DatabaseHelper mDb;
@@ -216,6 +216,10 @@ public class LearningManager {
             mWrongCounter = 0;
             mCorrectCounter = 0;
             mQuestionsCounter = 0;
+        }
+
+        public int getCurrentWordId() {
+            return mWords.getInt(mWords.getColumnIndex(_ID));
         }
 
         ///////////////////////////

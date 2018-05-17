@@ -173,6 +173,8 @@ public class LearningSettingsFragment extends Fragment {
                     activity.getSupportFragmentManager().beginTransaction()
                             .replace(R.id.fragment_container, new LearningSessionFragment(), LearningSessionFragment.TAG)
                             .commit();
+                    // reset mistakes list
+                    Preferences.LearningSummary.resetSet(getContext());
                 }
             }
         });

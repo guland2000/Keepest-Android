@@ -362,4 +362,5 @@
     <string name="tts_italian">Italiano</string>
     <string name="tts_welsh">Galês</string>
     <string name="flashcards_mode">flashcards</string>
+    <string name="learning_mistakes">Mistakes:</string>
 </resources>

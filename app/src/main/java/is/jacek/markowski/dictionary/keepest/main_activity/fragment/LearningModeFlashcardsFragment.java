@@ -260,6 +260,7 @@ public class LearningModeFlashcardsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 mSession.increaseWrongCounter();
+                Preferences.LearningSummary.addIdToSet(getContext(), mSession.getCurrentWordId());
                 nextQuestion();
             }
         });

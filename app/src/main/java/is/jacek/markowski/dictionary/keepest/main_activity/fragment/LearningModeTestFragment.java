@@ -308,6 +308,7 @@ public class LearningModeTestFragment extends Fragment {
             button.setBackgroundResource(R.color.buttonWrongAnswerColor);
             showCorrectAnswers();
             mSession.increaseWrongCounter();
+            Preferences.LearningSummary.addIdToSet(getContext(), mSession.getCurrentWordId());
             mWrongTvCounter.setText(Integer.toString(mSession.getWrongCount()));
             // vibrate
             Vibrator v = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);

@@ -293,6 +293,41 @@ public class Preferences {
 
     }
 
+    public static class LearningSummary {
+        static final String PREFERENCES_FILE = Preferences.PREFERENCES_FILE + "learning";
+        static final String SET_NAME = "name";
+
+        public static void resetSet(Context context) {
+            SharedPreferences.Editor editor = context.getSharedPreferences(PREFERENCES_FILE, Context.MODE_PRIVATE).edit();
+            editor.putStringSet(SET_NAME, new ArraySet<String>());
+            editor.apply();
+        }
+
+        public static void addIdToSet(Context context, int id) {
+            SharedPreferences.Editor editor = context.getSharedPreferences(PREFERENCES_FILE, Context.MODE_PRIVATE).edit();
+            Set<String> stringSet = getSetOfId(context);
+            Set<String> newSet = new ArraySet<>();
+            newSet.addAll(stringSet);
+
+            if (!isIdInSet(context, id)) {
+                newSet.add(Integer.toString(id));
+            }
+
+            editor.putStringSet(SET_NAME, newSet);
+            editor.apply();
+        }
+
+        public static Set<String> getSetOfId(Context context) {
+            SharedPreferences pref = context.getSharedPreferences(PREFERENCES_FILE, Context.MODE_PRIVATE);
+            return pref.getStringSet(SET_NAME, new HashSet<String>());
+        }
+
+        public static boolean isIdInSet(Context context, int id) {
+            Set<String> stringSet = getSetOfId(context);
+            return stringSet.contains(Integer.toString(id));
+        }
+    }
+
     public static class Tutorial {
         public static final String PREFERENCES_FILE = Preferences.PREFERENCES_FILE + "tutorial";
 

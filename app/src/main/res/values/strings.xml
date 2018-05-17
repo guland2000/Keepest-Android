@@ -153,6 +153,7 @@
     <string name="tts_french">French</string>
     <string name="tts_italian">Italian</string>
     <string name="tts_welsh">Welsh</string>
+    <string name="learning_mistakes">Mistakes:</string>
 
 
     <string-array name="select" translatable="true">

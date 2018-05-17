@@ -348,6 +348,7 @@ public class LearningModeWritingFragment extends Fragment {
                 mEdAnswer.setTextColor(ContextCompat.getColor(getContext(), R.color.buttonWrongAnswerColor));
                 if (!LearningManager.LearningSession.mAnswerChecked)
                     mSession.increaseWrongCounter();
+                Preferences.LearningSummary.addIdToSet(getContext(), mSession.getCurrentWordId());
                 mWrongTvCounter.setText(Integer.toString(mSession.getWrongCount()));
                 Vibrator vib = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
                 if (Build.VERSION.SDK_INT >= 26) {

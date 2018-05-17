@@ -355,4 +355,5 @@
     <string name="tts_italian">Ítalska</string>
     <string name="tts_welsh">Velska</string>
     <string name="flashcards_mode">flashcards</string>
+    <string name="learning_mistakes">Mistakes:</string>
 </resources>

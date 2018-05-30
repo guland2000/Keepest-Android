@@ -45,6 +45,8 @@ import static is.jacek.markowski.dictionary.keepest.main_activity.database.Contr
 import static is.jacek.markowski.dictionary.keepest.main_activity.database.Contract.Tag.Entry.TAG_ID;
 import static is.jacek.markowski.dictionary.keepest.main_activity.database.Contract.Tag.Entry.WORD_ID;
 import static is.jacek.markowski.dictionary.keepest.main_activity.database.Contract.Word.Entry.COLUMN_DICTIONARY_ID;
+import static is.jacek.markowski.dictionary.keepest.main_activity.database.Contract.Word.Entry.COLUMN_LEVEL;
+import static is.jacek.markowski.dictionary.keepest.main_activity.database.Contract.Word.Entry.COLUMN_NEXT_REVIEW;
 import static is.jacek.markowski.dictionary.keepest.main_activity.database.Contract.Word.Entry.COLUMN_TRANSLATION;
 import static is.jacek.markowski.dictionary.keepest.main_activity.database.Contract.Word.Entry.COLUMN_WORD;
 import static is.jacek.markowski.dictionary.keepest.main_activity.database.Contract.Word.Entry.TABLE_WORD;
@@ -242,7 +244,8 @@ public class WordProvider extends ContentProvider {
             }
             where = where + args;
         }
-        return selectFrom + where;
+        String order = " ORDER BY " + COLUMN_LEVEL + ", " + COLUMN_NEXT_REVIEW;
+        return selectFrom + where + order;
     }
 
     @Override

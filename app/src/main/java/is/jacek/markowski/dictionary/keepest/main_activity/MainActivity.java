@@ -518,7 +518,7 @@ public class MainActivity extends AppCompatActivity
                         values,
                         where,
                         selectionArgs);
-                Message.showToast(this, getString(R.string.word_pasted));
+                Message.showToast(this, getString(R.string.word_moved));
                 break;
             }
             case COPY_WORD: {
@@ -537,12 +537,13 @@ public class MainActivity extends AppCompatActivity
                 }
                 // add tags to copied word
                 for (int i = 0; i < c.getCount(); i++) {
+                    c.moveToPosition(i);
                     ContentValues v = new ContentValues();
                     v.put(Contract.Tag.Entry.WORD_ID, newWordId);
                     v.put(TAG_ID, c.getInt(c.getColumnIndex(TAG_ID)));
                     resolver.insert(UriHelper.TagsWord.buildAddTagToWordUri(), v);
                 }
-                Message.showToast(this, getString(R.string.word_pasted));
+                Message.showToast(this, getString(R.string.word_copied));
                 c.close();
                 break;
             }

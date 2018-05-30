@@ -213,6 +213,7 @@
         android:layout_marginStart="8dp"
         android:src="@drawable/ic_correct"
         android:tint="@color/buttonRightAnswerColor"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btn_flashcards_check" />

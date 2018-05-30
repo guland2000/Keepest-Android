@@ -128,7 +128,6 @@ public class LearningModeFlashcardsFragment extends Fragment {
         // visibility of buttons
         mBtCheck.setVisibility(View.VISIBLE);
         mIbtWrong.setVisibility(View.INVISIBLE);
-        mIbtCorrect.setVisibility(View.INVISIBLE);
         mAnswer.setText("");
 
         if (!Preferences.isShowGif(getContext())) {
@@ -177,7 +176,6 @@ public class LearningModeFlashcardsFragment extends Fragment {
                 public void onClick(View v) {
                     mBtCheck.setVisibility(View.INVISIBLE);
                     mIbtWrong.setVisibility(View.VISIBLE);
-                    mIbtCorrect.setVisibility(View.VISIBLE);
                     checkAnswer();
                 }
             });

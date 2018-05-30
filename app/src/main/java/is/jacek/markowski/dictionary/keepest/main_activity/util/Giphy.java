@@ -48,6 +48,7 @@ public class Giphy {
                     .asGif()
                     .load(source)
                     .placeholder(R.color.buttonDefaultColor)
+                    .error(R.drawable.ic_cancel)
                     .centerCrop()
                     .into(destination);
         }

@@ -37,9 +37,13 @@ import static android.provider.UserDictionary.Words._ID;
 import static is.jacek.markowski.dictionary.keepest.main_activity.database.Contract.Tag.Entry.COLUMN_TAG;
 import static is.jacek.markowski.dictionary.keepest.main_activity.database.Contract.Tag.Entry.TAG_ID;
 import static is.jacek.markowski.dictionary.keepest.main_activity.database.Contract.Tag.Entry.WORD_ID;
+import static is.jacek.markowski.dictionary.keepest.main_activity.database.Contract.Word.Entry.COLUMN_BAD_IN_ROW;
 import static is.jacek.markowski.dictionary.keepest.main_activity.database.Contract.Word.Entry.COLUMN_DICTIONARY_ID;
 import static is.jacek.markowski.dictionary.keepest.main_activity.database.Contract.Word.Entry.COLUMN_FAVOURITE;
+import static is.jacek.markowski.dictionary.keepest.main_activity.database.Contract.Word.Entry.COLUMN_GOOD_IN_ROW;
 import static is.jacek.markowski.dictionary.keepest.main_activity.database.Contract.Word.Entry.COLUMN_IMAGE;
+import static is.jacek.markowski.dictionary.keepest.main_activity.database.Contract.Word.Entry.COLUMN_LEVEL;
+import static is.jacek.markowski.dictionary.keepest.main_activity.database.Contract.Word.Entry.COLUMN_NEXT_REVIEW;
 import static is.jacek.markowski.dictionary.keepest.main_activity.database.Contract.Word.Entry.COLUMN_NOTES;
 import static is.jacek.markowski.dictionary.keepest.main_activity.database.Contract.Word.Entry.COLUMN_TRANSLATION;
 import static is.jacek.markowski.dictionary.keepest.main_activity.database.Contract.Word.Entry.COLUMN_WORD;
@@ -59,12 +63,15 @@ public class WordManager {
         if (c != null && c.getCount() > 0) {
             c.moveToFirst();
             int favourite = c.getInt(c.getColumnIndex(COLUMN_FAVOURITE));
-            // todo
             String tags = Tags.prepareStringWithAllTags(context, (int) wordId);
             String notes = c.getString(c.getColumnIndex(COLUMN_NOTES));
             String word = c.getString(c.getColumnIndex(COLUMN_WORD));
             String trans = c.getString(c.getColumnIndex(COLUMN_TRANSLATION));
             String imageUrl = c.getString(c.getColumnIndex(COLUMN_IMAGE));
+            int level = c.getInt(c.getColumnIndex(COLUMN_LEVEL));
+            int nextReview = c.getInt(c.getColumnIndex(COLUMN_NEXT_REVIEW));
+            int correctInRow = c.getInt(c.getColumnIndex(COLUMN_GOOD_IN_ROW));
+            int wrongInRow = c.getInt(c.getColumnIndex(COLUMN_BAD_IN_ROW));
             entry.id = (int) wordId;
             entry.word = word.trim();
             entry.translation = trans.trim();
@@ -72,6 +79,11 @@ public class WordManager {
             entry.notes = notes.trim();
             entry.tags = tags.trim();
             entry.imageUrl = imageUrl;
+            entry.level = level;
+            entry.nextReview = nextReview;
+            entry.correctInRow = correctInRow;
+            entry.wrongInRow = wrongInRow;
+
         }
         if (c != null) {
             c.close();
@@ -118,6 +130,10 @@ public class WordManager {
             values.put(COLUMN_FAVOURITE, entry.favourite);
             values.put(COLUMN_NOTES, entry.notes);
             values.put(COLUMN_IMAGE, entry.imageUrl);
+            values.put(COLUMN_LEVEL, entry.level);
+            values.put(COLUMN_NEXT_REVIEW, entry.nextReview);
+            values.put(COLUMN_GOOD_IN_ROW, entry.correctInRow);
+            values.put(COLUMN_BAD_IN_ROW, entry.wrongInRow);
             return values;
         }
 
@@ -229,6 +245,10 @@ public class WordManager {
         public String tags = "";
         public String notes = "";
         public String imageUrl = "";
+        public int level = 0;
+        public int nextReview = 0;
+        public int correctInRow = 0;
+        public int wrongInRow = 0;
 
         public static void saveIdOfLastAddedWord(Context context, int wordId) {
             Preferences.Word pref = new Preferences.Word();

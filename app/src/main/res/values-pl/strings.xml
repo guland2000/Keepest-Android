@@ -370,4 +370,6 @@
     <string name="tts_polish">Polski</string>
     <string name="flashcards_mode">fiszki</string>
     <string name="learning_mistakes">Błędy:</string>
+    <string name="word_pasted">Wklejono słowo.</string>
+    <string name="clipboard_empty">Schowek jest pusty.</string>
 </resources>

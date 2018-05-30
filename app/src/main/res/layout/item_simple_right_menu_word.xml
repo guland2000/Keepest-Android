@@ -43,13 +43,41 @@
             android:layout_height="match_parent">
 
             <ImageButton
+                android:id="@+id/img_cut"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@android:color/transparent"
+                android:tint="@android:color/transparent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/img_copy"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_cut" />
+
+            <ImageButton
+                android:id="@+id/img_copy"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@android:color/transparent"
+                android:tint="@android:color/transparent"
+                app:layout_constraintBottom_toBottomOf="@+id/img_delete"
+                app:layout_constraintEnd_toStartOf="@+id/img_delete"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_copy" />
+
+            <ImageButton
                 android:id="@+id/img_delete"
-                android:layout_width="44dp"
+                android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_gravity="center"
-                android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
-                android:layout_marginStart="8dp"
                 android:layout_weight="1"
                 android:adjustViewBounds="false"
                 android:background="@android:color/transparent"
@@ -58,11 +86,10 @@
                 android:elevation="0dp"
                 android:tint="@color/buttonWrongAnswerColor"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="1.0"
-                app:srcCompat="@drawable/ic_delete"/>
+                app:srcCompat="@drawable/ic_delete" />
 
         </android.support.constraint.ConstraintLayout>
 

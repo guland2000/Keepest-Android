@@ -24,6 +24,8 @@ package is.jacek.markowski.dictionary.keepest.main_activity;
 
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -60,10 +62,12 @@ import android.widget.Toast;
 import com.google.android.gms.drive.DriveId;
 import com.google.android.gms.drive.OpenFileActivityOptions;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
 import is.jacek.markowski.dictionary.keepest.BuildConfig;
 import is.jacek.markowski.dictionary.keepest.R;
+import is.jacek.markowski.dictionary.keepest.main_activity.database.Contract;
 import is.jacek.markowski.dictionary.keepest.main_activity.fragment.DictionaryDialogFragment;
 import is.jacek.markowski.dictionary.keepest.main_activity.fragment.DictionaryFragment;
 import is.jacek.markowski.dictionary.keepest.main_activity.fragment.EmptyFragment;
@@ -84,6 +88,9 @@ import is.jacek.markowski.dictionary.keepest.main_activity.util.Preferences;
 import is.jacek.markowski.dictionary.keepest.main_activity.util.UriHelper;
 import is.jacek.markowski.dictionary.keepest.main_activity.util.WordManager;
 
+import static android.provider.BaseColumns._ID;
+import static is.jacek.markowski.dictionary.keepest.main_activity.database.Contract.Tag.Entry.TAG_ID;
+import static is.jacek.markowski.dictionary.keepest.main_activity.database.Contract.Word.Entry.COLUMN_DICTIONARY_ID;
 import static is.jacek.markowski.dictionary.keepest.main_activity.fragment.WordDialogFragment.ADD_MODE;
 import static is.jacek.markowski.dictionary.keepest.main_activity.fragment.WordDialogFragment.EDIT_MODE;
 import static is.jacek.markowski.dictionary.keepest.main_activity.util.GDriveV3.REQUEST_CODE_OPENER;
@@ -95,6 +102,11 @@ import static is.jacek.markowski.dictionary.keepest.main_activity.util.Loaders.W
 import static is.jacek.markowski.dictionary.keepest.main_activity.util.Loaders.Words.SORT_BY_NAMES;
 import static is.jacek.markowski.dictionary.keepest.main_activity.util.Loaders.Words.SORT_BY_STARS;
 import static is.jacek.markowski.dictionary.keepest.main_activity.util.Preferences.PREFERENCES_FILE;
+import static is.jacek.markowski.dictionary.keepest.main_activity.util.Preferences.Word.COPY_WORD;
+import static is.jacek.markowski.dictionary.keepest.main_activity.util.Preferences.Word.CUT_WORD;
+import static is.jacek.markowski.dictionary.keepest.main_activity.util.Preferences.Word.EMPTY;
+import static is.jacek.markowski.dictionary.keepest.main_activity.util.UriHelper.Word.buildWordsAllUri;
+import static is.jacek.markowski.dictionary.keepest.main_activity.util.WordManager.WordEdit.prepareContentValues;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, TextToSpeech.OnInitListener {
@@ -282,7 +294,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onResume() {
         super.onResume();
-        getContentResolver().notifyChange(UriHelper.Word.buildWordsAllUri(), null);
+        getContentResolver().notifyChange(buildWordsAllUri(), null);
         restoreLastFragment();
     }
 
@@ -301,6 +313,7 @@ public class MainActivity extends AppCompatActivity
         if (mTts != null) {
             mTts.shutdown();
         }
+        WordManager.Word.clearIdOfWordToPaste(this); // empty clipboard
     }
 
     @Override
@@ -476,7 +489,7 @@ public class MainActivity extends AppCompatActivity
     public void sortWordList(MenuItem item) {
         WordFragment fragment = (WordFragment) getSupportFragmentManager().findFragmentByTag(WordFragment.TAG);
         RecyclerView recyclerView = fragment.mRecyclerView;
-        Uri uri = UriHelper.Word.buildWordsAllUri();
+        Uri uri = buildWordsAllUri();
         if (fragment.sortMode.equals(SORT_BY_NAMES)) {
             fragment.sortMode = SORT_BY_STARS;
         } else {
@@ -485,6 +498,61 @@ public class MainActivity extends AppCompatActivity
         getSupportLoaderManager().destroyLoader(LOADER_ID);
         getSupportLoaderManager().initLoader(LOADER_ID, null,
                 new Loaders.Words.LoadAllWords(getBaseContext(), recyclerView, uri, fragment.sortMode));
+    }
+
+    public void pasteWord(MenuItem item) {
+        int id = (int) WordManager.Word.getIdOfWordToPaste(this);
+        String type = WordManager.Word.getWordOperationType(this);
+        if (id <= 0) {
+            Message.showToast(this, getString(R.string.clipboard_empty));
+            return;
+        }
+        switch (type) {
+            case CUT_WORD: {
+                ContentValues values = new ContentValues();
+                values.put(COLUMN_DICTIONARY_ID, DictionaryManager.getDictData(this).dictId);
+                final String where = _ID + "=?";
+                final String[] selectionArgs = new String[]{Integer.toString(id)};
+                this.getContentResolver().update(
+                        buildWordsAllUri(),
+                        values,
+                        where,
+                        selectionArgs);
+                Message.showToast(this, getString(R.string.word_pasted));
+                break;
+            }
+            case COPY_WORD: {
+                WordManager.Word entry = WordManager.getWordById(this, id);
+                ContentValues values = prepareContentValues(this, entry);
+                Uri uri = this.getContentResolver().insert(buildWordsAllUri(), values);
+                int newWordId = Integer.valueOf(uri.getLastPathSegment());
+                // get tags of copied word
+                ContentResolver resolver = this.getContentResolver();
+                Cursor c = resolver.query(UriHelper.TagsWord.buildTagsForWords(), null, Contract.Tag.Entry.WORD_ID + "=?", new String[]{Integer.toString(id)}, null);
+                ArrayList<Integer> tagIds = new ArrayList<>();
+                for (int i = 0; i < c.getCount(); i++) {
+                    c.moveToPosition(i);
+                    int tagId = c.getInt(c.getColumnIndex(TAG_ID));
+                    tagIds.add(tagId);
+                }
+                // add tags to copied word
+                for (int i = 0; i < c.getCount(); i++) {
+                    ContentValues v = new ContentValues();
+                    v.put(Contract.Tag.Entry.WORD_ID, newWordId);
+                    v.put(TAG_ID, c.getInt(c.getColumnIndex(TAG_ID)));
+                    resolver.insert(UriHelper.TagsWord.buildAddTagToWordUri(), v);
+                }
+                Message.showToast(this, getString(R.string.word_pasted));
+                c.close();
+                break;
+            }
+            default:
+                Message.showToast(this, getString(R.string.clipboard_empty));
+                break;
+        }
+        WordManager.Word.setWordOperationType(this, EMPTY);
+        WordManager.Word.clearIdOfLastAddedWord(this);
+
     }
 
     public void commitSettingsFragment() {
@@ -526,7 +594,7 @@ public class MainActivity extends AppCompatActivity
             Uri uri = UriHelper.Word.buildWordSearchUri(word);
             WordManager.Word.clearIdOfLastAddedWord(this);
             if (word.length() == 0) {
-                uri = UriHelper.Word.buildWordsAllUri();
+                uri = buildWordsAllUri();
             }
             getSupportLoaderManager().destroyLoader(LOADER_ID);
             getSupportLoaderManager().initLoader(LOADER_ID, null,

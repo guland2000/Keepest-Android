@@ -130,23 +130,39 @@ public class Preferences {
     public static class Word {
 
         public static final String LAST_WORD_ID_KEY = "last_word_id";
+        public static final String WORD_TO_PASTE_ID_KEY = "paste_word_id";
+        public static final String OPERATION_TYPE_KEY = "operation_type";
+        public static final String COPY_WORD = "copy";
+        public static final String CUT_WORD = "cut";
+        public static final String EMPTY = "empty";
 
-        public void saveIdOfLastAddedWord(Context context, int wordId) {
+        public void saveIdOfWord(Context context, int wordId, String key) {
             SharedPreferences.Editor editor = context.getSharedPreferences(PREFERENCES_FILE, Context.MODE_PRIVATE).edit();
-            editor.putInt(LAST_WORD_ID_KEY, wordId);
+            editor.putInt(key, wordId);
             editor.apply();
         }
 
-        public void clearIdOfLastAddedWord(Context context) {
+        public void clearIdOfWord(Context context, String key) {
             SharedPreferences.Editor editor = context.getSharedPreferences(PREFERENCES_FILE, Context.MODE_PRIVATE).edit();
-            editor.putInt(LAST_WORD_ID_KEY, 0);
+            editor.putInt(key, 0);
             editor.apply();
         }
 
-        public int getIdOfLastAddedWord(Context context) {
+        public int getIdOfWord(Context context, String key) {
             SharedPreferences pref = context.getSharedPreferences(PREFERENCES_FILE, Context.MODE_PRIVATE);
-            return pref.getInt(LAST_WORD_ID_KEY, 0);
+            return pref.getInt(key, 0);
 
+        }
+
+        public void setWordOperationType(Context context, String type) {
+            SharedPreferences.Editor editor = context.getSharedPreferences(PREFERENCES_FILE, Context.MODE_PRIVATE).edit();
+            editor.putString(OPERATION_TYPE_KEY, type);
+            editor.apply();
+        }
+
+        public String getWordOperationType(Context context) {
+            SharedPreferences pref = context.getSharedPreferences(PREFERENCES_FILE, Context.MODE_PRIVATE);
+            return pref.getString(OPERATION_TYPE_KEY, EMPTY);
         }
     }
 

@@ -310,19 +310,45 @@ public class WordManager {
 
         public static void saveIdOfLastAddedWord(Context context, int wordId) {
             Preferences.Word pref = new Preferences.Word();
-            pref.saveIdOfLastAddedWord(context, wordId);
+            pref.saveIdOfWord(context, wordId, Preferences.Word.LAST_WORD_ID_KEY);
         }
 
         public static long getIdOfLastAddedWord(Context context) {
             Preferences.Word pref = new Preferences.Word();
-            return pref.getIdOfLastAddedWord(context);
-
+            return pref.getIdOfWord(context, Preferences.Word.LAST_WORD_ID_KEY);
         }
 
         public static void clearIdOfLastAddedWord(Context context) {
             Preferences.Word pref = new Preferences.Word();
-            pref.clearIdOfLastAddedWord(context);
+            pref.clearIdOfWord(context, Preferences.Word.LAST_WORD_ID_KEY);
         }
+
+        public static void saveIdOfWordToPaste(Context context, int wordId) {
+            Preferences.Word pref = new Preferences.Word();
+            pref.saveIdOfWord(context, wordId, Preferences.Word.WORD_TO_PASTE_ID_KEY);
+        }
+
+        public static void setWordOperationType(Context context, String type) {
+            Preferences.Word pref = new Preferences.Word();
+            pref.setWordOperationType(context, type);
+        }
+
+        public static String getWordOperationType(Context context) {
+            Preferences.Word pref = new Preferences.Word();
+            return pref.getWordOperationType(context);
+        }
+
+        public static long getIdOfWordToPaste(Context context) {
+            Preferences.Word pref = new Preferences.Word();
+            return pref.getIdOfWord(context, Preferences.Word.WORD_TO_PASTE_ID_KEY);
+        }
+
+        public static void clearIdOfWordToPaste(Context context) {
+            Preferences.Word pref = new Preferences.Word();
+            pref.clearIdOfWord(context, Preferences.Word.WORD_TO_PASTE_ID_KEY);
+        }
+
+
     }
 
     public static class TagChooser {

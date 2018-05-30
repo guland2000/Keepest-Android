@@ -47,6 +47,7 @@ import is.jacek.markowski.dictionary.keepest.main_activity.fragment.WordSummaryF
 import is.jacek.markowski.dictionary.keepest.main_activity.util.Connection;
 import is.jacek.markowski.dictionary.keepest.main_activity.util.DictionaryManager;
 import is.jacek.markowski.dictionary.keepest.main_activity.util.Message;
+import is.jacek.markowski.dictionary.keepest.main_activity.util.Preferences;
 import is.jacek.markowski.dictionary.keepest.main_activity.util.UriHelper;
 import is.jacek.markowski.dictionary.keepest.main_activity.util.WordManager;
 
@@ -182,6 +183,26 @@ public class WordAdapter extends RecyclerView.Adapter<WordAdapter.WordsViewHolde
             }
         });
 
+        // cut action
+        holder.mCut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                WordManager.Word.saveIdOfWordToPaste(mActivity, holder.idInDatabase);
+                WordManager.Word.setWordOperationType(mActivity, Preferences.Word.CUT_WORD);
+                holder.mSml.smoothCloseEndMenu();
+            }
+        });
+
+        // copy action
+        holder.mCopy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                WordManager.Word.saveIdOfWordToPaste(mActivity, holder.idInDatabase);
+                WordManager.Word.setWordOperationType(mActivity, Preferences.Word.COPY_WORD);
+                holder.mSml.smoothCloseEndMenu();
+            }
+        });
+
         // play sound
         holder.mSound.setOnClickListener(new View.OnClickListener()
 
@@ -216,7 +237,9 @@ public class WordAdapter extends RecyclerView.Adapter<WordAdapter.WordsViewHolde
                 dialog.show(fm, WordSummaryFragment.TAG);
             }
         });
-        holder.mCardView.setOnLongClickListener(new View.OnLongClickListener() {
+        holder.mCardView.setOnLongClickListener(new View.OnLongClickListener()
+
+        {
             @Override
             public boolean onLongClick(View v) {
                 Message.showToast(mActivity, mActivity.getString(R.string.swipe_left_to_open_menu));
@@ -274,7 +297,8 @@ public class WordAdapter extends RecyclerView.Adapter<WordAdapter.WordsViewHolde
         private TextView mWordTextView;
         private TextView mTranslationTextView;
         private ImageButton mDelete;
-        private CardView mCardSwipeMenu;
+        private ImageButton mCopy;
+        private ImageButton mCut;
         private CardView mCardView;
         private SwipeHorizontalMenuLayout mSml;
         private ImageButton mSound;
@@ -286,9 +310,10 @@ public class WordAdapter extends RecyclerView.Adapter<WordAdapter.WordsViewHolde
             mSml = itemView.findViewById(R.id.sml);
             mWordTextView = itemView.findViewById(R.id.tv_word);
             mTranslationTextView = itemView.findViewById(R.id.tv_translation);
-            mCardSwipeMenu = itemView.findViewById(R.id.card_swipe_menu);
             mCardView = itemView.findViewById(R.id.card_word);
             mDelete = itemView.findViewById(R.id.img_delete);
+            mCopy = itemView.findViewById(R.id.img_copy);
+            mCut = itemView.findViewById(R.id.img_cut);
             mSound = itemView.findViewById(R.id.img_sound);
             mWordHidden = itemView.findViewById(R.id.tv_word_hidden);
             mTags = itemView.findViewById(R.id.tv_tags);

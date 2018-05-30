@@ -154,6 +154,8 @@
     <string name="tts_italian">Italian</string>
     <string name="tts_welsh">Welsh</string>
     <string name="learning_mistakes">Mistakes:</string>
+    <string name="action_paste" translatable="false">paste</string>
+    <string name="clipboard_empty">Clipboard is empty.</string>
 
 
     <string-array name="select" translatable="true">
@@ -382,6 +384,7 @@
         <item>yo</item>
         <item>zu</item>
     </string-array>
+    <string name="word_pasted">Word pasted.</string>
 
 
 </resources>

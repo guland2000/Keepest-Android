@@ -47,7 +47,7 @@ public class Giphy {
             GlideApp.with(activity)
                     .asGif()
                     .load(source)
-                    .placeholder(R.color.buttonDefaultColor)
+                    .placeholder(R.drawable.ic_timer)
                     .error(R.drawable.ic_cancel)
                     .centerCrop()
                     .into(destination);

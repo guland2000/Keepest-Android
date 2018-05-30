@@ -357,4 +357,6 @@
     <string name="flashcards_mode">flashcards</string>
     <string name="learning_mistakes">Mistakes:</string>
     <string name="clipboard_empty">Clipboard is empty.</string>
+    <string name="word_copied">Word copied.</string>
+    <string name="word_moved">Word moved.</string>
 </resources>

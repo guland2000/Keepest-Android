@@ -137,6 +137,20 @@ public class WordManager {
             return values;
         }
 
+        public static ContentValues prepareContentValuesForUpdate(WordManager.Word entry) {
+            ContentValues values = new ContentValues();
+            values.put(COLUMN_WORD, entry.word);
+            values.put(COLUMN_TRANSLATION, entry.translation);
+            values.put(COLUMN_FAVOURITE, entry.favourite);
+            values.put(COLUMN_NOTES, entry.notes);
+            values.put(COLUMN_IMAGE, entry.imageUrl);
+            values.put(COLUMN_LEVEL, entry.level);
+            values.put(COLUMN_NEXT_REVIEW, entry.nextReview);
+            values.put(COLUMN_GOOD_IN_ROW, entry.correctInRow);
+            values.put(COLUMN_BAD_IN_ROW, entry.wrongInRow);
+            return values;
+        }
+
         public static void saveTextItem(Context context, String key, String text) {
             Preferences.WordEdit pref = new Preferences.WordEdit();
             pref.saveTextItem(context, key, text);
@@ -239,16 +253,60 @@ public class WordManager {
 
     public static class Word {
         public int id = -1;
+        private final int MAX_LEVEL = 100;
+        private final int MIN_LEVEL = 0;
+        static final int LEVEL_UP_LIMIT = 1;
+        static final int LEVEL_DOWN_LIMIT = 1;
         public String word = "";
         public String translation = "";
         public int favourite = 0; // 0-1
         public String tags = "";
         public String notes = "";
         public String imageUrl = "";
-        public int level = 0;
         public int nextReview = 0;
+        public int level = 0;
         public int correctInRow = 0;
         public int wrongInRow = 0;
+
+        void increaseLevel() {
+            level++;
+            if (level > MAX_LEVEL) {
+                level = MAX_LEVEL;
+            }
+            correctInRow = 0;
+            wrongInRow = 0;
+            nextReview = getDaysForReview() + level;
+        }
+
+        void decreaseLevel() {
+            level--;
+            if (level < MIN_LEVEL) {
+                level = MIN_LEVEL;
+            }
+            correctInRow = 0;
+            wrongInRow = 0;
+            nextReview = getDaysForReview();
+        }
+
+        public void increaseCorrect() {
+            correctInRow++;
+            wrongInRow = 0;
+            if (correctInRow >= LEVEL_UP_LIMIT) {
+                increaseLevel();
+            }
+        }
+
+        int getDaysForReview() {
+            return (int) (System.currentTimeMillis() / 1000L / 60 / 60 / 24);
+        }
+
+        public void increaseWrong() {
+            wrongInRow++;
+            correctInRow = 0;
+            if (wrongInRow >= LEVEL_DOWN_LIMIT) {
+                decreaseLevel();
+            }
+        }
 
         public static void saveIdOfLastAddedWord(Context context, int wordId) {
             Preferences.Word pref = new Preferences.Word();

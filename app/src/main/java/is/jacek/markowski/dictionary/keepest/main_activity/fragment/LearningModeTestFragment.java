@@ -58,6 +58,7 @@ import is.jacek.markowski.dictionary.keepest.main_activity.util.Giphy;
 import is.jacek.markowski.dictionary.keepest.main_activity.util.LearningManager;
 import is.jacek.markowski.dictionary.keepest.main_activity.util.LearningManager.Question;
 import is.jacek.markowski.dictionary.keepest.main_activity.util.Preferences;
+import is.jacek.markowski.dictionary.keepest.main_activity.util.SRS;
 import is.jacek.markowski.dictionary.keepest.main_activity.util.Tts;
 import is.jacek.markowski.dictionary.keepest.main_activity.util.TutorialManager;
 import is.jacek.markowski.dictionary.keepest.main_activity.util.TutorialManager.TutorialItem;
@@ -294,6 +295,7 @@ public class LearningModeTestFragment extends Fragment {
     @SuppressLint("SetTextI18n")
     private void changeButtonColorOnAnswer(TextView button) {
         String buttonAnswer = button.getText().toString();
+        WordManager.Word entry = WordManager.getWordById(getContext(), mSession.getCurrentWordId());
         if (LearningManager.getCurrentSession().getCurrentQuestion().checkAnswer(buttonAnswer)) {
             button.setBackgroundResource(R.color.buttonRightAnswerColor);
             mSession.increaseCorrectCounter();
@@ -304,6 +306,8 @@ public class LearningModeTestFragment extends Fragment {
                     .duration(500)
                     .createFor(button)
                     .start();
+            // SRS
+            SRS.correctAnswer(getContext(), entry);
         } else {
             button.setBackgroundResource(R.color.buttonWrongAnswerColor);
             showCorrectAnswers();
@@ -324,6 +328,8 @@ public class LearningModeTestFragment extends Fragment {
                     .duration(300)
                     .createFor(button)
                     .start();
+            // SRS
+            SRS.wrongAnswer(getContext(), entry);
         }
         // play text to speech
         Tts ttsManager = new Tts(getActivity());

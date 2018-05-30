@@ -49,6 +49,7 @@ import is.jacek.markowski.dictionary.keepest.main_activity.util.Giphy;
 import is.jacek.markowski.dictionary.keepest.main_activity.util.LearningManager;
 import is.jacek.markowski.dictionary.keepest.main_activity.util.LearningManager.Question;
 import is.jacek.markowski.dictionary.keepest.main_activity.util.Preferences;
+import is.jacek.markowski.dictionary.keepest.main_activity.util.SRS;
 import is.jacek.markowski.dictionary.keepest.main_activity.util.Tts;
 import is.jacek.markowski.dictionary.keepest.main_activity.util.WordManager;
 
@@ -251,6 +252,8 @@ public class LearningModeFlashcardsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 mSession.increaseCorrectCounter();
+                WordManager.Word entry = WordManager.getWordById(getContext(), mSession.getCurrentWordId());
+                SRS.correctAnswer(getContext(), entry);
                 nextQuestion();
             }
         });
@@ -258,7 +261,12 @@ public class LearningModeFlashcardsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 mSession.increaseWrongCounter();
+                // list of incorrect answers
                 Preferences.LearningSummary.addIdToSet(getContext(), mSession.getCurrentWordId());
+                // update SRS data
+                WordManager.Word entry = WordManager.getWordById(getContext(), mSession.getCurrentWordId());
+                SRS.wrongAnswer(getContext(), entry);
+                // move to next question
                 nextQuestion();
             }
         });

@@ -56,6 +56,7 @@ import is.jacek.markowski.dictionary.keepest.main_activity.util.Giphy;
 import is.jacek.markowski.dictionary.keepest.main_activity.util.LearningManager;
 import is.jacek.markowski.dictionary.keepest.main_activity.util.LearningManager.Question;
 import is.jacek.markowski.dictionary.keepest.main_activity.util.Preferences;
+import is.jacek.markowski.dictionary.keepest.main_activity.util.SRS;
 import is.jacek.markowski.dictionary.keepest.main_activity.util.Text;
 import is.jacek.markowski.dictionary.keepest.main_activity.util.Tts;
 import is.jacek.markowski.dictionary.keepest.main_activity.util.WordManager;
@@ -306,17 +307,16 @@ public class LearningModeWritingFragment extends Fragment {
         });
 
         // show gif
-        if (q != null && Preferences.isShowGif( getContext())) {
+        if (q != null && Preferences.isShowGif(getContext())) {
             WordManager.Word entry = WordManager.getWordById(getContext(), q.getIdInDatabase());
             Giphy.displayGif(getActivity(), entry.imageUrl, mGifView);
         }
 
         // play question on start
         if (q != null) {
-            if(Preferences.isReadLangOne(getContext()) && mSession.mLearningMode == LearningManager.MODE_WRITING_WORD) {
+            if (Preferences.isReadLangOne(getContext()) && mSession.mLearningMode == LearningManager.MODE_WRITING_WORD) {
                 question.callOnClick();
-            }
-            else if(Preferences.isReadLangTwo(getContext()) && mSession.mLearningMode == LearningManager.MODE_WRITING_TRANSLATION) {
+            } else if (Preferences.isReadLangTwo(getContext()) && mSession.mLearningMode == LearningManager.MODE_WRITING_TRANSLATION) {
                 question.callOnClick();
             }
         }
@@ -337,17 +337,24 @@ public class LearningModeWritingFragment extends Fragment {
     }
 
     private void checkAnswer() {
+        WordManager.Word entry = WordManager.getWordById(getContext(), mSession.getCurrentWordId());
         if (Text.validate(getContext(), mEdAnswer.getText().toString())) {
             mEdAnswer.setEnabled(false);
             if (LearningManager.getCurrentSession().getCurrentQuestion().checkAnswer(mEdAnswer.getText().toString())) {
                 mEdAnswer.setTextColor(ContextCompat.getColor(getContext(), R.color.buttonRightAnswerColor));
-                if (!LearningManager.LearningSession.mAnswerChecked)
+                if (!LearningManager.LearningSession.mAnswerChecked) {
                     mSession.increaseCorrectCounter();
+                    // SRS
+                    SRS.correctAnswer(getContext(), entry);
+                }
                 mCorrectTvCounter.setText(Integer.toString(mSession.getCorrectCount()));
             } else {
                 mEdAnswer.setTextColor(ContextCompat.getColor(getContext(), R.color.buttonWrongAnswerColor));
-                if (!LearningManager.LearningSession.mAnswerChecked)
+                if (!LearningManager.LearningSession.mAnswerChecked) {
                     mSession.increaseWrongCounter();
+                    // SRS
+                    SRS.wrongAnswer(getContext(), entry);
+                }
                 Preferences.LearningSummary.addIdToSet(getContext(), mSession.getCurrentWordId());
                 mWrongTvCounter.setText(Integer.toString(mSession.getWrongCount()));
                 Vibrator vib = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
@@ -363,7 +370,7 @@ public class LearningModeWritingFragment extends Fragment {
             Tts ttsManager = new Tts(getActivity());
             if (!ttsManager.isPlaying()) {
                 String answersLang = mSession.getCurrentQuestion().getAnswersLanguage(getContext());
-                if(answersLang != null) {
+                if (answersLang != null) {
                     if (Preferences.isReadLangTwo(getContext()) && mSession.mLearningMode == LearningManager.MODE_WRITING_WORD) {
                         mAnswer.callOnClick();
                     } else if (Preferences.isReadLangOne(getContext()) && mSession.mLearningMode == LearningManager.MODE_WRITING_TRANSLATION) {

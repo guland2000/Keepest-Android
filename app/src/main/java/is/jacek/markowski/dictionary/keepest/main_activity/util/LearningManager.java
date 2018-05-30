@@ -73,7 +73,6 @@ public class LearningManager {
         sLearningSession.mNumberOfQuestions = numberOfQuestions;
         sLearningSession.mLearningMode = learningMode;
         sLearningSession.mDb = db;
-        sLearningSession.questions = RandomQuestions.prepareRandomizedQuestions(cursor, numberOfQuestions);
         cursor.moveToFirst();
         sLearningSession.restartSession();
         return true;
@@ -130,7 +129,6 @@ public class LearningManager {
         public static int hintsRemaining = HINTS_ALLOWED;
         public int mNumberOfQuestions;
         public int mQuestionsCounter = 0;
-        public ArrayList<Integer> questions;
         public int mLearningMode;
         private int questionIndex = 0;
         private String[] mSetOfTagIds;
@@ -150,7 +148,7 @@ public class LearningManager {
             if (questionIndex == mNumberOfQuestions || questionIndex == mWords.getCount()) {
                 questionIndex = 0;
             }
-            mWords.moveToPosition(questions.get(questionIndex++));
+            mWords.moveToPosition(questionIndex++);
             mQuestionsCounter++;
         }
 
@@ -210,7 +208,6 @@ public class LearningManager {
         }
 
         public void restartSession() {
-            sLearningSession.questions = RandomQuestions.prepareRandomizedQuestions(mWords, mNumberOfQuestions);
             questionIndex = 0;
             moveToNextQuestion();
             mWrongCounter = 0;
@@ -487,30 +484,3 @@ public class LearningManager {
     }
 }
 
-class RandomQuestions {
-    private static Random random = new Random(System.currentTimeMillis() / 1000);
-
-    static ArrayList<Integer> prepareRandomizedQuestions(Cursor cursor, int numberOfQuestions) {
-        // available questions > numberOfQuestion
-        ArrayList<Integer> questionSet = new ArrayList<>(numberOfQuestions);
-        if (cursor.getCount() >= numberOfQuestions) {
-            // find non repeating questions
-            while (questionSet.size() < numberOfQuestions) {
-                int randomIndex = random.nextInt(cursor.getCount());
-                if (!questionSet.contains(randomIndex)) {
-                    questionSet.add(randomIndex);
-                }
-            }
-        } else {
-            // question have to repeat
-            int index = 0;
-            while (questionSet.size() < cursor.getCount()) {
-                questionSet.add(index++);
-            }
-        }
-
-        // randomize questions
-        Collections.shuffle(questionSet);
-        return questionSet;
-    }
-}

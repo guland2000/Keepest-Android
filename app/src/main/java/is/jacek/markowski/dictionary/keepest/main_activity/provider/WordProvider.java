@@ -244,7 +244,7 @@ public class WordProvider extends ContentProvider {
             }
             where = where + args;
         }
-        String order = " ORDER BY " + COLUMN_LEVEL + ", " + COLUMN_NEXT_REVIEW;
+        String order = " ORDER BY " + COLUMN_NEXT_REVIEW + ", " + COLUMN_LEVEL;
         return selectFrom + where + order;
     }
 

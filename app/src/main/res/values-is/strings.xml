@@ -359,4 +359,6 @@
     <string name="clipboard_empty">Clipboard is empty.</string>
     <string name="word_copied">Word copied.</string>
     <string name="word_moved">Word moved.</string>
+    <string name="cut_word">Cut.</string>
+    <string name="copy_word">Copy.</string>
 </resources>

@@ -373,4 +373,6 @@
     <string name="clipboard_empty">Schowek jest pusty.</string>
     <string name="word_copied">Skopiowano słowo.</string>
     <string name="word_moved">Przeniesiono słowo.</string>
+    <string name="cut_word">Wytnij.</string>
+    <string name="copy_word">Kopiuj.</string>
 </resources>

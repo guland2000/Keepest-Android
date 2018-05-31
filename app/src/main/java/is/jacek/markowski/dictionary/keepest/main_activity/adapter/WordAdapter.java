@@ -189,6 +189,7 @@ public class WordAdapter extends RecyclerView.Adapter<WordAdapter.WordsViewHolde
             public void onClick(final View v) {
                 WordManager.Word.saveIdOfWordToPaste(mActivity, holder.idInDatabase);
                 WordManager.Word.setWordOperationType(mActivity, Preferences.Word.CUT_WORD);
+                Message.showToast(mActivity, mActivity.getString(R.string.cut_word));
                 holder.mSml.smoothCloseEndMenu();
             }
         });
@@ -199,6 +200,7 @@ public class WordAdapter extends RecyclerView.Adapter<WordAdapter.WordsViewHolde
             public void onClick(final View v) {
                 WordManager.Word.saveIdOfWordToPaste(mActivity, holder.idInDatabase);
                 WordManager.Word.setWordOperationType(mActivity, Preferences.Word.COPY_WORD);
+                Message.showToast(mActivity, mActivity.getString(R.string.copy_word));
                 holder.mSml.smoothCloseEndMenu();
             }
         });

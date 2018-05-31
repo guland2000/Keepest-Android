@@ -70,6 +70,7 @@ public class LearningManager {
         }
         sLearningSession = new LearningSession(setOfTagIds);
         sLearningSession.mWords = cursor;
+        sLearningSession.mResolver = resolver;
         sLearningSession.mNumberOfQuestions = numberOfQuestions;
         sLearningSession.mLearningMode = learningMode;
         sLearningSession.mDb = db;
@@ -137,6 +138,7 @@ public class LearningManager {
         private int mWrongCounter;
         private DatabaseHelper mDb;
         private Random mRandom = new Random(System.currentTimeMillis() / 1000);
+        public ContentResolver mResolver;
 
         LearningSession(Set<String> set) {
             mSetOfTagIds = new String[set.size()];
@@ -208,6 +210,8 @@ public class LearningManager {
         }
 
         public void restartSession() {
+            mWords = mResolver.query(buildWordsLearningModeUri(), null, null, null, null);
+            mWords.moveToFirst();
             questionIndex = 0;
             moveToNextQuestion();
             mWrongCounter = 0;

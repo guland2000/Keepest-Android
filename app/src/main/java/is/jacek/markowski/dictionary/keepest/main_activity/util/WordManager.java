@@ -253,7 +253,7 @@ public class WordManager {
 
     public static class Word {
         public int id = -1;
-        private final int MAX_LEVEL = 100;
+        private final int MAX_LEVEL = 20;
         private final int MIN_LEVEL = 0;
         static final int LEVEL_UP_LIMIT = 1;
         static final int LEVEL_DOWN_LIMIT = 1;
@@ -275,7 +275,7 @@ public class WordManager {
             }
             correctInRow = 0;
             wrongInRow = 0;
-            nextReview = getDaysForReview() + level;
+            nextReview = getHoursForReview() + (int) ((Math.pow(level, 3)));
         }
 
         void decreaseLevel() {
@@ -285,7 +285,7 @@ public class WordManager {
             }
             correctInRow = 0;
             wrongInRow = 0;
-            nextReview = getDaysForReview();
+            nextReview = getHoursForReview();
         }
 
         public void increaseCorrect() {
@@ -296,8 +296,8 @@ public class WordManager {
             }
         }
 
-        int getDaysForReview() {
-            return (int) (System.currentTimeMillis() / 1000L / 60 / 60 / 24);
+        int getHoursForReview() {
+            return (int) (System.currentTimeMillis() / 1000L / 60 / 60);
         }
 
         public void increaseWrong() {

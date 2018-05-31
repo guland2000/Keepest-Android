@@ -384,7 +384,6 @@
         <item>yo</item>
         <item>zu</item>
     </string-array>
-    <string name="word_pasted">Word pasted.</string>
     <string name="word_copied">Word copied.</string>
     <string name="word_moved">Word moved.</string>
 

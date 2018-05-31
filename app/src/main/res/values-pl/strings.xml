@@ -370,8 +370,7 @@
     <string name="tts_polish">Polski</string>
     <string name="flashcards_mode">fiszki</string>
     <string name="learning_mistakes">Błędy:</string>
-    <string name="word_pasted">Wklejono słowo.</string>
     <string name="clipboard_empty">Schowek jest pusty.</string>
-    <string name="word_copied">Word copied.</string>
-    <string name="word_moved">Word moved.</string>
+    <string name="word_copied">Skopiowano słowo.</string>
+    <string name="word_moved">Przeniesiono słowo.</string>
 </resources>

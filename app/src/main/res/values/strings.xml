@@ -62,9 +62,6 @@
     <string name="you_have_0_dictionaries">Create word list. Enter name and choose languages.</string>
     <string name="next">Next</string>
     <string name="nav_night_mode">Night mode ON/OFF</string>
-    <string name="turorial_restart_session">Restart session.</string>
-    <string name="tutorial_end_session">End session.</string>
-    <string name="tutorial_add_new_word">Add new word.</string>
     <string name="tag_name">Tag\'s name</string>
     <string name="filename">File</string>
     <string name="choose_export_method">Choose export method</string>
@@ -114,9 +111,7 @@
     <string name="nav_rate_app">Rate this app</string>
     <string name="unable_to_find_playstore">Unable to open PlayStore.</string>
     <string name="privacy_policy">Privacy Policy</string>
-    <string name="gdrive_error_create_file">Error while trying to create new file contents</string>
     <string name="gdrive_upload_success">File uploaded!</string>
-    <string name="about">About</string>
     <string name="edit">Edit</string>
     <string name="search_in_english">Search in english</string>
     <string name="show_gif" translatable="false">GIF</string>
@@ -135,24 +130,9 @@
     <string name="enter_answer">Enter answer</string>
     <string name="check">Check</string>
     <string name="hint" translatable="false">❓</string>
-    <string name="portuguese_2018">Portuguese, 2018</string>
-    <string name="contributor_portuguese_2018" translatable="false">Nádia Dias</string>
     <string name="source_code">Source code</string>
-    <string name="contributors">Contributors</string>
-    <string name="translations">Translations</string>
-    <string name="icleandic_2018">Icelandic, 2018</string>
-    <string name="contributor_icelandic_2018" translatable="false">Aðalsteinn Reykjalín</string>
     <string name="tts_settings" translatable="false">Voice Synthesis</string>
-    <string name="tts_icelandic">Icelandic</string>
-    <string name="tts_settings_edit">Customize TTS</string>
-    <string name="tts_polish">Polish</string>
-    <string name="tts_english">English</string>
-    <string name="tts_spanish">Spanish</string>
-    <string name="tts_romanian">Romanian</string>
-    <string name="tts_german">German</string>
-    <string name="tts_french">French</string>
-    <string name="tts_italian">Italian</string>
-    <string name="tts_welsh">Welsh</string>
+    <string name="tts_settings_edit">TextToSpeech</string>
     <string name="learning_mistakes">Mistakes:</string>
     <string name="action_paste" translatable="false">paste</string>
     <string name="clipboard_empty">Clipboard is empty.</string>
@@ -388,6 +368,14 @@
     <string name="word_moved">Word moved.</string>
     <string name="cut_word">Cut.</string>
     <string name="copy_word">Copy.</string>
+    <string name="engine_one" translatable="false">Engine: 1</string>
+    <string name="engine_two" translatable="false">Engine: 2</string>
+    <string name="google_translate" translatable="false">Google Translate</string>
+    <string name="add_rule">Add Rule</string>
+    <string name="default_engine">Default engine</string>
+    <string name="engine_1">Engine 1</string>
+    <string name="engine_2">Engine 2</string>
+    <string name="text_to_speech">TextToSpeech</string>
 
 
 </resources>

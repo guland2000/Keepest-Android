@@ -87,9 +87,6 @@
     <string name="to">Do</string>
     <string name="translate">Tłumacz</string>
     <string name="translation">Tłumaczenie</string>
-    <string name="turorial_restart_session">Restartuj sesję</string>
-    <string name="tutorial_add_new_word">Dodaj nowe słowo.</string>
-    <string name="tutorial_end_session">Zakończ naukę.</string>
     <string name="unknown">nieznany</string>
     <string name="word">Słowo</string>
     <string name="words_title">Słowa</string>
@@ -336,9 +333,7 @@
     <string name="nav_rate_app">Oceń aplikację</string>
     <string name="unable_to_find_playstore">Nie można otworzyć PlayStore.</string>
     <string name="privacy_policy">Polityka Prywatności</string>
-    <string name="gdrive_error_create_file">Bląd podczas tworzenia pliku.</string>
     <string name="gdrive_upload_success">Wysłano plik!</string>
-    <string name="about">O programie</string>
     <string name="edit">Edytuj</string>
     <string name="search_in_english">Szukaj po angielsku</string>
     <string name="connecting_to_gdrive">Łączenie z Dyskiem Google...</string>
@@ -353,21 +348,8 @@
     <string name="test_mode">test</string>
     <string name="enter_answer">Wpisz odpowiedź</string>
     <string name="check">Sprawdź</string>
-    <string name="portuguese_2018">Portugalski, 2018</string>
     <string name="source_code">Kod źródłowy</string>
-    <string name="contributors">Współtwórcy</string>
-    <string name="translations">Tłumaczenia</string>
-    <string name="icleandic_2018">Islandzki, 2018</string>
-    <string name="tts_icelandic">Islandzki</string>
-    <string name="tts_settings_edit">Dostosuj TTS</string>
-    <string name="tts_welsh">Waliski</string>
-    <string name="tts_italian">Włoski</string>
-    <string name="tts_french">Francuski</string>
-    <string name="tts_german">Niemiecki</string>
-    <string name="tts_romanian">Rumuński</string>
-    <string name="tts_spanish">Hiszpański</string>
-    <string name="tts_english">Angielski</string>
-    <string name="tts_polish">Polski</string>
+    <string name="tts_settings_edit">TextToSpeech</string>
     <string name="flashcards_mode">fiszki</string>
     <string name="learning_mistakes">Błędy:</string>
     <string name="clipboard_empty">Schowek jest pusty.</string>
@@ -375,4 +357,9 @@
     <string name="word_moved">Przeniesiono słowo.</string>
     <string name="cut_word">Wytnij.</string>
     <string name="copy_word">Kopiuj.</string>
+    <string name="add_rule">Dodaj regułę</string>
+    <string name="default_engine">Domyślny silnik</string>
+    <string name="engine_1">Silnik 1</string>
+    <string name="engine_2">Silnik 2</string>
+    <string name="text_to_speech">TextToSpeech</string>
 </resources>

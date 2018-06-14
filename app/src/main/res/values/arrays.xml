@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright 2018 Jacek Markowski
   ~
   ~ Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
@@ -22,58 +21,13 @@
   -->
 
 <resources>
-    <string-array name="tts_entries" translatable="false">
-        <item>Google Translate</item>
-        <item>IVONA</item>
+    <string-array name="tts_engines" translatable="false">
+        <item>Engine: 1</item>
+        <item>Engine: 2</item>
     </string-array>
-    <string-array name="tts_english_entries" translatable="false">
-        <item>Google Translate</item>
-        <item>IVONA GB</item>
-        <item>IVONA US</item>
-        <item>IVONA AU</item>
-    </string-array>
-    <string-array name="tts_spanish_entries" translatable="false">
-        <item>Google Translate</item>
-        <item>IVONA ES</item>
-        <item>IVONA US</item>
-    </string-array>
-    <string-array name="tts_icelandic_values" translatable="false">
-        <item>google_translate</item>
-        <item>is</item>
-    </string-array>
-    <string-array name="tts_polish_values" translatable="false">
-        <item>google_translate</item>
-        <item>pl</item>
-    </string-array>
-    <string-array name="tts_english_values" translatable="false">
-        <item>google_translate</item>
-        <item>en_GB</item>
-        <item>en_US</item>
-        <item>en_AU</item>
-    </string-array>
-    <string-array name="tts_spanish_values" translatable="false">
-        <item>google_translate</item>
-        <item>es_ES</item>
-        <item>es_US</item>
-    </string-array>
-    <string-array name="tts_romanian_values" translatable="false">
-        <item>google_translate</item>
-        <item>ro</item>
-    </string-array>
-    <string-array name="tts_german_values" translatable="false">
-        <item>google_translate</item>
-        <item>de</item>
-    </string-array>
-    <string-array name="tts_french_values" translatable="false">
-        <item>google_translate</item>
-        <item>fr</item>
-    </string-array>
-    <string-array name="tts_italian_values" translatable="false">
-        <item>google_translate</item>
-        <item>it</item>
-    </string-array>
-    <string-array name="tts_welsh_values" translatable="false">
-        <item>google_translate</item>
-        <item>cy</item>
+    <string-array name="tts_engines_default" translatable="false">
+        <item>"Google Translate"</item>
+        <item>"Engine: 1"</item>
+        <item>"Engine: 2"</item>
     </string-array>
 </resources>

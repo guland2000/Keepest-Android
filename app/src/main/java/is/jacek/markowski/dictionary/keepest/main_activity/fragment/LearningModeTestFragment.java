@@ -47,7 +47,6 @@ import android.widget.TextView;
 
 import com.appolica.flubber.Flubber;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import is.jacek.markowski.dictionary.keepest.R;
@@ -60,8 +59,6 @@ import is.jacek.markowski.dictionary.keepest.main_activity.util.LearningManager.
 import is.jacek.markowski.dictionary.keepest.main_activity.util.Preferences;
 import is.jacek.markowski.dictionary.keepest.main_activity.util.SRS;
 import is.jacek.markowski.dictionary.keepest.main_activity.util.Tts;
-import is.jacek.markowski.dictionary.keepest.main_activity.util.TutorialManager;
-import is.jacek.markowski.dictionary.keepest.main_activity.util.TutorialManager.TutorialItem;
 import is.jacek.markowski.dictionary.keepest.main_activity.util.WordManager;
 
 
@@ -125,15 +122,6 @@ public class LearningModeTestFragment extends Fragment {
         activity.hideKeyboard();
         activity.setAsLastFragment(LearningSessionFragment.TAG);
         setupQuestion();
-        // tutorial
-        List<TutorialItem> items = new ArrayList<>();
-        items.add(new TutorialItem(mBtRestart, getString(R.string.turorial_restart_session)));
-        items.add(new TutorialItem(mBtStop, getString(R.string.tutorial_end_session)));
-        try {
-            TutorialManager.showTutorialSequence(getActivity(), items, TAG + "sessionLearn");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     private void setupQuestion() {

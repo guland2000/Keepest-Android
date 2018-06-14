@@ -32,8 +32,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
 
 /**
  * Created by jacek on 03.05.17.
@@ -98,7 +96,7 @@ public class Tts {
                 File cache = null;
                 try {
                     cache = Cache.cacheOrReadSound(mContext, uri, text, textLang);
-                } catch (InvalidKeySpecException | NoSuchAlgorithmException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
 

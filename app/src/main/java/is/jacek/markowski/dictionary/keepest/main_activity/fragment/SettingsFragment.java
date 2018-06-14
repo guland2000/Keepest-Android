@@ -92,41 +92,18 @@ public class SettingsFragment extends PreferenceFragment {
                 return false;
             }
         });
-        // download ivona
-        Preference pre_download_ivona = getPreferenceScreen().findPreference("pref_tts_ivona_download");
-        pre_download_ivona.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+
+        // tts settings
+        Preference pre_tts_settings = getPreferenceScreen().findPreference("pref_tts_settings");
+        pre_tts_settings.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                String url = "http://lmgtfy.com/?q=IVONA+Text-to-Speech+apkpure";
-                Intent i = new Intent(Intent.ACTION_VIEW);
-                i.setData(Uri.parse(url));
-                startActivity(i);
-                return false;
+                activity.getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, new TtsFragment(), TtsFragment.TAG)
+                        .commit();
+                return true;
             }
         });
-        // clear cache on voice change
-        String[] voices = {
-                "pref_tts_polish",
-                "pref_tts_icelandic",
-                "pref_tts_english",
-                "pref_tts_spanish",
-                "pref_tts_romanian",
-                "pref_tts_german",
-                "pref_tts_french",
-                "pref_tts_italian",
-                "pref_tts_welsh"
-        };
-        for (String voice : voices) {
-            Preference pre_tts_lang = getPreferenceScreen().findPreference(voice);
-            pre_tts_lang.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-                @Override
-                public boolean onPreferenceChange(Preference preference, Object newValue) {
-                    Cache.clearCache(activity);
-                    return true;
-                }
-            });
-        }
-
 
         Preference pre_version = getPreferenceScreen().findPreference("pref_version");
         String appVersion = BuildConfig.VERSION_NAME;

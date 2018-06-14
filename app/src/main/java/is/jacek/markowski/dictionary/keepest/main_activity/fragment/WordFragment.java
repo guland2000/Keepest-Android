@@ -36,15 +36,10 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import is.jacek.markowski.dictionary.keepest.R;
 import is.jacek.markowski.dictionary.keepest.main_activity.MainActivity;
 import is.jacek.markowski.dictionary.keepest.main_activity.adapter.WordAdapter;
 import is.jacek.markowski.dictionary.keepest.main_activity.util.Tts;
-import is.jacek.markowski.dictionary.keepest.main_activity.util.TutorialManager;
-import is.jacek.markowski.dictionary.keepest.main_activity.util.TutorialManager.TutorialItem;
 import is.jacek.markowski.dictionary.keepest.main_activity.util.UriHelper;
 
 import static is.jacek.markowski.dictionary.keepest.main_activity.util.Loaders.Words.LOADER_ID;
@@ -97,14 +92,6 @@ public class WordFragment extends Fragment {
     public void onStart() {
         super.onStart();
         mActivity.hideKeyboard();
-
-        List<TutorialItem> items = new ArrayList<>();
-        items.add(new TutorialItem(mFloatingActionButton, getString(R.string.tutorial_add_new_word)));
-        try {
-            TutorialManager.showTutorialSequence(mActivity, items, TAG + "wordFragment");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
 

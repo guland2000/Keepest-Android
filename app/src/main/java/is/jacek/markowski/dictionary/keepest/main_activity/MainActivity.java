@@ -63,7 +63,6 @@ import com.google.android.gms.drive.DriveId;
 import com.google.android.gms.drive.OpenFileActivityOptions;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
 import is.jacek.markowski.dictionary.keepest.BuildConfig;
 import is.jacek.markowski.dictionary.keepest.R;
@@ -74,6 +73,7 @@ import is.jacek.markowski.dictionary.keepest.main_activity.fragment.EmptyFragmen
 import is.jacek.markowski.dictionary.keepest.main_activity.fragment.LearningSessionFragment;
 import is.jacek.markowski.dictionary.keepest.main_activity.fragment.LearningSettingsFragment;
 import is.jacek.markowski.dictionary.keepest.main_activity.fragment.SettingsFragment;
+import is.jacek.markowski.dictionary.keepest.main_activity.fragment.TtsFragment;
 import is.jacek.markowski.dictionary.keepest.main_activity.fragment.WordAdvancedFragment;
 import is.jacek.markowski.dictionary.keepest.main_activity.fragment.WordFragment;
 import is.jacek.markowski.dictionary.keepest.main_activity.util.DictionaryManager;
@@ -102,6 +102,8 @@ import static is.jacek.markowski.dictionary.keepest.main_activity.util.Loaders.W
 import static is.jacek.markowski.dictionary.keepest.main_activity.util.Loaders.Words.SORT_BY_NAMES;
 import static is.jacek.markowski.dictionary.keepest.main_activity.util.Loaders.Words.SORT_BY_STARS;
 import static is.jacek.markowski.dictionary.keepest.main_activity.util.Preferences.PREFERENCES_FILE;
+import static is.jacek.markowski.dictionary.keepest.main_activity.util.Preferences.TextToSpeech.ENGINE_ONE;
+import static is.jacek.markowski.dictionary.keepest.main_activity.util.Preferences.TextToSpeech.ENGINE_TWO;
 import static is.jacek.markowski.dictionary.keepest.main_activity.util.Preferences.Word.COPY_WORD;
 import static is.jacek.markowski.dictionary.keepest.main_activity.util.Preferences.Word.CUT_WORD;
 import static is.jacek.markowski.dictionary.keepest.main_activity.util.Preferences.Word.EMPTY;
@@ -120,7 +122,8 @@ public class MainActivity extends AppCompatActivity
     public boolean mIsWordFragmentOpened = true;
     public GDriveV3 mGdriveV3;
     private NavigationView mNavigationView;
-    public TextToSpeech mTts;
+    public TextToSpeech mTts_one;
+    public TextToSpeech mTts_two;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -152,8 +155,25 @@ public class MainActivity extends AppCompatActivity
             mWordAdvancedFragment = WordAdvancedFragment.newInstance(this, id, ADD_MODE);
         }
         mSettingsFragment = new SettingsFragment();
-        // ivona tts icelandic
-        mTts = new TextToSpeech(this, this, "com.ivona.tts");
+
+        //tts
+        String engine_one = Preferences.TextToSpeech.read(this, ENGINE_ONE);
+        String engine_two = Preferences.TextToSpeech.read(this, ENGINE_TWO);
+        if (!engine_one.equals("")) {
+            mTts_one = new TextToSpeech(this, this, engine_one);
+        } else {
+            mTts_one = new TextToSpeech(this, this);
+        }
+        if (engine_one.equals(engine_two)) {
+            mTts_two = mTts_one;
+        } else {
+            if (!engine_two.equals("")) {
+                mTts_two = new TextToSpeech(this, this, engine_two);
+            } else {
+                mTts_two = new TextToSpeech(this, this);
+            }
+        }
+
     }
 
     private void setApplicationTheme() {
@@ -310,8 +330,11 @@ public class MainActivity extends AppCompatActivity
     protected void onDestroy() {
         super.onDestroy();
         setAsLastFragment(WordFragment.TAG);
-        if (mTts != null) {
-            mTts.shutdown();
+        if (mTts_one != null) {
+            mTts_one.shutdown();
+        }
+        if (mTts_two != null) {
+            mTts_one.shutdown();
         }
         WordManager.Word.clearIdOfWordToPaste(this); // empty clipboard
     }
@@ -377,8 +400,10 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onStop() {
         super.onStop();
-        if (mTts != null)
-            mTts.stop();
+        if (mTts_one != null)
+            mTts_one.stop();
+        if (mTts_two != null)
+            mTts_two.stop();
     }
 
 
@@ -642,8 +667,10 @@ public class MainActivity extends AppCompatActivity
     // text to speech initializer
     @Override
     public void onInit(int status) {
-        /* todo - add all ivona voices, menu entry for tts setting for languages*/
-        // set voice to icelandic
-        mTts.setLanguage(new Locale("is"));
+        TtsFragment ttsFragment = (TtsFragment) getSupportFragmentManager().findFragmentByTag(TtsFragment.TAG);
+        if (ttsFragment != null) {
+            ttsFragment.populateLocalesSpinner(0);
+            ttsFragment.engineChooser.setSelection(0);
+        }
     }
 }

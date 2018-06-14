@@ -338,24 +338,62 @@ public class Preferences {
             return pref.getStringSet(SET_NAME, new HashSet<String>());
         }
 
-        public static boolean isIdInSet(Context context, int id) {
+        static boolean isIdInSet(Context context, int id) {
             Set<String> stringSet = getSetOfId(context);
             return stringSet.contains(Integer.toString(id));
         }
     }
 
-    public static class Tutorial {
-        public static final String PREFERENCES_FILE = Preferences.PREFERENCES_FILE + "tutorial";
+    public static class TextToSpeech {
+        static final String PREFERENCES_FILE = Preferences.PREFERENCES_FILE + "tts";
+        static final String SET_NAME = "tts_settings";
+        public static final String ENGINE_ONE = "one";
+        public static final String ENGINE_TWO = "two";
+        public static final String ENGINE_DEFAULT = "default";
 
-        public static void setAsShowed(Context context, String key) {
+
+        public static void resetTtsSettings(Context context) {
             SharedPreferences.Editor editor = context.getSharedPreferences(PREFERENCES_FILE, Context.MODE_PRIVATE).edit();
-            editor.putBoolean(key, true);
+            editor.putStringSet(SET_NAME, new ArraySet<String>());
             editor.apply();
         }
 
-        public static boolean wasShowed(Context context, String key) {
+        public static void addOrRemoveTtsSettings(Context context, String value) {
+            SharedPreferences.Editor editor = context.getSharedPreferences(PREFERENCES_FILE, Context.MODE_PRIVATE).edit();
+            Set<String> stringSet = getSetOfTtsSettings(context);
+            Set<String> newSet = new ArraySet<>();
+            newSet.addAll(stringSet);
+
+            if (!isIdInSet(context, value)) {
+                newSet.add(value);
+            } else {
+                newSet.remove(value);
+            }
+
+            editor.putStringSet(SET_NAME, newSet);
+            editor.commit();
+        }
+
+        public static Set<String> getSetOfTtsSettings(Context context) {
             SharedPreferences pref = context.getSharedPreferences(PREFERENCES_FILE, Context.MODE_PRIVATE);
-            return pref.getBoolean(key, false);
+            return pref.getStringSet(SET_NAME, new HashSet<String>());
+        }
+
+        public static boolean isIdInSet(Context context, String value) {
+            Set<String> stringSet = getSetOfTtsSettings(context);
+            return stringSet.contains(value);
+        }
+
+        public static void write(Context context, String key, String value) {
+            SharedPreferences.Editor editor = context.getSharedPreferences(PREFERENCES_FILE, Context.MODE_PRIVATE).edit();
+            editor.putString(key, value);
+            editor.apply();
+        }
+
+        public static String read(Context context, String key) {
+            SharedPreferences pref = context.getSharedPreferences(PREFERENCES_FILE, Context.MODE_PRIVATE);
+            return pref.getString(key, "");
         }
     }
+
 }

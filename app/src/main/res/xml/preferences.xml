@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright 2018 Jacek Markowski
   ~
   ~ Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
@@ -30,12 +29,12 @@
             android:icon="@drawable/ic_cloud_upload"
             android:key="pref_send"
             android:summary="@string/send_to_cloud_summary"
-            android:title="@string/send_to_cloud"/>
+            android:title="@string/send_to_cloud" />
         <Preference
             android:icon="@drawable/ic_cloud_download"
             android:key="pref_download"
             android:summary="@string/download_from_cloud_summary"
-            android:title="@string/download_from_cloud"/>
+            android:title="@string/download_from_cloud" />
     </PreferenceCategory>
     <PreferenceCategory
         android:layout="@layout/preference_category"
@@ -50,7 +49,7 @@
                 <Preference
                     android:icon="@drawable/ic_delete"
                     android:key="pref_clear_cache"
-                    android:title="@string/clear_cache"/>
+                    android:title="@string/clear_cache" />
             </PreferenceCategory>
         </PreferenceScreen>
     </PreferenceCategory>
@@ -61,112 +60,18 @@
             android:icon="@drawable/volume"
             android:key="pref_tts_settings"
             android:persistent="false"
-            android:summary="Supported TTS engines: IVONA (offline, better quality), Google Translate (online)"
-            android:title="@string/tts_settings_edit">
-            <Preference
-                android:icon="@drawable/ic_import"
-                android:key="pref_tts_ivona_download"
-                android:title="Download IVONA voices"/>
-            <PreferenceCategory
-                android:title="@string/tts_settings">
-                <ListPreference
-                    android:summary="%s"
-                    android:entries="@array/tts_entries"
-                    android:entryValues="@array/tts_icelandic_values"
-                    android:defaultValue="google_translate"
-                    android:key="pref_tts_icelandic"
-                    android:title="@string/tts_icelandic"/>
-                <ListPreference
-                    android:summary="%s"
-                    android:entries="@array/tts_entries"
-                    android:entryValues="@array/tts_polish_values"
-                    android:defaultValue="google_translate"
-                    android:key="pref_tts_polish"
-                    android:title="@string/tts_polish"/>
-                <ListPreference
-                    android:summary="%s"
-                    android:entries="@array/tts_english_entries"
-                    android:entryValues="@array/tts_english_values"
-                    android:defaultValue="google_translate"
-                    android:key="pref_tts_english"
-                    android:title="@string/tts_english"/>
-                <ListPreference
-                    android:summary="%s"
-                    android:entries="@array/tts_spanish_entries"
-                    android:entryValues="@array/tts_spanish_values"
-                    android:defaultValue="google_translate"
-                    android:key="pref_tts_spanish"
-                    android:title="@string/tts_spanish"/>
-                <ListPreference
-                    android:summary="%s"
-                    android:entries="@array/tts_entries"
-                    android:entryValues="@array/tts_romanian_values"
-                    android:defaultValue="google_translate"
-                    android:key="pref_tts_romanian"
-                    android:title="@string/tts_romanian"/>
-                <ListPreference
-                    android:summary="%s"
-                    android:entries="@array/tts_entries"
-                    android:entryValues="@array/tts_german_values"
-                    android:defaultValue="google_translate"
-                    android:key="pref_tts_german"
-                    android:title="@string/tts_german"/>
-                <ListPreference
-                    android:summary="%s"
-                    android:entries="@array/tts_entries"
-                    android:entryValues="@array/tts_french_values"
-                    android:defaultValue="google_translate"
-                    android:key="pref_tts_french"
-                    android:title="@string/tts_french"/>
-                <ListPreference
-                    android:summary="%s"
-                    android:entries="@array/tts_entries"
-                    android:entryValues="@array/tts_italian_values"
-                    android:defaultValue="google_translate"
-                    android:key="pref_tts_italian"
-                    android:title="@string/tts_italian"/>
-                <ListPreference
-                    android:summary="%s"
-                    android:entries="@array/tts_entries"
-                    android:entryValues="@array/tts_welsh_values"
-                    android:defaultValue="google_translate"
-                    android:key="pref_tts_welsh"
-                    android:title="@string/tts_welsh"/>
-            </PreferenceCategory>
-        </PreferenceScreen>
+            android:title="@string/tts_settings_edit" />
     </PreferenceCategory>
-    <PreferenceCategory
-        android:layout="@layout/preference_category"
-        android:title="@string/about">
-        <PreferenceScreen
-            android:key="pref_contributors"
-            android:persistent="true"
-            android:title="@string/contributors">
-            <PreferenceCategory android:title="@string/translations">
-                <Preference
-                    android:key="pref_portuguese"
-                    android:summary="@string/contributor_portuguese_2018"
-                    android:title="@string/portuguese_2018"/>
-                <Preference
-                    android:key="pref_icelandic"
-                    android:summary="@string/contributor_icelandic_2018"
-                    android:title="@string/icleandic_2018"/>
-            </PreferenceCategory>
-        </PreferenceScreen>
-        <PreferenceScreen
-            android:key="pref_privacy_policy"
-            android:persistent="false"
-            android:title="@string/privacy_policy">
-        </PreferenceScreen>
-        <PreferenceScreen
-            android:key="pref_source_code"
-            android:persistent="false"
-            android:title="@string/source_code">
-        </PreferenceScreen>
-        <PreferenceScreen
-            android:key="pref_version"
-            android:persistent="false"
-            android:title="@string/app_version">
-        </PreferenceScreen>
-    </PreferenceCategory>
+    <PreferenceScreen
+        android:key="pref_privacy_policy"
+        android:persistent="false"
+        android:title="@string/privacy_policy"></PreferenceScreen>
+    <PreferenceScreen
+        android:key="pref_source_code"
+        android:persistent="false"
+        android:title="@string/source_code"></PreferenceScreen>
+    <PreferenceScreen
+        android:key="pref_version"
+        android:persistent="false"
+        android:title="@string/app_version"></PreferenceScreen>
 </PreferenceScreen>

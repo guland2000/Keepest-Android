@@ -24,10 +24,8 @@ package is.jacek.markowski.dictionary.keepest.main_activity.util;
 
 import android.content.Context;
 import android.content.ContextWrapper;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
-import android.preference.PreferenceManager;
 import android.speech.tts.TextToSpeech;
 import android.support.annotation.NonNull;
 import android.widget.Toast;
@@ -41,9 +39,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URL;
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
 import java.util.Locale;
+import java.util.Set;
 
 import is.jacek.markowski.dictionary.keepest.R;
 import is.jacek.markowski.dictionary.keepest.main_activity.MainActivity;
@@ -53,7 +50,7 @@ public class Cache {
 
     private static File file;
 
-    static File cacheOrReadSound(Context context, Uri uri, String word, String langCode) throws InvalidKeySpecException, NoSuchAlgorithmException {
+    static File cacheOrReadSound(Context context, Uri uri, String word, String langCode) {
 
         String toHash = word.toLowerCase() + langCode;
         String hash = hashCode(toHash);
@@ -82,71 +79,60 @@ public class Cache {
     }
 
     private static void saveSoundFile(Context context, String word, String langCode, Uri uri, File file) {
-        MainActivity activity = (MainActivity) context;
-        TextToSpeech tts = activity.mTts;
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(activity);
+        TextToSpeech tts = null;
         Locale locale = null;
-        switch (langCode) {
-            case "is": {
-                String engine = prefs.getString("pref_tts_icelandic", "google_translate");
-                locale = new Locale(engine);
-                break;
-            }
-            case "pl": {
-                String engine = prefs.getString("pref_tts_polish", "google_translate");
-                locale = new Locale(engine);
-                break;
-            }
-            case "en": {
-                String engine = prefs.getString("pref_tts_english", "google_translate");
-                if (engine.length() > 2) {
-                    String lang = engine.substring(0, 2);
-                    String region = engine.substring(3);
+        boolean useDefaultEngine = true;
+        boolean useTts = false;
+
+        // read tts rule from preferences
+        Set<String> ttsSet = Preferences.TextToSpeech.getSetOfTtsSettings(context);
+        for (String value : ttsSet) {
+            try {
+                String isoCode = value.split("\\|")[2];
+                String engine = value.split("\\|")[0];
+                String lang = isoCode.split("_")[0];
+                String region = isoCode.split("_")[1];
+                if (lang.equals(langCode)) {
                     locale = new Locale(lang, region);
+                    useDefaultEngine = false;
+                    useTts = true;
+                    if (context.getString(R.string.engine_one).equals(engine)) {
+                        tts = ((MainActivity) context).mTts_one;
+
+                    } else if (context.getString(R.string.engine_two).equals(engine)) {
+                        tts = ((MainActivity) context).mTts_two;
+
+                    }
+                    break;
                 }
-                break;
+
+            } catch (IndexOutOfBoundsException ignored) {
             }
-            case "es": {
-                String engine = prefs.getString("pref_tts_spanish", "google_translate");
-                if (engine.length() > 2) {
-                    String lang = engine.substring(0, 2);
-                    String region = engine.substring(3);
-                    locale = new Locale(lang, region);
-                }
-                break;
-            }
-            case "ro": {
-                String engine = prefs.getString("pref_tts_romanian", "google_translate");
-                locale = new Locale(engine);
-                break;
-            }
-            case "de": {
-                String engine = prefs.getString("pref_tts_german", "google_translate");
-                locale = new Locale(engine);
-                break;
-            }
-            case "fr": {
-                String engine = prefs.getString("pref_tts_french", "google_translate");
-                locale = new Locale(engine);
-                break;
-            }
-            case "it": {
-                String engine = prefs.getString("pref_tts_italian", "google_translate");
-                locale = new Locale(engine);
-                break;
-            }
-            case "cy": {
-                String engine = prefs.getString("pref_tts_welsh", "google_translate");
-                locale = new Locale(engine);
-                break;
+        }
+        if (useDefaultEngine) {
+            String defaultEngine = Preferences.TextToSpeech.read(context, Preferences.TextToSpeech.ENGINE_DEFAULT);
+            if (context.getString(R.string.engine_one).equals(defaultEngine)) {
+                tts = ((MainActivity) context).mTts_one;
+                locale = new Locale(langCode);
+                useTts = true;
+
+            } else if (context.getString(R.string.engine_two).equals(defaultEngine)) {
+                tts = ((MainActivity) context).mTts_two;
+                locale = new Locale(langCode);
+                useTts = true;
+
+            } else {
+                useTts = false;
+
             }
         }
 
-        if (locale != null && tts.setLanguage(locale) >= 0) {
+
+        if (useTts && locale != null && tts.setLanguage(locale) >= 0) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                activity.mTts.synthesizeToFile(word, null, file, file.getName());
+                tts.synthesizeToFile(word, null, file, file.getName());
             } else {
-                activity.mTts.synthesizeToFile(word, null, file.getAbsolutePath());
+                tts.synthesizeToFile(word, null, file.getAbsolutePath());
             }
             int timeCounter = 0;
             int sleep = 100;

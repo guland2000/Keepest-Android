@@ -45,6 +45,9 @@ import java.util.Set;
 import is.jacek.markowski.dictionary.keepest.R;
 import is.jacek.markowski.dictionary.keepest.main_activity.MainActivity;
 
+import static is.jacek.markowski.dictionary.keepest.main_activity.util.Preferences.TextToSpeech.ENGINE_ONE_CODE;
+import static is.jacek.markowski.dictionary.keepest.main_activity.util.Preferences.TextToSpeech.ENGINE_TWO_CODE;
+
 
 public class Cache {
 
@@ -94,13 +97,15 @@ public class Cache {
                 String region = isoCode.split("_")[1];
                 if (lang.equals(langCode)) {
                     locale = new Locale(lang, region);
-                    useDefaultEngine = false;
-                    useTts = true;
-                    if (context.getString(R.string.engine_one).equals(engine)) {
+                    if (ENGINE_ONE_CODE.equals(engine)) {
                         tts = ((MainActivity) context).mTts_one;
+                        useDefaultEngine = false;
+                        useTts = true;
 
-                    } else if (context.getString(R.string.engine_two).equals(engine)) {
+                    } else if (ENGINE_TWO_CODE.equals(engine)) {
                         tts = ((MainActivity) context).mTts_two;
+                        useDefaultEngine = false;
+                        useTts = true;
 
                     }
                     break;
@@ -111,12 +116,12 @@ public class Cache {
         }
         if (useDefaultEngine) {
             String defaultEngine = Preferences.TextToSpeech.read(context, Preferences.TextToSpeech.ENGINE_DEFAULT);
-            if (context.getString(R.string.engine_one).equals(defaultEngine)) {
+            if (ENGINE_ONE_CODE.equals(defaultEngine)) {
                 tts = ((MainActivity) context).mTts_one;
                 locale = new Locale(langCode);
                 useTts = true;
 
-            } else if (context.getString(R.string.engine_two).equals(defaultEngine)) {
+            } else if (ENGINE_TWO_CODE.equals(defaultEngine)) {
                 tts = ((MainActivity) context).mTts_two;
                 locale = new Locale(langCode);
                 useTts = true;

@@ -102,6 +102,7 @@ import static is.jacek.markowski.dictionary.keepest.main_activity.util.Loaders.W
 import static is.jacek.markowski.dictionary.keepest.main_activity.util.Loaders.Words.SORT_BY_NAMES;
 import static is.jacek.markowski.dictionary.keepest.main_activity.util.Loaders.Words.SORT_BY_STARS;
 import static is.jacek.markowski.dictionary.keepest.main_activity.util.Preferences.PREFERENCES_FILE;
+import static is.jacek.markowski.dictionary.keepest.main_activity.util.Preferences.TextToSpeech.ENGINE_CHOOSER;
 import static is.jacek.markowski.dictionary.keepest.main_activity.util.Preferences.TextToSpeech.ENGINE_ONE;
 import static is.jacek.markowski.dictionary.keepest.main_activity.util.Preferences.TextToSpeech.ENGINE_TWO;
 import static is.jacek.markowski.dictionary.keepest.main_activity.util.Preferences.Word.COPY_WORD;
@@ -160,18 +161,20 @@ public class MainActivity extends AppCompatActivity
         String engine_one = Preferences.TextToSpeech.read(this, ENGINE_ONE);
         String engine_two = Preferences.TextToSpeech.read(this, ENGINE_TWO);
         if (!engine_one.equals("")) {
+            if (mTts_one != null) {
+                mTts_one.shutdown();
+            }
             mTts_one = new TextToSpeech(this, this, engine_one);
         } else {
             mTts_one = new TextToSpeech(this, this);
         }
-        if (engine_one.equals(engine_two)) {
-            mTts_two = mTts_one;
-        } else {
-            if (!engine_two.equals("")) {
-                mTts_two = new TextToSpeech(this, this, engine_two);
-            } else {
-                mTts_two = new TextToSpeech(this, this);
+        if (!engine_two.equals("")) {
+            if (mTts_two != null) {
+                mTts_two.shutdown();
             }
+            mTts_two = new TextToSpeech(this, this, engine_two);
+        } else {
+            mTts_two = new TextToSpeech(this, this);
         }
 
     }
@@ -669,8 +672,13 @@ public class MainActivity extends AppCompatActivity
     public void onInit(int status) {
         TtsFragment ttsFragment = (TtsFragment) getSupportFragmentManager().findFragmentByTag(TtsFragment.TAG);
         if (ttsFragment != null) {
-            ttsFragment.populateLocalesSpinner(0);
-            ttsFragment.engineChooser.setSelection(0);
+            int engineNumber;
+            try {
+                engineNumber = Integer.valueOf(Preferences.TextToSpeech.read(this, ENGINE_CHOOSER));
+            } catch (NumberFormatException e) {
+                engineNumber = 0;
+            }
+            ttsFragment.populateLocalesSpinner(engineNumber);
         }
     }
 }

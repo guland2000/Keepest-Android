@@ -349,7 +349,11 @@ public class Preferences {
         static final String SET_NAME = "tts_settings";
         public static final String ENGINE_ONE = "one";
         public static final String ENGINE_TWO = "two";
+        public static final String ENGINE_ONE_CODE = "1";
+        public static final String ENGINE_TWO_CODE = "2";
+        public static final String GOOGLE_TRANSLATE_CODE = "0";
         public static final String ENGINE_DEFAULT = "default";
+        public static final String ENGINE_CHOOSER = "engine_chooser";
 
 
         public static void resetTtsSettings(Context context) {

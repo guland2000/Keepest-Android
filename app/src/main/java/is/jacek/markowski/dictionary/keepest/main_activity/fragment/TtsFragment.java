@@ -51,9 +51,13 @@ import is.jacek.markowski.dictionary.keepest.main_activity.adapter.TtsAdapter;
 import is.jacek.markowski.dictionary.keepest.main_activity.util.Cache;
 import is.jacek.markowski.dictionary.keepest.main_activity.util.Preferences;
 
+import static is.jacek.markowski.dictionary.keepest.main_activity.util.Preferences.TextToSpeech.ENGINE_CHOOSER;
 import static is.jacek.markowski.dictionary.keepest.main_activity.util.Preferences.TextToSpeech.ENGINE_DEFAULT;
 import static is.jacek.markowski.dictionary.keepest.main_activity.util.Preferences.TextToSpeech.ENGINE_ONE;
+import static is.jacek.markowski.dictionary.keepest.main_activity.util.Preferences.TextToSpeech.ENGINE_ONE_CODE;
 import static is.jacek.markowski.dictionary.keepest.main_activity.util.Preferences.TextToSpeech.ENGINE_TWO;
+import static is.jacek.markowski.dictionary.keepest.main_activity.util.Preferences.TextToSpeech.ENGINE_TWO_CODE;
+import static is.jacek.markowski.dictionary.keepest.main_activity.util.Preferences.TextToSpeech.GOOGLE_TRANSLATE_CODE;
 
 
 public class TtsFragment extends Fragment {
@@ -82,7 +86,6 @@ public class TtsFragment extends Fragment {
         Toolbar toolbarFragment = getActivity().findViewById(R.id.toolbar);
         final MainActivity activity = (MainActivity) getActivity();
         activity.setToolbar(toolbarFragment, getString(R.string.text_to_speech));
-        //check for logged user
     }
 
     @Override
@@ -105,15 +108,15 @@ public class TtsFragment extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 switch (position) {
                     case 1: {
-                        Preferences.TextToSpeech.write(getContext(), ENGINE_DEFAULT, getString(R.string.engine_one));
+                        Preferences.TextToSpeech.write(getContext(), ENGINE_DEFAULT, ENGINE_ONE_CODE);
                         break;
                     }
                     case 2: {
-                        Preferences.TextToSpeech.write(getContext(), ENGINE_DEFAULT, getString(R.string.engine_two));
+                        Preferences.TextToSpeech.write(getContext(), ENGINE_DEFAULT, ENGINE_TWO_CODE);
                         break;
                     }
                     default:
-                        Preferences.TextToSpeech.write(getContext(), ENGINE_DEFAULT, getString(R.string.google_translate));
+                        Preferences.TextToSpeech.write(getContext(), ENGINE_DEFAULT, GOOGLE_TRANSLATE_CODE);
                         break;
 
                 }
@@ -128,7 +131,7 @@ public class TtsFragment extends Fragment {
         addSettingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String engine = engineChooser.getSelectedItem().toString();
+                String engine = Long.toString(engineChooser.getSelectedItemId() + 1);
                 String lang = engineLocale.getSelectedItem().toString();
                 String ttsSetting = engine + "|" + lang;
                 if (!Preferences.TextToSpeech.isIdInSet(getContext(), ttsSetting)) {
@@ -152,11 +155,10 @@ public class TtsFragment extends Fragment {
         SpinnerChooserListener listener = new SpinnerChooserListener();
         engineChooser.setOnTouchListener(listener);
         engineChooser.setOnItemSelectedListener(listener);
+
         engineLocale = root.findViewById(R.id.spinner_lang);
-        Toolbar toolbarFragment = getActivity().findViewById(R.id.toolbar);
-        activity.setToolbar(toolbarFragment, getString(R.string.app_name));
+
         populateEngineSpinners();
-        populateLocalesSpinner(0);
         readValuesFromPreferences();
 
         return root;
@@ -167,16 +169,24 @@ public class TtsFragment extends Fragment {
         String engine_two = Preferences.TextToSpeech.read(getContext(), ENGINE_TWO);
         String engine_default = Preferences.TextToSpeech.read(getContext(), ENGINE_DEFAULT);
         if (engine_one.equals("")) {
-            Preferences.TextToSpeech.write(getContext(), ENGINE_ONE, engineSpinner1.getItemAtPosition(0).toString());
+            engine_one = activity.mTts_one.getDefaultEngine();
+            Preferences.TextToSpeech.write(getContext(), ENGINE_ONE, engine_one);
         }
         if (engine_two.equals("")) {
-            Preferences.TextToSpeech.write(getContext(), ENGINE_TWO, engineSpinner1.getItemAtPosition(0).toString());
+            engine_two = activity.mTts_one.getDefaultEngine();
+            Preferences.TextToSpeech.write(getContext(), ENGINE_TWO, engine_two);
         }
+
+        // populate locales
         setSpinText(engineSpinner1, engine_one);
         setSpinText(engineSpinner2, engine_two);
-        if (engine_default.equals(getContext().getString(R.string.engine_one))) {
+        engineChooser.setSelection(0);
+        populateLocalesSpinner(1);
+
+        // default engine chooser
+        if (engine_default.equals(ENGINE_ONE_CODE)) {
             defaultSpinner.setSelection(1);
-        } else if (engine_default.equals(getContext().getString(R.string.engine_two))) {
+        } else if (engine_default.equals(ENGINE_TWO_CODE)) {
             defaultSpinner.setSelection(2);
         } else {
             defaultSpinner.setSelection(0);
@@ -195,8 +205,7 @@ public class TtsFragment extends Fragment {
 
     public void populateEngineSpinners() {
         List<String> enginesArray = new ArrayList<>();
-        List<TextToSpeech.EngineInfo> engines = new TextToSpeech(activity, activity).getEngines();
-
+        List<TextToSpeech.EngineInfo> engines = activity.mTts_one.getEngines();
 
         for (TextToSpeech.EngineInfo engineInfo : engines) {
             enginesArray.add(engineInfo.name);
@@ -212,13 +221,13 @@ public class TtsFragment extends Fragment {
         engineSpinner2.setAdapter(adapterEngines);
     }
 
-    public void populateLocalesSpinner(int position) {
+    public void populateLocalesSpinner(int engineNumber) {
         ArrayList<String> localesArray = new ArrayList<>();
         for (Locale locale : Locale.getAvailableLocales()) {
             int res = TextToSpeech.LANG_NOT_SUPPORTED;
-            if (position == 0 && activity.mTts_one != null) {
+            if (engineNumber == 1) {
                 res = activity.mTts_one.isLanguageAvailable(locale);
-            } else if (position == 1 && activity.mTts_two != null) {
+            } else if (engineNumber == 2) {
                 res = activity.mTts_two.isLanguageAvailable(locale);
             }
             if (res == TextToSpeech.LANG_COUNTRY_AVAILABLE) {
@@ -245,7 +254,9 @@ public class TtsFragment extends Fragment {
         public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
             if (userSelect) {
                 // Your selection handling code here
-                populateLocalesSpinner(pos);
+                int engineNumber = pos + 1;
+                Preferences.TextToSpeech.write(activity, ENGINE_CHOOSER, Integer.toString(engineNumber));
+                populateLocalesSpinner(engineNumber);
                 userSelect = false;
             }
         }
@@ -263,6 +274,9 @@ public class TtsFragment extends Fragment {
         public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
             if (userSelect) {
                 String engine = engineSpinner1.getSelectedItem().toString();
+                if (activity.mTts_one != null) {
+                    activity.mTts_one.shutdown();
+                }
                 activity.mTts_one = new TextToSpeech(activity, activity, engine);
                 Preferences.TextToSpeech.write(getContext(), ENGINE_ONE, engine);
                 userSelect = false;
@@ -276,6 +290,9 @@ public class TtsFragment extends Fragment {
         public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
             if (userSelect) {
                 String engine = engineSpinner2.getSelectedItem().toString();
+                if (activity.mTts_two != null) {
+                    activity.mTts_two.shutdown();
+                }
                 activity.mTts_two = new TextToSpeech(activity, activity, engine);
                 Preferences.TextToSpeech.write(getContext(), ENGINE_TWO, engine);
                 userSelect = false;

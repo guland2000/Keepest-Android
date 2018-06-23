@@ -64,6 +64,8 @@ import static is.jacek.markowski.dictionary.keepest.main_activity.database.Contr
 import static is.jacek.markowski.dictionary.keepest.main_activity.database.Contract.Word.Entry.COLUMN_DICTIONARY_ID;
 import static is.jacek.markowski.dictionary.keepest.main_activity.database.Contract.Word.Entry.COLUMN_FAVOURITE;
 import static is.jacek.markowski.dictionary.keepest.main_activity.database.Contract.Word.Entry.COLUMN_IMAGE;
+import static is.jacek.markowski.dictionary.keepest.main_activity.database.Contract.Word.Entry.COLUMN_LEVEL;
+import static is.jacek.markowski.dictionary.keepest.main_activity.database.Contract.Word.Entry.COLUMN_NEXT_REVIEW;
 import static is.jacek.markowski.dictionary.keepest.main_activity.database.Contract.Word.Entry.COLUMN_NOTES;
 import static is.jacek.markowski.dictionary.keepest.main_activity.database.Contract.Word.Entry.COLUMN_TRANSLATION;
 import static is.jacek.markowski.dictionary.keepest.main_activity.database.Contract.Word.Entry.COLUMN_WORD;
@@ -94,6 +96,8 @@ public class ImportExport {
     static final String STAR_KEY = "fav";
     static final String NOTES_KEY = "notes";
     static final String IMAGE_KEY = "image";
+    static final String LEVEL_KEY = "level";
+    static final String NEXT_REVIEW_KEY = "next_review";
     public static int STORAGE_REQUEST_CODE = 0;
     private static File dir;
 
@@ -251,6 +255,8 @@ public class ImportExport {
                         String translation = mCursorWords.getString(mCursorWords.getColumnIndex(COLUMN_TRANSLATION));
                         String notes = mCursorWords.getString(mCursorWords.getColumnIndex(COLUMN_NOTES));
                         String image = mCursorWords.getString(mCursorWords.getColumnIndex(COLUMN_IMAGE));
+                        int level = mCursorWords.getInt(mCursorWords.getColumnIndex(COLUMN_LEVEL));
+                        int nextReview = mCursorWords.getInt(mCursorWords.getColumnIndex(COLUMN_NEXT_REVIEW));
                         int isFavourite = mCursorWords.getInt(mCursorWords.getColumnIndex(COLUMN_FAVOURITE));
                         if (mFormat.equals(FILE_KEEP)) {
                             JSONObject wordObj = new JSONObject();
@@ -260,6 +266,9 @@ public class ImportExport {
                             wordObj.put(NOTES_KEY, notes);
                             wordObj.put(TAGS_WORD_KEY, wordTags);
                             wordObj.put(IMAGE_KEY, image);
+                            // learning level
+                            wordObj.put(LEVEL_KEY, level);
+                            wordObj.put(NEXT_REVIEW_KEY, nextReview);
                             words.put(wordObj);
                         } else if (mFormat.equals(FILE_CSV)) {
                             csvWriter.writeNext(new String[]{word, translation, wordTags, notes, image});
@@ -415,8 +424,10 @@ public class ImportExport {
                             String trans = item.getString(TRANS_KEY);
                             String notes = item.getString(NOTES_KEY);
                             String image = item.optString(IMAGE_KEY);
-                            String wordTags = item.getString(TAGS_WORD_KEY);
                             int star = item.getInt(STAR_KEY);
+                            int level = item.optInt(LEVEL_KEY);
+                            int nextReview = item.optInt(NEXT_REVIEW_KEY);
+                            String wordTags = item.getString(TAGS_WORD_KEY);
                             values = new ContentValues();
                             values.put(COLUMN_WORD, word);
                             values.put(COLUMN_TRANSLATION, trans);
@@ -424,6 +435,12 @@ public class ImportExport {
                             values.put(COLUMN_DICTIONARY_ID, idObject.id);
                             values.put(COLUMN_NOTES, notes);
                             values.put(COLUMN_IMAGE, image);
+                            //star
+                            values.put(COLUMN_FAVOURITE, star);
+                            // learning level
+                            values.put(COLUMN_LEVEL, level);
+                            values.put(COLUMN_NEXT_REVIEW, nextReview);
+
                             values.put(TAGS_WORD_KEY, wordTags);
                             wordValues.add(values);
                         }

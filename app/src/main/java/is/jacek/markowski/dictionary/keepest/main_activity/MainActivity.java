@@ -676,7 +676,7 @@ public class MainActivity extends AppCompatActivity
             try {
                 engineNumber = Integer.valueOf(Preferences.TextToSpeech.read(this, ENGINE_CHOOSER));
             } catch (NumberFormatException e) {
-                engineNumber = 0;
+                engineNumber = 1;
             }
             ttsFragment.populateLocalesSpinner(engineNumber);
         }

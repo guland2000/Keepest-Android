@@ -22,12 +22,12 @@
 
 <resources>
     <string-array name="tts_engines" translatable="false">
-        <item>Engine: 1</item>
-        <item>Engine: 2</item>
+        <item>@string/engine_1</item>
+        <item>@string/engine_2</item>
     </string-array>
     <string-array name="tts_engines_default" translatable="false">
         <item>"Google Translate"</item>
-        <item>"Engine: 1"</item>
-        <item>"Engine: 2"</item>
+        <item>@string/engine_1</item>
+        <item>@string/engine_2</item>
     </string-array>
 </resources>

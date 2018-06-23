@@ -208,8 +208,8 @@ public class WordProvider extends ContentProvider {
                 Set<String> tagIds = WordManager.TagChooser.getSetOfTagId(getContext());
                 Set<String> dictIds = DictionaryManager.DictChooser.getSetOfId(getContext());
 
-                String selectWords = buildSqlQuery(dictIds, TABLE_WORD, COLUMN_DICTIONARY_ID);
-                String selectTags = buildSqlQuery(tagIds, TABLE_WORD_TAG_RELATIONS, TAG_ID);
+                String selectWords = buildSqlQuery(dictIds, TABLE_WORD, COLUMN_DICTIONARY_ID, true);
+                String selectTags = buildSqlQuery(tagIds, TABLE_WORD_TAG_RELATIONS, TAG_ID, false);
 
                 String raw_sql;
                 if (tagIds.size() == 0) {
@@ -227,7 +227,7 @@ public class WordProvider extends ContentProvider {
         return cursor;
     }
 
-    private String buildSqlQuery(Set<String> setIds, String table, String column) {
+    private String buildSqlQuery(Set<String> setIds, String table, String column, boolean orderByLevel) {
         String selectFrom = "SELECT * FROM " + table + " ";
         if (setIds.size() == 0) {
             return selectFrom;
@@ -244,7 +244,10 @@ public class WordProvider extends ContentProvider {
             }
             where = where + args;
         }
-        String order = " ORDER BY " + COLUMN_NEXT_REVIEW + ", " + COLUMN_LEVEL;
+        String order = "";
+        if (orderByLevel) {
+            order = " ORDER BY " + COLUMN_NEXT_REVIEW + ", " + COLUMN_LEVEL;
+        }
         return selectFrom + where + order;
     }
 

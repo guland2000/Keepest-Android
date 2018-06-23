@@ -362,4 +362,5 @@
     <string name="engine_1">Silnik 1</string>
     <string name="engine_2">Silnik 2</string>
     <string name="text_to_speech">TextToSpeech</string>
+    <string name="list_already_exists">Lista już istnieje!</string>
 </resources>

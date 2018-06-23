@@ -28,6 +28,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
@@ -55,12 +56,14 @@ import java.util.List;
 import is.jacek.markowski.dictionary.keepest.R;
 import is.jacek.markowski.dictionary.keepest.main_activity.MainActivity;
 import is.jacek.markowski.dictionary.keepest.main_activity.database.Contract;
+import is.jacek.markowski.dictionary.keepest.main_activity.database.DatabaseHelper;
 
 import static android.os.Environment.DIRECTORY_DOWNLOADS;
 import static android.provider.BaseColumns._ID;
 import static is.jacek.markowski.dictionary.keepest.main_activity.database.Contract.Dictionary.Entry.COLUMN_DICTIONARY_FROM;
 import static is.jacek.markowski.dictionary.keepest.main_activity.database.Contract.Dictionary.Entry.COLUMN_DICTIONARY_NAME;
 import static is.jacek.markowski.dictionary.keepest.main_activity.database.Contract.Dictionary.Entry.COLUMN_DICTIONARY_TO;
+import static is.jacek.markowski.dictionary.keepest.main_activity.database.Contract.Dictionary.Entry.TABLE_DICTIONARY;
 import static is.jacek.markowski.dictionary.keepest.main_activity.database.Contract.Word.Entry.COLUMN_DICTIONARY_ID;
 import static is.jacek.markowski.dictionary.keepest.main_activity.database.Contract.Word.Entry.COLUMN_FAVOURITE;
 import static is.jacek.markowski.dictionary.keepest.main_activity.database.Contract.Word.Entry.COLUMN_IMAGE;
@@ -365,6 +368,7 @@ public class ImportExport {
 
             String state = Environment.getExternalStorageState();
             if (Environment.MEDIA_MOUNTED.equals(state)) {
+                List<DictObject> dictsList = new ArrayList<>();
                 try {
                     if (mFilename.endsWith(".keep")) {
                         FileInputStream f = new FileInputStream(fileUnzipped);
@@ -384,7 +388,7 @@ public class ImportExport {
                     JSONArray dicts = importFile.getJSONArray(DICT_ARRAY_KEY);
                     //List<ContentValues> dictValues = new ArrayList<>();
                     List<ContentValues> wordValues = new ArrayList<>();
-                    DictId idObject = new DictId();
+                    DictObject idObject = new DictObject();
 
                     dict_loop:
                     for (int i = 0; i < dicts.length(); i++) {
@@ -393,6 +397,11 @@ public class ImportExport {
                         String to = dict.getString(TO_KEY);
                         String dictName = dict.getString(DICT_KEY);
                         String dictTags = dict.getString(TAGS_DICT_KEY);
+                        DictObject dictObj = new DictObject();
+                        dictObj.name = dictName;
+                        dictObj.from = from;
+                        dictObj.to = to;
+                        dictsList.add(dictObj);
                         JSONArray words = dict.getJSONArray(WORD_ARRAY_KEY);
                         // create dictionary
                         ContentValues values = new ContentValues();
@@ -452,14 +461,39 @@ public class ImportExport {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+                // remove duplicated dictionaries:
+                for (DictObject item : dictsList) {
+                    removeDuplicatedDictionaries(item);
+                }
+
+
             }
+
             return null;
+        }
+
+        private void removeDuplicatedDictionaries(DictObject item) {
+            DatabaseHelper dbHelper = new DatabaseHelper(mActivity);
+            SQLiteDatabase db = dbHelper.getReadableDatabase();
+            String selection = COLUMN_DICTIONARY_NAME + "=? AND " + COLUMN_DICTIONARY_FROM + "=? AND " + COLUMN_DICTIONARY_TO + "=?";
+            String[] selectionArgs = new String[]{item.name, item.from, item.to};
+            Cursor cursor = db.query(TABLE_DICTIONARY, new String[]{_ID}, selection, selectionArgs, null, null, _ID + " ASC");
+            cursor.moveToFirst();
+            for (int i = 0; i < cursor.getCount() - 1; i++) {
+                cursor.move(i);
+                String dId = Integer.toString(cursor.getInt(cursor.getColumnIndex(_ID)));
+                mContentResolver.delete(UriHelper.Dictionary.buildDictUri(), _ID + "=?", new String[]{dId});
+            }
+            cursor.close();
         }
     }
 
-    private static class DictId {
+    private static class DictObject {
         int id;
         boolean is_valid;
+        String name;
+        String from;
+        String to;
     }
 
 
@@ -471,7 +505,7 @@ public class ImportExport {
         @Override
         protected void onInsertComplete(int token, Object cookie, Uri uri) {
             super.onInsertComplete(token, cookie, uri);
-            DictId idObject = (DictId) cookie;
+            DictObject idObject = (DictObject) cookie;
             idObject.id = Integer.valueOf(uri.getLastPathSegment());
             idObject.is_valid = true;
         }

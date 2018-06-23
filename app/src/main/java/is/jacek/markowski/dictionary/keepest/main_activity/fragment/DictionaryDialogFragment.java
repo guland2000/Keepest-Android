@@ -27,6 +27,8 @@ import android.app.Dialog;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.DialogInterface;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -44,10 +46,16 @@ import java.util.Locale;
 import is.jacek.markowski.dictionary.keepest.R;
 import is.jacek.markowski.dictionary.keepest.main_activity.MainActivity;
 import is.jacek.markowski.dictionary.keepest.main_activity.database.Contract;
+import is.jacek.markowski.dictionary.keepest.main_activity.database.DatabaseHelper;
 import is.jacek.markowski.dictionary.keepest.main_activity.util.DictionaryManager;
+import is.jacek.markowski.dictionary.keepest.main_activity.util.Message;
 import is.jacek.markowski.dictionary.keepest.main_activity.util.Text;
 
 import static android.provider.BaseColumns._ID;
+import static is.jacek.markowski.dictionary.keepest.main_activity.database.Contract.Dictionary.Entry.COLUMN_DICTIONARY_FROM;
+import static is.jacek.markowski.dictionary.keepest.main_activity.database.Contract.Dictionary.Entry.COLUMN_DICTIONARY_NAME;
+import static is.jacek.markowski.dictionary.keepest.main_activity.database.Contract.Dictionary.Entry.COLUMN_DICTIONARY_TO;
+import static is.jacek.markowski.dictionary.keepest.main_activity.database.Contract.Dictionary.Entry.TABLE_DICTIONARY;
 
 
 public class DictionaryDialogFragment extends DialogFragment {
@@ -143,13 +151,17 @@ public class DictionaryDialogFragment extends DialogFragment {
                             if (Text.validate(getContext(), name)) {
                                 ContentResolver resolver = getContext().getContentResolver();
                                 ContentValues values = prepareContentValues();
-                                Uri dictIdUri = resolver.insert(uri, values);
-                                long dictId = Long.valueOf(dictIdUri.getLastPathSegment());
-                                //DictionaryManager.openFirstCreatedDictionary(activity);
-                                DictionaryManager.saveDictData(activity, dictId);
-                                DictionaryManager.setDictionaryAsOpened(getContext(), dictId);
-                                activity.commitWordsFragment();
-                                dialog.dismiss();
+                                if (values != null) {
+                                    Uri dictIdUri = resolver.insert(uri, values);
+                                    long dictId = Long.valueOf(dictIdUri.getLastPathSegment());
+                                    //DictionaryManager.openFirstCreatedDictionary(activity);
+                                    DictionaryManager.saveDictData(activity, dictId);
+                                    DictionaryManager.setDictionaryAsOpened(getContext(), dictId);
+                                    activity.commitWordsFragment();
+                                    dialog.dismiss();
+                                } else {
+                                    Message.showToast(DictionaryDialogFragment.this.getContext(), getString(R.string.list_already_exists));
+                                }
                             }
                         }
                     });
@@ -167,12 +179,16 @@ public class DictionaryDialogFragment extends DialogFragment {
                             if (Text.validate(getContext(), name)) {
                                 ContentResolver resolver = getContext().getContentResolver();
                                 ContentValues values = prepareContentValues();
-                                resolver.update(uri, values, _ID + "=?", new String[]{Long.toString(dictId)});
-                                dialog.dismiss();
-                                try {
-                                    activity.displayDictionaryDetails();
-                                } catch (Exception e) {
-                                    e.printStackTrace();
+                                if (values != null) {
+                                    resolver.update(uri, values, _ID + "=?", new String[]{Long.toString(dictId)});
+                                    dialog.dismiss();
+                                    try {
+                                        activity.displayDictionaryDetails();
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                } else {
+                                    Message.showToast(DictionaryDialogFragment.this.getContext(), getString(R.string.list_already_exists));
                                 }
                             }
                         }
@@ -183,15 +199,32 @@ public class DictionaryDialogFragment extends DialogFragment {
         return d;
     }
 
+    private boolean doesDictionaryExists(String name, String from, String to) {
+        DatabaseHelper dbHelper = new DatabaseHelper(getContext());
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        String selection = COLUMN_DICTIONARY_NAME + "=? AND " + COLUMN_DICTIONARY_FROM + "=? AND " + COLUMN_DICTIONARY_TO + "=?";
+        String[] selectionArgs = new String[]{name, from, to};
+        Cursor cursor = db.query(TABLE_DICTIONARY, new String[]{_ID}, selection, selectionArgs, null, null, _ID + " ASC");
+        cursor.moveToFirst();
+        int count = cursor.getCount();
+        cursor.close();
+        return count > 0;
+    }
+
     private ContentValues prepareContentValues() {
         String dict = Text.shrinkText(mDictionaryEditText.getText().toString());
         int speakFromId = (int) mSpinnerFrom.getSelectedItemId();
         int speakToId = (int) mSpinnerTo.getSelectedItemId();
         List<String> langValues = Arrays.asList(getResources().getStringArray(R.array.selectValues));
         ContentValues values = new ContentValues();
-        values.put(Contract.Dictionary.Entry.COLUMN_DICTIONARY_NAME, dict);
-        values.put(Contract.Dictionary.Entry.COLUMN_DICTIONARY_FROM, langValues.get(speakFromId));
-        values.put(Contract.Dictionary.Entry.COLUMN_DICTIONARY_TO, langValues.get(speakToId));
+        String from = langValues.get(speakFromId);
+        String to = langValues.get(speakToId);
+        values.put(COLUMN_DICTIONARY_NAME, dict);
+        values.put(COLUMN_DICTIONARY_FROM, from);
+        values.put(COLUMN_DICTIONARY_TO, to);
+        if (doesDictionaryExists(dict, from, to)) {
+            return null;
+        }
         return values;
     }
 }

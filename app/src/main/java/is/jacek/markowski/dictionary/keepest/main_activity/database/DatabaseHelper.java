@@ -62,6 +62,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = "keepest.db";
     private Context mContext;
 
+    public void removeOrphans() {
+        getWritableDatabase().execSQL("DELETE FROM " + TABLE_WORD + " WHERE _id IN" +
+                " (SELECT " + TABLE_WORD + "._id FROM " + TABLE_WORD
+                + " LEFT JOIN " + TABLE_DICTIONARY
+                + " ON " + TABLE_WORD + ".dictionary=" + TABLE_DICTIONARY + "._id WHERE "
+                + TABLE_DICTIONARY + "._id IS NULL)");
+        getWritableDatabase().execSQL("DELETE FROM " + TABLE_WORD_TAG_RELATIONS + " WHERE _id IN" +
+                " (SELECT " + TABLE_WORD_TAG_RELATIONS + "._id FROM " +
+                TABLE_WORD_TAG_RELATIONS + " LEFT JOIN " + TABLE_WORD
+                + " ON " + TABLE_WORD_TAG_RELATIONS + ".word_id=" + TABLE_WORD + "._id WHERE "
+                + TABLE_WORD + "._id IS NULL)");
+    }
+
     public DatabaseHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
         mContext = context;

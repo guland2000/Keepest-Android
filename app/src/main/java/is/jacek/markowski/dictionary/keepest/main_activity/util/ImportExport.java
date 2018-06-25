@@ -465,8 +465,8 @@ public class ImportExport {
                 for (DictObject item : dictsList) {
                     removeDuplicatedDictionaries(item);
                 }
-
-
+                // remove orphaned words
+                new DatabaseHelper(mActivity).removeOrphans();
             }
 
             return null;

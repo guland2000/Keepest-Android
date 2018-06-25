@@ -38,6 +38,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import is.jacek.markowski.dictionary.keepest.main_activity.database.DatabaseHelper;
+
 import static android.provider.BaseColumns._ID;
 import static is.jacek.markowski.dictionary.keepest.main_activity.database.Contract.Word.Entry.COLUMN_DICTIONARY_ID;
 import static is.jacek.markowski.dictionary.keepest.main_activity.util.ImportExport.ExportJsonTask.TYPE_CLOUD;
@@ -117,6 +119,7 @@ public class Files {
 
     public static void prepareJsonAll(Activity activity, String filename, int type) {
         ContentResolver resolver = activity.getContentResolver();
+        new DatabaseHelper(activity).removeOrphans();
         Cursor wordsCursor = resolver.query(buildWordWithSelectionUri(), null, null, null, COLUMN_DICTIONARY_ID + " ASC");
         Cursor dictCursor = resolver.query(UriHelper.Dictionary.buildDictUri(), null, null, null, _ID + " ASC");
         ImportExport.exportToJson((FragmentActivity) activity, wordsCursor, dictCursor, filename, type, FILE_KEEP);
@@ -124,6 +127,7 @@ public class Files {
 
     public static void prepareJsonOne(Activity activity, int dict_id, String filename, int type, String format) {
         ContentResolver resolver = activity.getContentResolver();
+        new DatabaseHelper(activity).removeOrphans();
         String whereDict = _ID + "=?";
         String whereWord = COLUMN_DICTIONARY_ID + "=?";
         String[] whereArgs = new String[]{Integer.toString(dict_id)};

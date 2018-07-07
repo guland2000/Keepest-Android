@@ -55,9 +55,11 @@ import java.util.List;
 import is.jacek.markowski.dictionary.keepest.R;
 import is.jacek.markowski.dictionary.keepest.main_activity.MainActivity;
 import is.jacek.markowski.dictionary.keepest.main_activity.database.DatabaseHelper;
+import is.jacek.markowski.dictionary.keepest.main_activity.util.Connection;
 import is.jacek.markowski.dictionary.keepest.main_activity.util.DictionaryManager;
 import is.jacek.markowski.dictionary.keepest.main_activity.util.Language;
 import is.jacek.markowski.dictionary.keepest.main_activity.util.Text;
+import is.jacek.markowski.dictionary.keepest.main_activity.util.Tts;
 import is.jacek.markowski.dictionary.keepest.main_activity.util.TutorialManager;
 import is.jacek.markowski.dictionary.keepest.main_activity.util.UriHelper;
 import is.jacek.markowski.dictionary.keepest.main_activity.util.WordManager;
@@ -86,6 +88,8 @@ public class WordDialogFragment extends DialogFragment {
     public EditText mEditTextWord;
     private EditText mEditTextTranslation;
     private ImageButton mImageButtonTrans;
+    private ImageButton mPlayWord;
+    private ImageButton mPlayTranslation;
 
     public static WordDialogFragment newInstance(boolean isDialog) {
         Bundle args = new Bundle();
@@ -162,6 +166,44 @@ public class WordDialogFragment extends DialogFragment {
                         btTrans,
                         pBar,
                         (MainActivity) getActivity());
+            }
+        });
+
+        // play tts
+        mPlayWord = view.findViewById(R.id.ibt_play_add_word);
+        mPlayWord.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Tts ttsManager = new Tts(getActivity());
+                if (!ttsManager.isPlaying()) {
+                    boolean isConnected = Connection.isConnected(getContext());
+                    DictionaryManager.Dictionary dict = DictionaryManager.getDictData(getContext());
+                    ttsManager.onlineTts(mEditTextWord.getText().toString(), dict.speak_from, "", dict.speak_to, isConnected);
+
+                    Flubber.with()
+                            .animation(Flubber.AnimationPreset.ZOOM_IN) // Slide up animation
+                            .duration(500)
+                            .createFor(mPlayWord)
+                            .start();
+                }
+            }
+        });
+        mPlayTranslation = view.findViewById(R.id.ibt_play_add_translation);
+        mPlayTranslation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Tts ttsManager = new Tts(getActivity());
+                if (!ttsManager.isPlaying()) {
+                    boolean isConnected = Connection.isConnected(getContext());
+                    DictionaryManager.Dictionary dict = DictionaryManager.getDictData(getContext());
+                    ttsManager.onlineTts("", dict.speak_from, mEditTextTranslation.getText().toString(), dict.speak_to, isConnected);
+
+                    Flubber.with()
+                            .animation(Flubber.AnimationPreset.ZOOM_IN) // Slide up animation
+                            .duration(500)
+                            .createFor(mPlayTranslation)
+                            .start();
+                }
             }
         });
 

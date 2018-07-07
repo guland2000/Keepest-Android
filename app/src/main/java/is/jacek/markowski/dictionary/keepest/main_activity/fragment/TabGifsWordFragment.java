@@ -171,9 +171,11 @@ public class TabGifsWordFragment extends Fragment implements WordAdvancedTabsAda
 
         } else {
             WordManager.WordEdit.saveTextItem(getContext(), IMAGE_KEY, entry.imageUrl);
-            Giphy.setHorizontalLogo("giphy", mLogo);
         }
 
+        if (draftImage.length() == 0 && entry.imageUrl.length() == 0) {
+            Giphy.setHorizontalLogo("giphy", mLogo);
+        }
         return root;
     }
 

@@ -236,6 +236,7 @@ public class LearningModeFlashcardsFragment extends Fragment {
         if (q != null && Preferences.isShowGif(mContext)) {
             WordManager.Word entry = WordManager.getWordById(mContext, q.getIdInDatabase());
             Giphy.displayGif(getActivity(), entry.imageUrl, mGifView);
+            Giphy.setVerticalLogo(entry.imageUrl, mGiphyLogo);
         }
         // play question on start
         if (q != null) {

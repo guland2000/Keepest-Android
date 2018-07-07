@@ -42,15 +42,40 @@ import is.jacek.markowski.dictionary.keepest.main_activity.adapter.GifChooserAda
  */
 
 public class Giphy {
+
+    public static void setHorizontalLogo(String url, ImageView view) {
+        if (url.contains("giphy")) {
+            view.setImageResource(R.drawable.static_logo);
+        } else {
+            view.setImageResource(R.drawable.static_logo_google);
+        }
+    }
+
+    public static void setVerticalLogo(String url, ImageView view) {
+        if (url.contains("giphy")) {
+            view.setImageResource(R.drawable.static_logo_2);
+        } else {
+            view.setImageResource(R.drawable.static_logo_google_2);
+        }
+    }
     public static void displayGif(FragmentActivity activity, String source, ImageView destination) {
         if (destination != null && source != null) {
-            GlideApp.with(activity)
-                    .asGif()
-                    .load(source)
-                    .placeholder(R.drawable.ic_timer)
-                    .error(R.drawable.ic_cancel)
-                    .centerCrop()
-                    .into(destination);
+            if (source.contains("giphy")) {
+                GlideApp.with(activity)
+                        .asGif()
+                        .load(source)
+                        .placeholder(R.drawable.ic_timer)
+                        .error(R.drawable.ic_cancel)
+                        .centerCrop()
+                        .into(destination);
+            } else {
+                GlideApp.with(activity)
+                        .load(source)
+                        .placeholder(R.drawable.ic_timer)
+                        .error(R.drawable.ic_cancel)
+                        .centerInside()
+                        .into(destination);
+            }
         }
     }
 

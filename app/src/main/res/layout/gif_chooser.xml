@@ -27,8 +27,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageButton
+        android:id="@+id/ibt_google_search"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/transparent"
+        android:scaleType="fitXY"
+        android:tint="@color/buttonRightAnswerColor"
+        app:layout_constraintBottom_toBottomOf="@+id/img_logo"
+        app:layout_constraintEnd_toStartOf="@+id/img_gif"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/img_gif"
+        app:srcCompat="@drawable/ic_google_search" />
+
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/img_logo"
         android:layout_width="wrap_content"
         android:layout_height="21dp"
         android:layout_marginBottom="0dp"
@@ -104,7 +121,7 @@
         android:layout_marginTop="0dp"
         android:clipToPadding="false"
         android:paddingBottom="80dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView5"
+        app:layout_constraintBottom_toTopOf="@+id/img_logo"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

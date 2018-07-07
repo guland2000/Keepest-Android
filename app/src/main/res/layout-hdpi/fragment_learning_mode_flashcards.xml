@@ -66,14 +66,14 @@
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintLayout"
-        android:layout_width="168dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:paddingRight="8dp"
-        app:layout_constraintEnd_toStartOf="@+id/bt_test_stop"
-        app:layout_constraintStart_toEndOf="@+id/bt_test_restart"
+        app:layout_constraintEnd_toEndOf="@+id/bt_test_stop"
+        app:layout_constraintStart_toStartOf="@+id/bt_test_restart"
         app:layout_constraintTop_toBottomOf="@+id/progress_test_questions">
 
         <TextView
@@ -165,7 +165,6 @@
         android:id="@+id/tv_flashcards_answer"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -173,7 +172,7 @@
         android:maxLines="2"
         app:autoSizeMaxTextSize="24sp"
         app:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toTopOf="@+id/btn_flashcards_check"
+        app:layout_constraintBottom_toTopOf="@+id/tv_flashcards_notes"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_flashcards_question"
@@ -217,6 +216,34 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btn_flashcards_check" />
+
+    <TextView
+        android:id="@+id/tv_flashcards_notes"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:textAlignment="center"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_flashcards_tags"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_flashcards_tags"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:textAlignment="center"
+        android:textColor="@color/editButton"
+        android:textSize="12sp"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toTopOf="@+id/btn_flashcards_check"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
 

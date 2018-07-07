@@ -181,7 +181,7 @@
         app:srcCompat="@drawable/star_off"/>
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/img_logo"
         android:layout_width="21dp"
         android:layout_height="0dp"
         android:layout_marginBottom="0dp"
@@ -220,7 +220,7 @@
         android:backgroundTint="@android:color/transparent"
         android:tint="@color/editButton"
         app:layout_constraintBottom_toBottomOf="@+id/img_summary_gif_view"
-        app:layout_constraintEnd_toStartOf="@+id/imageView"
+        app:layout_constraintEnd_toStartOf="@+id/img_logo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/img_summary_gif_view"
         app:srcCompat="@drawable/ic_left"/>

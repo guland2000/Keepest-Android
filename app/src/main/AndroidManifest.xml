@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright 2018 Jacek Markowski
   ~
   ~ Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
@@ -19,17 +18,16 @@
   ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
   ~ THE SOFTWARE.
   ~
-  -->
-
+-->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="is.jacek.markowski.dictionary.keepest">
+    package="is.jacek.markowski.dictionary.keepest">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.VIBRATE"/>`
-
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    `
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -39,35 +37,34 @@
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="adjustResize">
         <activity
-            android:name="is.jacek.markowski.dictionary.keepest.main_activity.MainActivity"
+            android:name=".main_activity.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
         <provider
-            android:name="is.jacek.markowski.dictionary.keepest.main_activity.provider.WordProvider"
+            android:name=".main_activity.provider.WordProvider"
             android:authorities="providerWord"
             android:enabled="true"
-            android:exported="false">
-        </provider>
+            android:exported="false"></provider>
         <provider
-            android:name="is.jacek.markowski.dictionary.keepest.main_activity.provider.DictionaryProvider"
+            android:name=".main_activity.provider.DictionaryProvider"
             android:authorities="providerDict"
             android:enabled="true"
-            android:exported="false">
-        </provider>
+            android:exported="false"></provider>
         <provider
-            android:name="is.jacek.markowski.dictionary.keepest.main_activity.provider.TagsProvider"
+            android:name=".main_activity.provider.TagsProvider"
             android:authorities="providerTags"
             android:enabled="true"
-            android:exported="false">
-        </provider>
+            android:exported="false"></provider>
+
+        <activity android:name=".GoogleSearchActivity"></activity>
     </application>
 
 </manifest>

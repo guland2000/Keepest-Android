@@ -66,6 +66,8 @@ public class LearningModeFlashcardsFragment extends Fragment {
     private ImageView mGiphyLogo;
     private Button mBtCheck;
     private TextView mAnswer;
+    private TextView mNotes;
+    private TextView mTags;
     private Context mContext;
     private ImageButton mIbtCorrect;
     private ImageButton mIbtWrong;
@@ -121,6 +123,8 @@ public class LearningModeFlashcardsFragment extends Fragment {
         mIbtCorrect = getView().findViewById(R.id.ibtn_flashcards_correct);
         mIbtWrong = getView().findViewById(R.id.ibtn_flashcards_wrong);
         mAnswer = getView().findViewById(R.id.tv_flashcards_answer);
+        mNotes = getView().findViewById(R.id.tv_flashcards_notes);
+        mTags = getView().findViewById(R.id.tv_flashcards_tags);
         mProgressBar = getView().findViewById(R.id.progress_test_questions);
         mCorrectTvCounter = getView().findViewById(R.id.tv_test_correct_counter);
         mWrongTvCounter = getView().findViewById(R.id.tv_test_wrong_counter);
@@ -130,6 +134,8 @@ public class LearningModeFlashcardsFragment extends Fragment {
         mBtCheck.setVisibility(View.VISIBLE);
         mIbtWrong.setVisibility(View.INVISIBLE);
         mAnswer.setText("");
+        mNotes.setText("");
+        mTags.setText("");
 
         if (!Preferences.isShowGif(getContext())) {
             mGifView.setVisibility(View.INVISIBLE);
@@ -236,6 +242,7 @@ public class LearningModeFlashcardsFragment extends Fragment {
         if (q != null && Preferences.isShowGif(mContext)) {
             WordManager.Word entry = WordManager.getWordById(mContext, q.getIdInDatabase());
             Giphy.displayGif(getActivity(), entry.imageUrl, mGifView);
+            Giphy.setVerticalLogo(entry.imageUrl, mGiphyLogo);
         }
         // play question on start
         if (q != null) {
@@ -280,6 +287,14 @@ public class LearningModeFlashcardsFragment extends Fragment {
 
     private void checkAnswer() {
         mAnswer.setText(mSession.getCurrentQuestion().getCorrectAnswer());
+        WordManager.Word wordObject = WordManager.getWordById(getActivity(), mSession.getCurrentWordId());
+        mNotes.setText(wordObject.notes);
+        String tags = "";
+        for (String tag : wordObject.tags.split(" ")) {
+            tags += " #" + tag;
+        }
+        mTags.setText(tags);
+
         // play text to speech
         Tts ttsManager = new Tts(getActivity());
         if (!ttsManager.isPlaying()) {

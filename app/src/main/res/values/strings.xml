@@ -377,6 +377,7 @@
     <string name="engine_2">Engine 2</string>
     <string name="text_to_speech">TextToSpeech</string>
     <string name="list_already_exists">List already exists!</string>
+    <string name="webview_info">Long press to choose an image.</string>
 
 
 </resources>

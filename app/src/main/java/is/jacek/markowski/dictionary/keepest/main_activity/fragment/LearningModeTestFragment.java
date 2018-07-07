@@ -239,6 +239,7 @@ public class LearningModeTestFragment extends Fragment {
         if (q != null && Preferences.isShowGif(getContext())) {
             WordManager.Word entry = WordManager.getWordById(getContext(), q.getIdInDatabase());
             Giphy.displayGif(getActivity(), entry.imageUrl, mGifView);
+            Giphy.setVerticalLogo(entry.imageUrl, mGiphyLogo);
         }
 
         // play question on start

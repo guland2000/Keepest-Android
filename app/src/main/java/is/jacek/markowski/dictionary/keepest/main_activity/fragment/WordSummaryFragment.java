@@ -218,6 +218,8 @@ public class WordSummaryFragment extends DialogFragment {
         //display gif
         WordManager.Word entry = WordManager.getWordById(getContext(), wordId);
         Giphy.displayGif(getActivity(), entry.imageUrl, gifView);
+        ImageView logo = getView().findViewById(R.id.img_logo);
+        Giphy.setVerticalLogo(entry.imageUrl, logo);
         setStarStatus();
     }
 

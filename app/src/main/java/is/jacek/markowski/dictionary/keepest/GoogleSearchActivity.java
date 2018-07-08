@@ -8,6 +8,7 @@ import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
@@ -33,6 +34,7 @@ public class GoogleSearchActivity extends AppCompatActivity {
         try {
             webView.loadUrl("https://www.google.com/search?q=" + URLEncoder.encode(message, StandardCharsets.UTF_8.name()));
         } catch (Exception e) {
+
             webView.loadUrl("https://www.google.com/search?q=");
             e.printStackTrace();
         }

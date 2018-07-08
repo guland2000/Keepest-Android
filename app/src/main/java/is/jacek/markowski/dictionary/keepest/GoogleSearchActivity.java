@@ -8,7 +8,6 @@ import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
@@ -32,8 +31,8 @@ public class GoogleSearchActivity extends AppCompatActivity {
         webView.setWebViewClient(new WebViewClient());
         webView.getSettings().setJavaScriptEnabled(false);
         try {
-            webView.loadUrl("https://www.google.com/search?q=" + URLEncoder.encode(message, StandardCharsets.UTF_8.toString()));
-        } catch (UnsupportedEncodingException e) {
+            webView.loadUrl("https://www.google.com/search?q=" + URLEncoder.encode(message, StandardCharsets.UTF_8.name()));
+        } catch (Exception e) {
             webView.loadUrl("https://www.google.com/search?q=");
             e.printStackTrace();
         }

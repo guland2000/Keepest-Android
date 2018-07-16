@@ -23,119 +23,119 @@
 <resources>
     <string name="app_name" translatable="false">Keepest</string>
 
-    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
-    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
+    <string name="navigation_drawer_open" translatable="false">Открыть боковое меню</string>
+    <string name="navigation_drawer_close" translatable="false">Закрыть боковое меню</string>
 
-    <string name="nav_settings">Settings</string>
-    <string name="nav_default_dictionary">default list</string>
+    <string name="nav_settings">Настройки</string>
+    <string name="nav_default_dictionary">список по умолчанию</string>
 
-    <string name="action_find">Sort</string>
-    <string name="nav_manage_dictionaries">Lists</string>
-    <string name="nav_words">Words</string>
-    <string name="save">Save</string>
-    <string name="dictionaries_title">Word lists</string>
-    <string name="from">from</string>
-    <string name="export_dictionary">Export word list</string>
-    <string name="there_are_no_email_clients">There are no email clients installed.</string>
-    <string name="close">Close</string>
-    <string name="settings_title">Settings</string>
-    <string name="words_title">Words</string>
-    <string name="export_all">Export All</string>
-    <string name="import_file">Import File</string>
-    <string name="backup_file_downloaded">Backup file imported</string>
-    <string name="cancel">Cancel</string>
-    <string name="importing_dictionaries_progress">Importing words</string>
-    <string name="exporting_dictionaries_progress">Exporting words</string>
-    <string name="no_write_permission">Export failed. No write permission.</string>
-    <string name="create_first_dictionary">Create Word List</string>
-    <string name="dictionary_name_hint">List\'s name</string>
-    <string name="dict_delete_dialog">Delete</string>
-    <string name="error_importing_dictionary_timeout">Sql insert timeout. Import failed</string>
-    <string name="no_internet_connection">No internet connection</string>
-    <string name="cache_size">"Cache size: %.2f megabytes"</string>
-    <string name="cache_cleared">Cache cleared</string>
-    <string name="confirm_deletion_of">"Confirm deletion of "</string>
-    <string name="learning_mode">Learning mode</string>
-    <string name="advanced">Extra</string>
-    <string name="translate">Translate</string>
-    <string name="yes">yes</string>
-    <string name="you_have_0_dictionaries">Create word list. Enter name and choose languages.</string>
-    <string name="next">Next</string>
-    <string name="nav_night_mode">Night mode ON/OFF</string>
-    <string name="tag_name">Tag\'s name</string>
-    <string name="filename">File</string>
-    <string name="choose_export_method">Choose export method</string>
-    <string name="flashcard">Card</string>
-    <string name="correct">Correct:</string>
-    <string name="wrong">Wrong:</string>
-    <string name="score">Score:</string>
+    <string name="action_find">Сортировать</string>
+    <string name="nav_manage_dictionaries">Списки</string>
+    <string name="nav_words">Слова</string>
+    <string name="save">Cохранить</string>
+    <string name="dictionaries_title">Список слов</string>
+    <string name="from">из</string>
+    <string name="export_dictionary">Экспорт списка слов</string>
+    <string name="there_are_no_email_clients">Нет установленных почтовых клиентов.</string>
+    <string name="close">Закрыть</string>
+    <string name="settings_title">Настройки</string>
+    <string name="words_title">Слова</string>
+    <string name="export_all">Экспортировать Всё</string>
+    <string name="import_file">Импортировать файл</string>
+    <string name="backup_file_downloaded">Резервный файл импортирован</string>
+    <string name="cancel">Отмена</string>
+    <string name="importing_dictionaries_progress">Импортирование слов</string>
+    <string name="exporting_dictionaries_progress">Экспортирование слов</string>
+    <string name="no_write_permission">Не удалось выполнить экспорт. Нет разрешения на запись.</string>
+    <string name="create_first_dictionary">Создать Список Слов</string>
+    <string name="dictionary_name_hint">Название списка(ов)</string>
+    <string name="dict_delete_dialog">Удалить</string>
+    <string name="error_importing_dictionary_timeout">айм-аут вставки Sql. Ошибка импорта</string>
+    <string name="no_internet_connection">Нет соединения с интернетом</string>
+    <string name="cache_size">"Размер кэша: %.2f мегабайт"</string>
+    <string name="cache_cleared">Кэш очищен</string>
+    <string name="confirm_deletion_of">"Подтвердите удаление "</string>
+    <string name="learning_mode">Режим обучения</string>
+    <string name="advanced">Дополнительно</string>
+    <string name="translate">Перевести</string>
+    <string name="yes">да</string>
+    <string name="you_have_0_dictionaries">Создать список слов. Введите название и выберите языки.</string>
+    <string name="next">Далее</string>
+    <string name="nav_night_mode">Ночной режим ВКЛ/ВЫКЛ</string>
+    <string name="tag_name">Название тега(ов)</string>
+    <string name="filename">Файл</string>
+    <string name="choose_export_method">Выберите метод экспорта</string>
+    <string name="flashcard">Карты</string>
+    <string name="correct">Правильно:</string>
+    <string name="wrong">Неверно:</string>
+    <string name="score">Очки:</string>
     <string name="_0_percent" translatable="false">0 %</string>
-    <string name="number_of_questions">Number of questions</string>
-    <string name="start_session">Start session</string>
-    <string name="word">Word</string>
-    <string name="translation">Translation</string>
-    <string name="notes">Notes</string>
-    <string name="enter_word">enter word</string>
-    <string name="enter_translation">enter translation</string>
-    <string name="already_exists">Already Exists</string>
-    <string name="dictionary_name">lists_name</string>
-    <string name="import_dictionary_from_file">Import words from file</string>
-    <string name="new_">New</string>
-    <string name="to">To</string>
-    <string name="tag">Tag</string>
-    <string name="select_all">Select All</string>
-    <string name="search">Search</string>
-    <string name="backup_keep">backup</string>
-    <string name="unknown">unknown</string>
-    <string name="choose_tags">Choose tags.</string>
-    <string name="choose_dictionaries">Choose lists</string>
-    <string name="zero_words_found">0 words found</string>
-    <string name="choose_number_of_questions">Choose number of questions.</string>
-    <string name="permissions">Permissions</string>
-    <string name="grant_acces_dialog">Grant access to read/write SD storage to enable Import/Export functionality.</string>
-    <string name="dictionaries_tab">Word lists</string>
-    <string name="notes_tab">Notes</string>
-    <string name="tags_tab">#Tags</string>
-    <string name="edit_tag">Edit #TAG</string>
-    <string name="tag_laready_exists">Tag already exist.</string>
-    <string name="empty_fields_not_allowed">Empty fields not allowed</string>
-    <string name="cloud_backup">Google Drive backup</string>
-    <string name="send_to_cloud">Send to Google Drive</string>
-    <string name="send_to_cloud_summary">Keep copy of your word lists safe in Google Drive.</string>
-    <string name="download_from_cloud_summary">Retrieve your word lists from Google Drive. Supported files: *.keep, *.csv (word, word, tags, notes)</string>
-    <string name="cache_summary">Keepest caches sounds to reduce internet usage. Cached sounds can be played offline.</string>
-    <string name="show_cache">Show Cache</string>
-    <string name="clear_cache">Clear Cache</string>
-    <string name="download_from_cloud">Download from Google Drive</string>
-    <string name="learning">Learning</string>
-    <string name="nav_rate_app">Rate this app</string>
-    <string name="unable_to_find_playstore">Unable to open PlayStore.</string>
-    <string name="privacy_policy">Privacy Policy</string>
-    <string name="gdrive_upload_success">File uploaded!</string>
-    <string name="edit">Edit</string>
-    <string name="search_in_english">Search in english</string>
+    <string name="number_of_questions">Количество вопросов</string>
+    <string name="start_session">Начать урок</string>
+    <string name="word">Слово</string>
+    <string name="translation">Перевод</string>
+    <string name="notes">Заметки</string>
+    <string name="enter_word">введите слово</string>
+    <string name="enter_translation">введите перевод</string>
+    <string name="already_exists">Уже Существует</string>
+    <string name="dictionary_name">название_списков</string>
+    <string name="import_dictionary_from_file">Импортировать слова из файла</string>
+    <string name="new_">Новый</string>
+    <string name="to">В</string>
+    <string name="tag">Тег</string>
+    <string name="select_all">Выбрать Всё</string>
+    <string name="search">Поиск</string>
+    <string name="backup_keep">резервное копирование</string>
+    <string name="unknown">неизвестное</string>
+    <string name="choose_tags">Выбрать теги.</string>
+    <string name="choose_dictionaries">Выбрать списки</string>
+    <string name="zero_words_found">0 слов найдено</string>
+    <string name="choose_number_of_questions">Выберите количество вопросов.</string>
+    <string name="permissions">Разрешения</string>
+    <string name="grant_acces_dialog">Предоставить доступ к хранилищу данных для чтения/записи SD карты, для включения функций импорта/экспорта.</string>
+    <string name="dictionaries_tab">Списки слов</string>
+    <string name="notes_tab">Заметки</string>
+    <string name="tags_tab">#Теги</string>
+    <string name="edit_tag">Изменить #ТЕГ</string>
+    <string name="tag_laready_exists">Тег уже существует.</string>
+    <string name="empty_fields_not_allowed">Пустые поля не разрешены</string>
+    <string name="cloud_backup">Резервное копирование на Google Drive</string>
+    <string name="send_to_cloud">Отправить на Google Drive</string>
+    <string name="send_to_cloud_summary">Храните копии ваших списков слов в безопасности на Google Drive.</string>
+    <string name="download_from_cloud_summary">Извлеките списки слов из Google Drive. Поддерживаемые форматы: *.keep, *.csv (word, word, tags, notes)</string>
+    <string name="cache_summary">Keepest кэширует звуки для уменьшения использования трафика интернета. Кэшированные звуки можно воспроизводить в автономном режиме.</string>
+    <string name="show_cache">Показать Кэш</string>
+    <string name="clear_cache">Очистить Кэш</string>
+    <string name="download_from_cloud">Загрузить из Google Drive</string>
+    <string name="learning">Обучение</string>
+    <string name="nav_rate_app">Оценить это приложение</string>
+    <string name="unable_to_find_playstore">Невозможно открыть PlayStore.</string>
+    <string name="privacy_policy">Политика конфиденциальности</string>
+    <string name="gdrive_upload_success">Файл загружен!</string>
+    <string name="edit">Изменить</string>
+    <string name="search_in_english">Поиск на английском</string>
     <string name="show_gif" translatable="false">GIF</string>
-    <string name="connecting_to_gdrive">Connecting to Google Drive...</string>
-    <string name="cache_title">Cache</string>
-    <string name="cache_settings">Cache Settings</string>
-    <string name="tut_translate_word">Touch this button to translate the word you entered.</string>
-    <string name="edit_word">Edit word</string>
-    <string name="add_word">Add word</string>
-    <string name="app_version">Version</string>
-    <string name="swipe_left_to_open_menu">Swipe left to open menu</string>
-    <string name="email">Send</string>
-    <string name="writing_mode">writing</string>
-    <string name="test_mode">test</string>
-    <string name="flashcards_mode">flashcards</string>
-    <string name="enter_answer">Enter answer</string>
-    <string name="check">Check</string>
+    <string name="connecting_to_gdrive">Соединение с Google Drive...</string>
+    <string name="cache_title">Кэш</string>
+    <string name="cache_settings">Настройки Кэш</string>
+    <string name="tut_translate_word">Нажмите эту кнопку, чтобы перевести введенное слово.</string>
+    <string name="edit_word">Редактировать слово</string>
+    <string name="add_word">Добавить слово</string>
+    <string name="app_version">Версия</string>
+    <string name="swipe_left_to_open_menu">Проведите пальцем влево, чтобы открыть меню</string>
+    <string name="email">Отправить</string>
+    <string name="writing_mode">написать</string>
+    <string name="test_mode">тест</string>
+    <string name="flashcards_mode">Флэшкарточки</string>
+    <string name="enter_answer">Ввести ответ</string>
+    <string name="check">Проверка</string>
     <string name="hint" translatable="false">❓</string>
-    <string name="source_code">Source code</string>
-    <string name="tts_settings" translatable="false">Voice Synthesis</string>
+    <string name="source_code">Исходный код</string>
+    <string name="tts_settings" translatable="false">Синтез голоса</string>
     <string name="tts_settings_edit">TextToSpeech</string>
-    <string name="learning_mistakes">Mistakes:</string>
-    <string name="action_paste" translatable="false">paste</string>
-    <string name="clipboard_empty">Clipboard is empty.</string>
+    <string name="learning_mistakes">Ошибки:</string>
+    <string name="action_paste" translatable="false">вставить</string>
+    <string name="clipboard_empty">Буфер обмена пуст.</string>
 
 
     <string-array name="select" translatable="true">
@@ -364,20 +364,20 @@
         <item>yo</item>
         <item>zu</item>
     </string-array>
-    <string name="word_copied">Word copied.</string>
-    <string name="word_moved">Word moved.</string>
-    <string name="cut_word">Cut.</string>
-    <string name="copy_word">Copy.</string>
-    <string name="engine_one" translatable="false">Engine: 1</string>
-    <string name="engine_two" translatable="false">Engine: 2</string>
+    <string name="word_copied">Слово скопировано.</string>
+    <string name="word_moved">Слово перемещено.</string>
+    <string name="cut_word">Обрезано.</string>
+    <string name="copy_word">Скопировано.</string>
+    <string name="engine_one" translatable="false">Движок TTS: 1</string>
+    <string name="engine_two" translatable="false">Движок TTS: 2</string>
     <string name="google_translate" translatable="false">Google Translate</string>
-    <string name="add_rule">Add Rule</string>
-    <string name="default_engine">Default engine</string>
-    <string name="engine_1">Engine 1</string>
-    <string name="engine_2">Engine 2</string>
+    <string name="add_rule">Добавить Правило</string>
+    <string name="default_engine">Движок TTS по умолчанию</string>
+    <string name="engine_1">Движок TTS 1</string>
+    <string name="engine_2">Движок TTS 2</string>
     <string name="text_to_speech">TextToSpeech</string>
-    <string name="list_already_exists">List already exists!</string>
-    <string name="webview_info">Long press to choose an image.</string>
+    <string name="list_already_exists">Список уже существует!</string>
+    <string name="webview_info">Длительное нажатие для выбора изображения.</string>
 
 
 </resources>
